@@ -5,22 +5,22 @@
 
 - name: Create a first server
   scaleway_compute:
-    name: '{{ first_server_name }}'
+    name: "{{ first_server_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
 - name: Create a second server
   scaleway_compute:
-    name: '{{ second_server_name }}'
+    name: "{{ second_server_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
 - name: Get server informations of the first page
@@ -57,20 +57,20 @@
 
 - name: Delete first server
   scaleway_compute:
-    name: '{{ first_server_name }}'
+    name: "{{ first_server_name }}"
     state: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
 - name: Delete second server
   scaleway_compute:
-    name: '{{ second_server_name }}'
+    name: "{{ second_server_name }}"
     state: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true

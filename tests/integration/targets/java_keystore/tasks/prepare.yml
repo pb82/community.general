@@ -11,7 +11,7 @@
 - name: Create private keys
   community.crypto.openssl_privatekey:
     path: "{{ remote_tmp_dir ~ '/' ~ (item.keyname | default(item.name)) ~ '.key' }}"
-    size: 2048  # this should work everywhere
+    size: 2048 # this should work everywhere
     # The following is more efficient, but might not work everywhere:
     # type: ECC
     # curve: secp384r1

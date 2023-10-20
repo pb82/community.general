@@ -21,7 +21,6 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_01
 
-
 - name: Create an empty file
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -33,25 +32,23 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_02
 
-
 - name: Create an empty file (check mode, idempotency)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
-    size: 0G
+    size: "0G"
   register: filesize_test_basic_03
   check_mode: true
 
 - name: Create an empty file (idempotency)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
-    size: 0G
+    size: "0G"
   register: filesize_test_basic_04
 
 - name: Stat the file (should still exist, unchanged)
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_04
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -95,7 +92,6 @@
       - filesize_stat_basic_02.stat.size == 0
       - filesize_stat_basic_04.stat.size == 0
 
-
 - name: Fill the file up to 57kB (57000B) with random data (check mode)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -108,7 +104,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_11
-
 
 - name: Fill the file up to 57kB (57000B) with random data
   community.general.filesize:
@@ -125,7 +120,6 @@
 - name: Store checksum as fact
   ansible.builtin.set_fact:
     filesize_test_checksum: "{{ filesize_stat_basic_12.stat.checksum }}"
-
 
 - name: Fill the file up to 57000B (57kB) with random data (check mode, idempotency)
   community.general.filesize:
@@ -146,7 +140,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_14
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -176,8 +169,6 @@
 
       - filesize_stat_basic_14.stat.checksum == filesize_test_checksum
 
-
-
 - name: Expand the file with 1 byte (57001B) (check mode)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -190,7 +181,6 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_21
 
-
 - name: Expand the file with 1 byte (57001B)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -201,7 +191,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_22
-
 
 - name: Expand the file with 1 byte (57.001 kB) (check mode, idempotency)
   community.general.filesize:
@@ -220,7 +209,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_24
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -252,8 +240,6 @@
       - filesize_stat_basic_22.stat.checksum != filesize_test_checksum
       - filesize_stat_basic_24.stat.checksum != filesize_test_checksum
 
-
-
 - name: Expand the file up to 2 MiB (2*1024*1024 bytes) (check mode)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -266,7 +252,6 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_31
 
-
 - name: Expand the file up to 2 MiB (2*1024*1024 bytes)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -277,7 +262,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_32
-
 
 - name: Expand the file up to 2×1M (2*1024*1024 bytes) (check mode, idempotency)
   community.general.filesize:
@@ -298,7 +282,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_34
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -326,8 +309,6 @@
       - filesize_stat_basic_32.stat.size == 2*1024**2
       - filesize_stat_basic_34.stat.size == 2*1024**2
 
-
-
 - name: Truncate the file to 57kB (57000B) (check mode)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -340,7 +321,6 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_41
 
-
 - name: Truncate the file to 57kB (57000B)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -351,7 +331,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_42
-
 
 - name: Truncate the file to 57000 B (57kB) (check mode, idempotency)
   community.general.filesize:
@@ -370,7 +349,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_basic_44
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -402,8 +380,6 @@
       - filesize_stat_basic_41.stat.checksum != filesize_test_checksum
       - filesize_stat_basic_42.stat.checksum == filesize_test_checksum
       - filesize_stat_basic_44.stat.checksum == filesize_test_checksum
-
-
 
 - name: Remove test file
   ansible.builtin.file:

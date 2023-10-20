@@ -6,21 +6,21 @@
 # General
 redis_packages:
   Alpine:
-  - redis
+    - redis
   Archlinux:
-  - redis
+    - redis
   Debian:
-  - redis-server
+    - redis-server
   Ubuntu:
-  - redis-server
+    - redis-server
   openSUSE Leap:
-  - redis
+    - redis
   Fedora:
-  - redis
+    - redis
   CentOS:
-  - redis
+    - redis
   FreeBSD:
-  - redis
+    - redis
 
 redis_bin:
   Alpine: /usr/bin/redis-server

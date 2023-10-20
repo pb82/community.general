@@ -37,7 +37,6 @@
     that:
       - gitlab_group_state is changed
 
-
 - name: Create GitLab Group ( Idempotency test )
   gitlab_group:
     api_url: "{{ gitlab_host }}"

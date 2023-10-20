@@ -26,14 +26,14 @@
   archive:
     path: "{{ remote_tmp_dir }}/*.txt"
     dest: "{{ remote_tmp_dir }}/archive_pretest_1.tar"
-    format: "tar"
+    format: tar
   register: pretest_1
 
 - name: Archive - pre-test - second run
   archive:
     path: "{{ remote_tmp_dir }}/*.txt"
     dest: "{{ remote_tmp_dir }}/archive_pretest_1.tar"
-    format: "tar"
+    format: tar
   register: pretest_2
 
 - name: Archive - validate pre-test
@@ -74,7 +74,7 @@
     - name: Get owner of brew binary
       stat: path="{{ brew_which.stdout }}"
       register: brew_stat
-    - name: "Install package"
+    - name: Install package
       homebrew:
         name: xz
         state: present

@@ -11,11 +11,11 @@
     value: 200
     value_type: int
   output:
-    new_value: '200'
+    new_value: "200"
     changed: true
   run_command_calls:
     - command: [/testbin/gconftool-2, --get, /desktop/gnome/background/picture_filename]
-      environ: &env-def {environ_update: {LANGUAGE: C, LC_ALL: C}, check_rc: true}
+      environ: &env-def { environ_update: { LANGUAGE: C, LC_ALL: C }, check_rc: true }
       rc: 0
       out: "100\n"
       err: ""
@@ -36,7 +36,7 @@
     value: 200
     value_type: int
   output:
-    new_value: '200'
+    new_value: "200"
     changed: false
   run_command_calls:
     - command: [/testbin/gconftool-2, --get, /desktop/gnome/background/picture_filename]
@@ -61,7 +61,7 @@
     value: false
     value_type: bool
   output:
-    new_value: 'false'
+    new_value: "false"
     changed: false
   run_command_calls:
     - command: [/testbin/gconftool-2, --get, /apps/gnome_settings_daemon/screensaver/start_screensaver]
@@ -84,7 +84,7 @@
     state: absent
     key: /desktop/gnome/background/picture_filename
   output:
-    new_value: null
+    new_value:
     changed: true
   run_command_calls:
     - command: [/testbin/gconftool-2, --get, /desktop/gnome/background/picture_filename]
@@ -102,7 +102,7 @@
     state: absent
     key: /apps/gnome_settings_daemon/screensaver/start_screensaver
   output:
-    new_value: null
+    new_value:
     changed: false
   run_command_calls:
     - command: [/testbin/gconftool-2, --get, /apps/gnome_settings_daemon/screensaver/start_screensaver]

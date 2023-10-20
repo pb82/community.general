@@ -24,7 +24,6 @@
       - result_basic_1 is failed
       - "result_basic_1.msg == 'parameters are mutually exclusive: value|values'"
 
-
 - name: test-basic 2 - set "create=no" on non-existing file and fail
   ini_file:
     path: "{{ non_existing_file }}"

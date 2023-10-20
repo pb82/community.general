@@ -45,7 +45,6 @@
     that:
       - gitlab_runner_state is changed
 
-
 #### COMMENTED AS MODULE WILL UPDATE THE RUNNER IF EXISTS. TO BE DISCUSSED ####
 # - name: Create GitLab Runner ( Idempotency test )
 #   gitlab_runner:

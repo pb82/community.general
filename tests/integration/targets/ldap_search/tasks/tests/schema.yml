@@ -11,8 +11,8 @@
 ####################################################################
 - name: Test for ldap schema output
   ldap_search:
-    dn: "ou=users,dc=example,dc=com"
-    scope: "onelevel"
+    dn: ou=users,dc=example,dc=com
+    scope: onelevel
     schema: true
   ignore_errors: true
   register: output
@@ -20,6 +20,6 @@
 - name: Assert that the schema output is correct
   assert:
     that:
-       - output is not failed
-       - output.results | length >= 1
-       - "{{ 'displayName' in output.results.0.attrs }}"
+      - output is not failed
+      - output.results | length >= 1
+      - "{{ 'displayName' in output.results.0.attrs }}"

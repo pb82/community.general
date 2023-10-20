@@ -15,13 +15,13 @@
       c2ssIFBvcnR1Z3XDqnMgKEJyYXNpbCksINCg0YPRgdGB0LrQuNC5LCBTbG92ZW7FocSNaW5hLCBJ
       dGFsaWFubywgTmVkZXJsYW5kcywg0KPQutGA0LDRl9C90YHRjNC60LAsIOCupOCuruCuv+CutOCv
       jSwg4LeD4LeS4LaC4LeE4La9LCDEjGVza3ksIEJva23DpWwsIE1hZ3lhcgo=
-    dest: '{{ output_file }}'
+    dest: "{{ output_file }}"
 - name: Add entries
   ini_file:
     section: "{{ item.section }}"
     option: "{{ item.option }}"
     value: "{{ item.value }}"
-    path: '{{ output_file }}'
+    path: "{{ output_file }}"
     create: true
   loop:
     - section: app:main

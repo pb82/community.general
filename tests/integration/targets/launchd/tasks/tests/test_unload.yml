@@ -10,15 +10,14 @@
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_1_launchd_start_result"
-
+  register: test_1_launchd_start_result
 
 - name: "[{{ item }}] When unloading the service in check mode"
   launchd:
     name: "{{ launchd_service_name }}"
     state: unloaded
   become: true
-  register: "test_1_launchd_unloaded_result_check_mode"
+  register: test_1_launchd_unloaded_result_check_mode
   check_mode: true
 
 - name: "[{{ item }}] Validate that service was unloaded in check mode"
@@ -27,13 +26,12 @@
       - test_1_launchd_unloaded_result_check_mode is success
       - test_1_launchd_unloaded_result_check_mode is changed
 
-
 - name: "[{{ item }}] When unloading the service..."
   launchd:
     name: "{{ launchd_service_name }}"
     state: unloaded
   become: true
-  register: "test_1_launchd_unloaded_result"
+  register: test_1_launchd_unloaded_result
 
 - name: "[{{ item }}] Validate that service was unloaded"
   assert:
@@ -52,7 +50,7 @@
     name: "{{ launchd_service_name }}"
     state: unloaded
   become: true
-  register: "test_2_launchd_unloaded_result"
+  register: test_2_launchd_unloaded_result
 
 - name: "[{{ item }}] Validate that service did not change and is still unloaded"
   assert:

@@ -10,32 +10,32 @@
 
 - name: Creating a handler if the directory doesn't exist should work
   sensu_handler:
-    name: "handler"
-    type: "pipe"
-    command: "/bin/bash"
-    state: "present"
+    name: handler
+    type: pipe
+    command: /bin/bash
+    state: present
 
 - name: Insert junk JSON in a handlers file
   lineinfile:
-    state: "present"
+    state: present
     create: "yes"
-    path: "/etc/sensu/conf.d/handlers/handler.json"
+    path: /etc/sensu/conf.d/handlers/handler.json
     line: "{'foo' = bar}"
 
 - name: Configure a handler with an existing invalid file
   sensu_handler:
-    name: "handler"
-    type: "pipe"
-    command: "/bin/bash"
-    state: "present"
+    name: handler
+    type: pipe
+    command: /bin/bash
+    state: present
   register: handler
 
 - name: Configure a handler (again)
   sensu_handler:
-    name: "handler"
-    type: "pipe"
-    command: "/bin/bash"
-    state: "present"
+    name: handler
+    type: pipe
+    command: /bin/bash
+    state: present
   register: handler_twice
 
 - name: Retrieve configuration file
@@ -46,17 +46,17 @@
 - name: Assert that handler data was set successfully and properly
   assert:
     that:
-      - "handler is successful"
-      - "handler is changed"
-      - "handler_twice is successful"
-      - "handler_twice is not changed"
-      - "handler['name'] == 'handler'"
-      - "handler['file'] == '/etc/sensu/conf.d/handlers/handler.json'"
-      - "handler['config']['type'] == 'pipe'"
-      - "handler['config']['command'] == '/bin/bash'"
-      - "handler['config']['timeout'] == 10"
-      - "handler['config']['handle_flapping'] == false"
-      - "handler['config']['handle_silenced'] == false"
+      - handler is successful
+      - handler is changed
+      - handler_twice is successful
+      - handler_twice is not changed
+      - handler['name'] == 'handler'
+      - handler['file'] == '/etc/sensu/conf.d/handlers/handler.json'
+      - handler['config']['type'] == 'pipe'
+      - handler['config']['command'] == '/bin/bash'
+      - handler['config']['timeout'] == 10
+      - handler['config']['handle_flapping'] == false
+      - handler['config']['handle_silenced'] == false
 
 - name: Assert that the handler configuration file is actually configured properly
   vars:
@@ -64,22 +64,22 @@
   assert:
     that:
       - "'handler' in config['handlers']"
-      - "config['handlers']['handler']['type'] == 'pipe'"
-      - "config['handlers']['handler']['command'] == '/bin/bash'"
-      - "config['handlers']['handler']['timeout'] == 10"
-      - "config['handlers']['handler']['handle_flapping'] == false"
-      - "config['handlers']['handler']['handle_silenced'] == false"
+      - config['handlers']['handler']['type'] == 'pipe'
+      - config['handlers']['handler']['command'] == '/bin/bash'
+      - config['handlers']['handler']['timeout'] == 10
+      - config['handlers']['handler']['handle_flapping'] == false
+      - config['handlers']['handler']['handle_silenced'] == false
 
 - name: Delete Sensu handler configuration
   sensu_handler:
-    name: "handler"
-    state: "absent"
+    name: handler
+    state: absent
   register: handler_delete
 
 - name: Delete Sensu handler configuration (again)
   sensu_handler:
-    name: "handler"
-    state: "absent"
+    name: handler
+    state: absent
   register: handler_delete_twice
 
 - name: Retrieve configuration file stat
@@ -90,16 +90,16 @@
 - name: Assert that handler deletion was successful
   assert:
     that:
-      - "handler_delete is successful"
-      - "handler_delete is changed"
-      - "handler_delete_twice is successful"
-      - "handler_delete_twice is not changed"
-      - "handler_stat.stat.exists == false"
+      - handler_delete is successful
+      - handler_delete is changed
+      - handler_delete_twice is successful
+      - handler_delete_twice is not changed
+      - handler_stat.stat.exists == false
 
 - name: Configuring a handler without a name should fail
   sensu_handler:
-    type: "pipe"
-    command: "/bin/bash"
+    type: pipe
+    command: /bin/bash
   register: failure
   ignore_errors: true
 
@@ -111,8 +111,8 @@
 
 - name: Configuring a handler without a type should fail
   sensu_handler:
-    name: "pipe"
-    command: "/bin/bash"
+    name: pipe
+    command: /bin/bash
   register: failure
   ignore_errors: true
 

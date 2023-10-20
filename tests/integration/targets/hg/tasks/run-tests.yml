@@ -1,17 +1,16 @@
+---
 # test code for the hg module
 # Copyright (c) 2018, Ansible Project
 #
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
-
-
 - name: set where to extract the repo
   set_fact:
     checkout_dir: "{{ remote_tmp_dir }}/hg_project_test"
 
 - name: set what repo to use
   set_fact:
-    repo: "http://hg.pf.osdn.net/view/a/ak/akasurde/hg_project_test"
+    repo: http://hg.pf.osdn.net/view/a/ak/akasurde/hg_project_test
 
 - name: clean out the remote_tmp_dir
   shell: rm -rf {{ remote_tmp_dir }}/*
@@ -34,8 +33,8 @@
     that:
       - "'before' in hg_result"
       - "'after' in hg_result"
-      - "not hg_result.before"
-      - "hg_result.changed"
+      - not hg_result.before
+      - hg_result.changed
 
 - name: repeated checkout
   hg:
@@ -61,17 +60,17 @@
 - name: assert presence of tags/trunk/branches
   assert:
     that:
-      - "tags.stat.isreg"
-      - "branches.stat.isreg"
+      - tags.stat.isreg
+      - branches.stat.isreg
 
 - name: verify on a re-clone things are marked unchanged
   assert:
     that:
-      - "not hg_result2.changed"
+      - not hg_result2.changed
 
 - name: Checkout non-existent repo clone
   hg:
-    repo: "http://hg.pf.osdn.net/view/a/ak/akasurde/hg_project_test_1"
+    repo: http://hg.pf.osdn.net/view/a/ak/akasurde/hg_project_test_1
     clone: false
     update: false
   register: hg_result3
@@ -82,4 +81,4 @@
     that:
       - hg_result3.msg
       - "'abort: HTTP Error 404: Not Found' in hg_result3.msg"
-      - "not hg_result3.changed"
+      - not hg_result3.changed

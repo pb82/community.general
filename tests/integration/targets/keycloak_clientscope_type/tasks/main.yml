@@ -2,8 +2,6 @@
 # Copyright (c) Ansible Project
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
-
-
 # Fixtures
 - name: Create keycloak realm
   community.general.keycloak_realm:
@@ -35,7 +33,7 @@
     auth_password: "{{ admin_password }}"
     realm: "{{ realm }}"
     name: scope1
-    description: "test 1"
+    description: test 1
     protocol: openid-connect
 
 - name: Create a scope2 client scope
@@ -46,7 +44,7 @@
     auth_password: "{{ admin_password }}"
     realm: "{{ realm }}"
     name: scope2
-    description: "test 2"
+    description: test 2
     protocol: openid-connect
 
 ### Tests
@@ -58,7 +56,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     realm: "{{ realm }}"
-    default_clientscopes: ['scope1', 'scope2']
+    default_clientscopes: [scope1, scope2]
     optional_clientscopes: []
   register: result
 
@@ -79,7 +77,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     realm: "{{ realm }}"
-    default_clientscopes: ['scope1', 'scope2']
+    default_clientscopes: [scope1, scope2]
     optional_clientscopes: []
   register: result
   failed_when: result is changed
@@ -91,8 +89,8 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     realm: "{{ realm }}"
-    default_clientscopes: ['scope1']
-    optional_clientscopes: ['scope2']
+    default_clientscopes: [scope1]
+    optional_clientscopes: [scope2]
   register: result
 
 - name: Assert that client scope types are set
@@ -114,7 +112,7 @@
     auth_password: "{{ admin_password }}"
     realm: "{{ realm }}"
     client_id: "{{ client_id }}"
-    default_clientscopes: ['scope1', 'scope2']
+    default_clientscopes: [scope1, scope2]
     optional_clientscopes: []
   register: result
 
@@ -136,7 +134,7 @@
     auth_password: "{{ admin_password }}"
     realm: "{{ realm }}"
     client_id: "{{ client_id }}"
-    default_clientscopes: ['scope1', 'scope2']
+    default_clientscopes: [scope1, scope2]
     optional_clientscopes: []
   register: result
   failed_when: result is changed
@@ -149,8 +147,8 @@
     auth_password: "{{ admin_password }}"
     realm: "{{ realm }}"
     client_id: "{{ client_id }}"
-    default_clientscopes: ['scope1']
-    optional_clientscopes: ['scope2']
+    default_clientscopes: [scope1]
+    optional_clientscopes: [scope2]
   register: result
 
 - name: Assert that client scope types are set

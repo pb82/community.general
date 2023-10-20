@@ -5,35 +5,35 @@
 
 - name: set destination filename
   set_fact:
-    bl_file: '{{ remote_tmp_dir }}/blacklist-ansible.conf'
+    bl_file: "{{ remote_tmp_dir }}/blacklist-ansible.conf"
 
 - name: copy blacklist file
   copy:
-    src: 'files/blacklist'
-    dest: '{{ bl_file }}'
+    src: files/blacklist
+    dest: "{{ bl_file }}"
 
 - name: Original stat
   stat:
-    path: '{{ bl_file }}'
+    path: "{{ bl_file }}"
   register: orig_stat
 
 - name: remove non-existing item from list
   community.general.kernel_blacklist:
-    blacklist_file: '{{ bl_file }}'
+    blacklist_file: "{{ bl_file }}"
     state: absent
     name: zzzz
   register: bl_test_1
 
 - name: add existing item from list
   community.general.kernel_blacklist:
-    blacklist_file: '{{ bl_file }}'
+    blacklist_file: "{{ bl_file }}"
     state: present
     name: bbbb
   register: bl_test_1a
 
 - name: stat_test_1
   stat:
-    path: '{{ bl_file }}'
+    path: "{{ bl_file }}"
   register: stat_test_1
 
 - name: show bl_test_1
@@ -69,14 +69,14 @@
 
 - name: add new item to list
   community.general.kernel_blacklist:
-    blacklist_file: '{{ bl_file }}'
+    blacklist_file: "{{ bl_file }}"
     state: present
     name: dddd
   register: bl_test_2
 
 - name: slurp_test_2
   slurp:
-    src: '{{ bl_file }}'
+    src: "{{ bl_file }}"
   register: slurp_test_2
 
 - name: assert element is added
@@ -97,14 +97,14 @@
 
 - name: remove item from list
   community.general.kernel_blacklist:
-    blacklist_file: '{{ bl_file }}'
+    blacklist_file: "{{ bl_file }}"
     state: absent
     name: bbbb
   register: bl_test_3
 
 - name: slurp_test_3
   slurp:
-    src: '{{ bl_file }}'
+    src: "{{ bl_file }}"
   register: slurp_test_3
 
 - name: assert element is removed
@@ -131,7 +131,7 @@
   ansible.builtin.file:
     path: /etc/modprobe.d
     state: directory
-    mode: '0755'
+    mode: "0755"
     owner: root
     group: root
   notify: Remove modprobe.d
@@ -141,13 +141,13 @@
     dest: /etc/modprobe.d/cls_rsvp-blacklist.conf
     content: |
       blacklist cls_rsvp
-    mode: '0644'
+    mode: "0644"
 
 - name: Block potentially affected (and unused) modules (7362)
   community.general.kernel_blacklist:
     name: "{{ line_item }}"
     state: present
-    blacklist_file: "/etc/modprobe.d/{{ line_item }}-blacklist.conf"
+    blacklist_file: /etc/modprobe.d/{{ line_item }}-blacklist.conf
   with_items:
     - cifs
     - cls_rsvp

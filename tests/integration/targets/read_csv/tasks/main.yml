@@ -26,14 +26,14 @@
 
 - assert:
     that:
-    - users_unique.dict.dag.name == 'dag'
-    - users_unique.dict.dag.gecos == 'Dag Wieërs'
-    - users_unique.dict.dag.uid == '500'
-    - users_unique.dict.dag.gid == '500'
-    - users_unique.dict.jeroen.name == 'jeroen'
-    - users_unique.dict.jeroen.gecos == 'Jeroen Hoekx'
-    - users_unique.dict.jeroen.uid == '501'
-    - users_unique.dict.jeroen.gid == '500'
+      - users_unique.dict.dag.name == 'dag'
+      - users_unique.dict.dag.gecos == 'Dag Wieërs'
+      - users_unique.dict.dag.uid == '500'
+      - users_unique.dict.dag.gid == '500'
+      - users_unique.dict.jeroen.name == 'jeroen'
+      - users_unique.dict.jeroen.gecos == 'Jeroen Hoekx'
+      - users_unique.dict.jeroen.uid == '501'
+      - users_unique.dict.jeroen.gid == '500'
 
 # Read a CSV file and access the first item
 - name: Read users from CSV file and return a list
@@ -43,15 +43,14 @@
 
 - assert:
     that:
-    - users_unique.list.0.name == 'dag'
-    - users_unique.list.0.gecos == 'Dag Wieërs'
-    - users_unique.list.0.uid == '500'
-    - users_unique.list.0.gid == '500'
-    - users_unique.list.1.name == 'jeroen'
-    - users_unique.list.1.gecos == 'Jeroen Hoekx'
-    - users_unique.list.1.uid == '501'
-    - users_unique.list.1.gid == '500'
-
+      - users_unique.list.0.name == 'dag'
+      - users_unique.list.0.gecos == 'Dag Wieërs'
+      - users_unique.list.0.uid == '500'
+      - users_unique.list.0.gid == '500'
+      - users_unique.list.1.name == 'jeroen'
+      - users_unique.list.1.gecos == 'Jeroen Hoekx'
+      - users_unique.list.1.uid == '501'
+      - users_unique.list.1.gid == '500'
 
 # Create basic CSV file using semi-colon
 - name: Create non-unique CSV file using semi-colon
@@ -69,20 +68,19 @@
     path: "{{ remote_tmp_dir }}/users_nonunique.csv"
     key: name
     unique: false
-    delimiter: ';'
+    delimiter: ;
   register: users_nonunique
 
 - assert:
     that:
-    - users_nonunique.dict.dag.name == 'dag'
-    - users_nonunique.dict.dag.gecos == 'Dag Wieers'
-    - users_nonunique.dict.dag.uid == '502'
-    - users_nonunique.dict.dag.gid == '500'
-    - users_nonunique.dict.jeroen.name == 'jeroen'
-    - users_nonunique.dict.jeroen.gecos == 'Jeroen Hoekx'
-    - users_nonunique.dict.jeroen.uid == '501'
-    - users_nonunique.dict.jeroen.gid == '500'
-
+      - users_nonunique.dict.dag.name == 'dag'
+      - users_nonunique.dict.dag.gecos == 'Dag Wieers'
+      - users_nonunique.dict.dag.uid == '502'
+      - users_nonunique.dict.dag.gid == '500'
+      - users_nonunique.dict.jeroen.name == 'jeroen'
+      - users_nonunique.dict.jeroen.gecos == 'Jeroen Hoekx'
+      - users_nonunique.dict.jeroen.uid == '501'
+      - users_nonunique.dict.jeroen.gid == '500'
 
 # Read a CSV file using an non-existing dialect
 - name: Read users from CSV file and return a dictionary
@@ -94,9 +92,8 @@
 
 - assert:
     that:
-    - users_placebo is failed
-    - users_placebo.msg == "Dialect 'placebo' is not supported by your version of python."
-
+      - users_placebo is failed
+      - users_placebo.msg == "Dialect 'placebo' is not supported by your version of python."
 
 # Create basic CSV file without header
 - name: Create unique CSV file without header
@@ -116,15 +113,14 @@
 
 - assert:
     that:
-    - users_noheader.dict.dag.name == 'dag'
-    - users_noheader.dict.dag.gecos == 'Dag Wieërs'
-    - users_noheader.dict.dag.uid == '500'
-    - users_noheader.dict.dag.gid == '500'
-    - users_noheader.dict.jeroen.name == 'jeroen'
-    - users_noheader.dict.jeroen.gecos == 'Jeroen Hoekx'
-    - users_noheader.dict.jeroen.uid == '501'
-    - users_noheader.dict.jeroen.gid == '500'
-
+      - users_noheader.dict.dag.name == 'dag'
+      - users_noheader.dict.dag.gecos == 'Dag Wieërs'
+      - users_noheader.dict.dag.uid == '500'
+      - users_noheader.dict.dag.gid == '500'
+      - users_noheader.dict.jeroen.name == 'jeroen'
+      - users_noheader.dict.jeroen.gecos == 'Jeroen Hoekx'
+      - users_noheader.dict.jeroen.uid == '501'
+      - users_noheader.dict.jeroen.gid == '500'
 
 # Create broken file
 - name: Create unique CSV file
@@ -146,8 +142,8 @@
 
 - assert:
     that:
-    - users_broken is failed
-    - "'Unable to process file' in users_broken.msg"
+      - users_broken is failed
+      - "'Unable to process file' in users_broken.msg"
 
 # Create basic CSV file with BOM
 - name: Create unique CSV file with BOM
@@ -156,7 +152,7 @@
     dest: "{{ remote_tmp_dir }}/users_bom.csv"
   vars:
     content: *users_content
-    bom: "{{ '\ufeff' }}"
+    bom: "{{ '\uFEFF' }}"
 
  # Read a CSV file and access the first item
 - name: Read users from CSV file and return a list
@@ -166,11 +162,11 @@
 
 - assert:
     that:
-    - users_bom.list.0.name == 'dag'
-    - users_bom.list.0.gecos == 'Dag Wieërs'
-    - users_bom.list.0.uid == '500'
-    - users_bom.list.0.gid == '500'
-    - users_bom.list.1.name == 'jeroen'
-    - users_bom.list.1.gecos == 'Jeroen Hoekx'
-    - users_bom.list.1.uid == '501'
-    - users_bom.list.1.gid == '500'
+      - users_bom.list.0.name == 'dag'
+      - users_bom.list.0.gecos == 'Dag Wieërs'
+      - users_bom.list.0.uid == '500'
+      - users_bom.list.0.gid == '500'
+      - users_bom.list.1.name == 'jeroen'
+      - users_bom.list.1.gecos == 'Jeroen Hoekx'
+      - users_bom.list.1.uid == '501'
+      - users_bom.list.1.gid == '500'

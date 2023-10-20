@@ -1,3 +1,4 @@
+---
 ####################################################################
 # WARNING: These are designed specifically for Ansible tests       #
 # and should not be used as examples of how to write Ansible roles #
@@ -90,7 +91,7 @@
     state: present
 
 - name: Remove a list of Users to A GitLab Project
-  community.general.gitlab_project_members::
+  "community.general.gitlab_project_members:":
     api_url: "{{ gitlab_server_url }}"
     api_token: "{{ gitlab_api_access_token }}"
     project: "{{ gitlab_project }}"
@@ -98,7 +99,7 @@
     state: absent
 
 - name: Add a list of Users with Dedicated Access Levels to A GitLab Project
-  community.general.gitlab_project_members::
+  "community.general.gitlab_project_members:":
     api_url: "{{ gitlab_server_url }}"
     api_token: "{{ gitlab_api_access_token }}"
     project: "{{ gitlab_project }}"
@@ -106,7 +107,7 @@
     state: present
 
 - name: Remove a list of Users with Dedicated Access Levels to A GitLab Project
-  community.general.gitlab_project_members::
+  "community.general.gitlab_project_members:":
     api_url: "{{ gitlab_server_url }}"
     api_token: "{{ gitlab_api_access_token }}"
     project: "{{ gitlab_project }}"
@@ -114,7 +115,7 @@
     state: absent
 
 - name: Add a user, remove all others which might be on this access level
-  community.general.gitlab_project_members::
+  "community.general.gitlab_project_members:":
     api_url: "{{ gitlab_server_url }}"
     api_token: "{{ gitlab_api_access_token }}"
     project: "{{ gitlab_project }}"

@@ -33,9 +33,9 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "file:delete"
-    display_name: "File delete"
-    icon_uri: "http://localhost/icon.png"
+    name: file:delete
+    display_name: File delete
+    icon_uri: http://localhost/icon.png
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   check_mode: true
@@ -60,9 +60,9 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "file:delete"
-    display_name: "File delete"
-    icon_uri: "http://localhost/icon.png"
+    name: file:delete
+    display_name: File delete
+    icon_uri: http://localhost/icon.png
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -83,9 +83,9 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "file:delete"
-    display_name: "File delete"
-    icon_uri: "http://localhost/icon.png"
+    name: file:delete
+    display_name: File delete
+    icon_uri: http://localhost/icon.png
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -106,7 +106,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "file:delete"
+    name: file:delete
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   diff: true
@@ -130,7 +130,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "file:delete"
+    name: file:delete
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -151,7 +151,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "file:delete"
+    name: file:delete
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -172,7 +172,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: absent
-    name: "file:delete"
+    name: file:delete
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   diff: true
@@ -194,7 +194,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: absent
-    name: "file:delete"
+    name: file:delete
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -212,7 +212,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: absent
-    name: "file:delete"
+    name: file:delete
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result

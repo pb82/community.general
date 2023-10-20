@@ -6,12 +6,12 @@
 - name: Create a server (Check)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
 
   register: server_creation_check_task
 
@@ -24,12 +24,12 @@
 
 - name: Create a server
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
   register: server_creation_task
@@ -43,12 +43,12 @@
 
 - name: Create a server (Confirmation)
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
   register: server_creation_confirmation_task
@@ -63,12 +63,12 @@
 - name: Patch server tags (Check)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     tags:
       - test
       - www
@@ -83,12 +83,12 @@
 
 - name: Patch server tags
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -104,12 +104,12 @@
 
 - name: Patch server tags (Confirmation)
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -126,12 +126,12 @@
 - name: Run it (Check mode)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: running
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     tags:
       - test
       - www
@@ -146,12 +146,12 @@
 
 - name: Run it
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: running
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -167,12 +167,12 @@
 
 - name: Run it
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: running
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -189,12 +189,12 @@
 - name: Reboot it (Check mode)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: restarted
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     tags:
       - test
       - www
@@ -209,12 +209,12 @@
 
 - name: Reboot it
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: restarted
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -231,12 +231,12 @@
 - name: Stop it (Check mode)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: stopped
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     tags:
       - test
       - www
@@ -251,12 +251,12 @@
 
 - name: Stop it
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: stopped
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -272,12 +272,12 @@
 
 - name: Stop it (Confirmation)
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: stopped
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -294,12 +294,12 @@
 - name: Destroy it (Check mode)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     tags:
       - test
       - www
@@ -314,12 +314,12 @@
 
 - name: Destroy it
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -335,12 +335,12 @@
 
 - name: Destroy it (Confirmation)
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
     tags:
       - test
@@ -357,12 +357,12 @@
 - name: Testing for unauthorized organization
   ignore_errors: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    image: '{{ scaleway_image_id }}'
+    image: "{{ scaleway_image_id }}"
     organization: this-organization-does-not-exists
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
   register: unauthorized_organization_task
 
 - debug: var=unauthorized_organization_task
@@ -375,12 +375,12 @@
 - name: Testing for unexisting image
   ignore_errors: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     image: this-image-does-not-exists
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
   register: unexisting_image_check
 
 - debug: var=unexisting_image_check

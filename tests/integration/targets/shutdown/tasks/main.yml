@@ -12,7 +12,7 @@
 - name: Execute shutdown with custom message and delay
   community.general.shutdown:
     delay: 100
-    msg: "Custom Message"
+    msg: Custom Message
   register: shutdown_result
   check_mode: true
 
@@ -29,7 +29,7 @@
       - '"Shut down initiated by Ansible" in shutdown_result_minus["shutdown_command"]'
       - '"Custom Message" not in shutdown_result_minus["shutdown_command"]'
   when:
-    - 'ansible_os_family not in ["Alpine", "AIX"]'
+    - ansible_os_family not in ["Alpine", "AIX"]
     - '"systemctl" not in shutdown_result["shutdown_command"]'
     - '"systemctl" not in shutdown_result_minus["shutdown_command"]'
 
@@ -37,23 +37,22 @@
   assert:
     that: '"shutdown" in shutdown_result["shutdown_command"]'
   when:
-    - "ansible_os_family != 'Alpine'"
-    - "ansible_system != 'VMKernel'"
+    - ansible_os_family != 'Alpine'
+    - ansible_system != 'VMKernel'
     - '"systemctl" not in shutdown_result["shutdown_command"]'
 
 - name: Verify shutdown command is present in Alpine except systemd
   assert:
     that: '"poweroff" in shutdown_result["shutdown_command"]'
-  when: 
-    - "ansible_os_family == 'Alpine'"
+  when:
+    - ansible_os_family == 'Alpine'
     - '"systemctl" not in shutdown_result["shutdown_command"]'
-
 
 - name: Verify shutdown command is present in VMKernel except systemd
   assert:
     that: '"halt" in shutdown_result["shutdown_command"]'
-  when: 
-    - "ansible_system == 'VMKernel'"
+  when:
+    - ansible_system == 'VMKernel'
     - '"systemctl" not in shutdown_result["shutdown_command"]'
 
 - name: Verify shutdown delay is present in minutes in Linux except systemd
@@ -62,8 +61,8 @@
       - '"-h 1" in shutdown_result["shutdown_command"]'
       - '"-h 0" in shutdown_result_minus["shutdown_command"]'
   when:
-    - "ansible_system == 'Linux'"
-    - "ansible_os_family != 'Alpine'"
+    - ansible_system == 'Linux'
+    - ansible_os_family != 'Alpine'
     - '"systemctl" not in shutdown_result["shutdown_command"]'
     - '"systemctl" not in shutdown_result_minus["shutdown_command"]'
 
@@ -111,8 +110,8 @@
   community.general.shutdown:
   register: shutdown_result
   check_mode: true
-  when: 
-    - "(ansible_distribution == 'Ubuntu' and ansible_distribution_major_version is version('18', '>=')) or (ansible_distribution == 'Debian')"
+  when:
+    - (ansible_distribution == 'Ubuntu' and ansible_distribution_major_version is version('18', '>=')) or (ansible_distribution == 'Debian')
     - '"systemd-sysv" not in ansible_facts.packages'
 
 - name: Install systemd_sysv in case it has been removed in test
@@ -120,5 +119,5 @@
     name: systemd-sysv
     state: present
   when:
-    - "(ansible_distribution == 'Ubuntu' and ansible_distribution_major_version is version('18', '>=')) or (ansible_distribution == 'Debian')"
-    - "systemd_sysv_install is changed"
+    - (ansible_distribution == 'Ubuntu' and ansible_distribution_major_version is version('18', '>=')) or (ansible_distribution == 'Debian')
+    - systemd_sysv_install is changed

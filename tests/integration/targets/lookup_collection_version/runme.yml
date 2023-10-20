@@ -24,8 +24,8 @@
           - lookup('community.general.collection_version', 'testns.testcoll_nothing') == '*'
           - lookup('community.general.collection_version', 'testns.testcoll_nothing', result_no_version='0.0.0') == '0.0.0'
           # Multiple collection names at once
-          - lookup('community.general.collection_version', 'testns.testcoll', 'testns.testcoll_nv', 'testns.testcoll_nv', 'testns.testcoll_mf', 'foo.bar')
-            == ['0.0.1', '*', '*', '0.0.1', none]
+          - lookup('community.general.collection_version', 'testns.testcoll', 'testns.testcoll_nv', 'testns.testcoll_nv', 'testns.testcoll_mf', 'foo.bar') == ['0.0.1',
+            '*', '*', '0.0.1', none]
 
     - name: Invalid FQCN
       set_fact:

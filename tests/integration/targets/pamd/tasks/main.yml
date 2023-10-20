@@ -1,14 +1,15 @@
+---
 # Copyright (c) 2021, Alexei Znamensky
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 - name: Set value for temp limit configuration
   set_fact:
-    test_pamd_file: "/tmp/pamd_file"
+    test_pamd_file: /tmp/pamd_file
 
 - name: Create temporary pam.d file
   copy:
-    content: "session required pam_lastlog.so silent showfailed"
+    content: session required pam_lastlog.so silent showfailed
     dest: "{{ test_pamd_file }}"
 - name: Test working on a single-line file works (2925)
   community.general.pamd:

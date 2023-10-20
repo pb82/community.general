@@ -45,7 +45,6 @@
     that:
       - gitlab_hook_state is changed
 
-
 - name: Create GitLab Hook ( Idempotency test )
   gitlab_hook:
     server_url: "{{ gitlab_host }}"

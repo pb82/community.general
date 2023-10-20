@@ -33,9 +33,9 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "file:create"
-    display_name: "File create"
-    icon_uri: "http://localhost/icon.png"
+    name: file:create
+    display_name: File create
+    icon_uri: http://localhost/icon.png
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -47,9 +47,9 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "file:delete"
-    display_name: "File delete"
-    icon_uri: "http://localhost/icon.png"
+    name: file:delete
+    display_name: File delete
+    icon_uri: http://localhost/icon.png
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -61,8 +61,8 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ScopePermission"
-    description: "Scope permission"
+    name: ScopePermission
+    description: Scope permission
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -75,8 +75,8 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ScopePermission"
-    description: "Scope permission"
+    name: ScopePermission
+    description: Scope permission
     permission_type: scope
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
@@ -90,14 +90,14 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ScopePermission"
-    description: "Scope permission"
+    name: ScopePermission
+    description: Scope permission
     resources:
-    - "Default Resource"
-    - "Other Resource"
+      - Default Resource
+      - Other Resource
     permission_type: scope
     scopes:
-      - "file:delete"
+      - file:delete
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -110,13 +110,13 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ScopePermission"
-    description: "Scope permission"
+    name: ScopePermission
+    description: Scope permission
     permission_type: scope
     scopes:
-      - "file:delete"
+      - file:delete
     policies:
-      - "Missing Policy"
+      - Missing Policy
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -129,13 +129,13 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ScopePermission"
-    description: "Scope permission"
+    name: ScopePermission
+    description: Scope permission
     permission_type: scope
     scopes:
-      - "file:delete"
+      - file:delete
     policies:
-      - "Default Policy"
+      - Default Policy
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -158,7 +158,7 @@
     auth_realm: "{{ admin_realm }}"
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
-    name: "ScopePermission"
+    name: ScopePermission
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -176,13 +176,13 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ScopePermission"
-    description: "Scope permission"
+    name: ScopePermission
+    description: Scope permission
     permission_type: scope
     scopes:
-      - "file:delete"
+      - file:delete
     policies:
-      - "Default Policy"
+      - Default Policy
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -204,7 +204,7 @@
     auth_realm: "{{ admin_realm }}"
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
-    name: "ScopePermission"
+    name: ScopePermission
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -222,13 +222,13 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ScopePermission"
-    description: "Scope permission changed"
+    name: ScopePermission
+    description: Scope permission changed
     permission_type: scope
-    decision_strategy: 'AFFIRMATIVE'
+    decision_strategy: AFFIRMATIVE
     scopes:
-      - "file:create"
-      - "file:delete"
+      - file:create
+      - file:delete
     policies: []
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
@@ -251,7 +251,7 @@
     auth_realm: "{{ admin_realm }}"
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
-    name: "ScopePermission"
+    name: ScopePermission
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -269,13 +269,13 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ScopePermission"
-    description: "Scope permission changed"
+    name: ScopePermission
+    description: Scope permission changed
     permission_type: scope
-    decision_strategy: 'AFFIRMATIVE'
+    decision_strategy: AFFIRMATIVE
     scopes:
-      - "file:create"
-      - "file:delete"
+      - file:create
+      - file:delete
     policies: []
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
@@ -298,7 +298,7 @@
     auth_realm: "{{ admin_realm }}"
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
-    name: "ScopePermission"
+    name: ScopePermission
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -316,7 +316,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: absent
-    name: "ScopePermission"
+    name: ScopePermission
     permission_type: scope
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
@@ -335,7 +335,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: absent
-    name: "ScopePermission"
+    name: ScopePermission
     permission_type: scope
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
@@ -354,11 +354,11 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ResourcePermission"
-    description: "Resource permission"
+    name: ResourcePermission
+    description: Resource permission
     permission_type: resource
     policies:
-      - "Default Policy"
+      - Default Policy
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -371,15 +371,15 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ResourcePermission"
-    description: "Resource permission"
+    name: ResourcePermission
+    description: Resource permission
     permission_type: resource
     resources:
-      - "Default Resource"
+      - Default Resource
     policies:
-      - "Default Policy"
+      - Default Policy
     scopes:
-      - "file:delete"
+      - file:delete
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -392,13 +392,13 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ResourcePermission"
-    description: "Resource permission"
+    name: ResourcePermission
+    description: Resource permission
     resources:
-      - "Default Resource"
+      - Default Resource
     permission_type: resource
     policies:
-      - "Default Policy"
+      - Default Policy
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -419,7 +419,7 @@
     auth_realm: "{{ admin_realm }}"
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
-    name: "ResourcePermission"
+    name: ResourcePermission
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -437,13 +437,13 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ResourcePermission"
-    description: "Resource permission"
+    name: ResourcePermission
+    description: Resource permission
     resources:
-      - "Default Resource"
+      - Default Resource
     permission_type: resource
     policies:
-      - "Default Policy"
+      - Default Policy
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -463,7 +463,7 @@
     auth_realm: "{{ admin_realm }}"
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
-    name: "ResourcePermission"
+    name: ResourcePermission
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -481,10 +481,10 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: present
-    name: "ResourcePermission"
-    description: "Resource permission changed"
+    name: ResourcePermission
+    description: Resource permission changed
     resources:
-      - "Default Resource"
+      - Default Resource
     permission_type: resource
     policies: []
     client_id: "{{ client_id }}"
@@ -507,7 +507,7 @@
     auth_realm: "{{ admin_realm }}"
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
-    name: "ResourcePermission"
+    name: ResourcePermission
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
   register: result
@@ -525,7 +525,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: absent
-    name: "ResourcePermission"
+    name: ResourcePermission
     permission_type: resource
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"
@@ -544,7 +544,7 @@
     auth_username: "{{ admin_user }}"
     auth_password: "{{ admin_password }}"
     state: absent
-    name: "ResourcePermission"
+    name: ResourcePermission
     permission_type: resource
     client_id: "{{ client_id }}"
     realm: "{{ realm }}"

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 - name: Collect vgcreate help
-  command: "vgcreate --help"
+  command: vgcreate --help
   register: vgcreate_help_result
 
 - when: "'--setautoactivation' in vgcreate_help_result.stdout"
@@ -41,7 +41,7 @@
 
     - name: Assert vg autoactivation disabled for vg_autoact_test
       assert:
-        that: "inactive_vg_autoact_status_result.stdout | length == 0"
+        that: inactive_vg_autoact_status_result.stdout | length == 0
 
     - name: Remove vg_autoact_test for the next test
       lvg:
@@ -53,7 +53,7 @@
       lvg:
         state: active
         vg: vg_autoact_test
-        vg_options: "--setautoactivation n"
+        vg_options: --setautoactivation n
         pvs: "{{ loop_device2 }}"
 
     - name: Collect vg autoactivation status for vg_autoact_test
@@ -62,10 +62,10 @@
 
     - name: Assert vg autoactivation disabled by option for vg_autoact_test
       assert:
-        that: "inactive_by_option_vg_autoact_status_result.stdout | length == 0"
+        that: inactive_by_option_vg_autoact_status_result.stdout | length == 0
   always:
-  - name: Cleanup vg_autoact_test
-    lvg:
-      state: absent
-      vg: vg_autoact_test
-      force: true
+    - name: Cleanup vg_autoact_test
+      lvg:
+        state: absent
+        vg: vg_autoact_test
+        force: true

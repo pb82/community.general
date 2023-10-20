@@ -4,14 +4,14 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 - name: collect repo configuration before test
-  shell: "grep . /etc/zypp/repos.d/*"
+  shell: grep . /etc/zypp/repos.d/*
   register: before
 
 - name: ensure zypper ref works
   command: zypper -n ref
 
 - block:
-    - include_tasks: 'zypper_repository.yml'
+    - include_tasks: zypper_repository.yml
   always:
     - name: remove repositories added during test
       community.general.zypper_repository:
@@ -28,7 +28,7 @@
         - systemsmanagement_Uyuni_Utils
 
     - name: collect repo configuration after test
-      shell: "grep . /etc/zypp/repos.d/*"
+      shell: grep . /etc/zypp/repos.d/*
       register: after
 
     - name: verify repo configuration has been restored

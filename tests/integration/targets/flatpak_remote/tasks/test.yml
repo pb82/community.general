@@ -17,7 +17,7 @@
   assert:
     that:
       - addition_result is changed
-    msg: "state=present shall add flatpak when absent"
+    msg: state=present shall add flatpak when absent
 
 - name: Test idempotency of addition - {{ method }}
   flatpak_remote:
@@ -31,7 +31,7 @@
   assert:
     that:
       - double_addition_result is not changed
-    msg: "state=present shall not do anything when flatpak is already present"
+    msg: state=present shall not do anything when flatpak is already present
 
 - name: Test updating remote url does not do anything - {{ method }}
   flatpak_remote:
@@ -45,8 +45,7 @@
   assert:
     that:
       - url_update_result is not changed
-    msg: "Trying to update the URL of an existing flatpak remote shall not do anything"
-
+    msg: Trying to update the URL of an existing flatpak remote shall not do anything
 
 # enabled=false
 
@@ -61,7 +60,7 @@
   assert:
     that:
       - deactivation_result is changed
-    msg: "enable=false shall disable flatpak remote when enabled"
+    msg: enable=false shall disable flatpak remote when enabled
 
 - name: Test idempotency of deactivation - {{ method }}
   flatpak_remote:
@@ -74,8 +73,7 @@
   assert:
     that:
       - double_deactivation_result is not changed
-    msg: "enabled=false shall not do anything when flatpak remote is already disabled"
-
+    msg: enabled=false shall not do anything when flatpak remote is already disabled
 
 # enabled=false
 
@@ -90,7 +88,7 @@
   assert:
     that:
       - activation_result is changed
-    msg: "enable=true shall enable flatpak remote when disabled"
+    msg: enable=true shall enable flatpak remote when disabled
 
 - name: Test idempotency of activation - {{ method }}
   flatpak_remote:
@@ -103,8 +101,7 @@
   assert:
     that:
       - double_activation_result is not changed
-    msg: "enabled=true shall not do anything when flatpak remote is already enabled"
-
+    msg: enabled=true shall not do anything when flatpak remote is already enabled
 
 # state=absent
 
@@ -119,7 +116,7 @@
   assert:
     that:
       - removal_result is changed
-    msg: "state=absent shall remove flatpak when present"
+    msg: state=absent shall remove flatpak when present
 
 - name: Test idempotency of removal - {{ method }}
   flatpak_remote:
@@ -132,4 +129,4 @@
   assert:
     that:
       - double_removal_result is not changed
-    msg: "state=absent shall not do anything when flatpak is not present"
+    msg: state=absent shall not do anything when flatpak is not present

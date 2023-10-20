@@ -10,9 +10,9 @@
     changed: false
   run_command_calls:
     - command: [/testbin/puppet, config, print, agent_disabled_lockfile]
-      environ: &env-def {environ_update: {LANGUAGE: C, LC_ALL: C}, check_rc: false}
+      environ: &env-def { environ_update: { LANGUAGE: C, LC_ALL: C }, check_rc: false }
       rc: 0
-      out: "blah, anything"
+      out: blah, anything
       err: ""
     - command:
         - /testbin/timeout
@@ -42,7 +42,7 @@
     - command: [/testbin/puppet, config, print, agent_disabled_lockfile]
       environ: *env-def
       rc: 0
-      out: "blah, anything"
+      out: blah, anything
       err: ""
     - command:
         - /testbin/timeout
@@ -73,7 +73,7 @@
     - command: [/testbin/puppet, config, print, agent_disabled_lockfile]
       environ: *env-def
       rc: 0
-      out: "blah, anything"
+      out: blah, anything
       err: ""
     - command:
         - /testbin/timeout
@@ -105,7 +105,7 @@
     - command: [/testbin/puppet, config, print, agent_disabled_lockfile]
       environ: *env-def
       rc: 0
-      out: "blah, anything"
+      out: blah, anything
       err: ""
     - command:
         - /testbin/timeout
@@ -137,7 +137,7 @@
     - command: [/testbin/puppet, config, print, agent_disabled_lockfile]
       environ: *env-def
       rc: 0
-      out: "blah, anything"
+      out: blah, anything
       err: ""
     - command:
         - /testbin/timeout
@@ -168,7 +168,7 @@
     - command: [/testbin/puppet, config, print, agent_disabled_lockfile]
       environ: *env-def
       rc: 0
-      out: "blah, anything"
+      out: blah, anything
       err: ""
     - command:
         - /testbin/timeout

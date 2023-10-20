@@ -4,5 +4,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 test_packages:
-  - "devel/ruby-gems"
-  - "ruby"
+  - devel/ruby-gems
+  - ruby

@@ -17,4 +17,4 @@
   vars:
     files:
       - "{{ ansible_os_family | lower }}.yml"
-      - "default.yml"
+      - default.yml

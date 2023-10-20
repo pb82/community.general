@@ -30,11 +30,10 @@
     key: "{{ gitlab_deploy_key }}"
     state: absent
 
-
 - name: Add deploy key to {{ gitlab_project_name }}
   gitlab_deploy_key:
     login_token: "{{ gitlab_login_token }}"
-    project: "root/{{ gitlab_project_name }}"
+    project: root/{{ gitlab_project_name }}
     server_url: "{{ gitlab_host }}"
     title: "{{ gitlab_project_name }}"
     key: "{{ gitlab_deploy_key }}"
@@ -46,11 +45,10 @@
       - deploy_key_status is changed
       - deploy_key_status.deploy_key.key == gitlab_deploy_key
 
-
 - name: Update public key {{ gitlab_project_name }}  (change expected)
   gitlab_deploy_key:
     login_token: "{{ gitlab_login_token }}"
-    project: "root/{{ gitlab_project_name }}"
+    project: root/{{ gitlab_project_name }}
     server_url: "{{ gitlab_host }}"
     title: "{{ gitlab_project_name }}"
     key: "{{ gitlab_deploy_key_new }}"
@@ -65,7 +63,7 @@
 - name: Update public key {{ gitlab_project_name }}  (no change expected)
   gitlab_deploy_key:
     login_token: "{{ gitlab_login_token }}"
-    project: "root/{{ gitlab_project_name }}"
+    project: root/{{ gitlab_project_name }}
     server_url: "{{ gitlab_host }}"
     title: "{{ gitlab_project_name }}"
     key: "{{ gitlab_deploy_key_new }}"

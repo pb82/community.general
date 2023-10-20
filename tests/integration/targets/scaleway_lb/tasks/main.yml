@@ -12,11 +12,11 @@
   check_mode: true
   scaleway_lb:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    organization_id: '{{ scw_org }}'
-    description: '{{ description }}'
-    tags: '{{ tags }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    organization_id: "{{ scw_org }}"
+    description: "{{ description }}"
+    tags: "{{ tags }}"
   register: lb_creation_check_task
 
 - debug: var=lb_creation_check_task
@@ -34,11 +34,11 @@
 - name: Create load-balancer
   scaleway_lb:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    organization_id: '{{ scw_org }}'
-    description: '{{ description }}'
-    tags: '{{ tags }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    organization_id: "{{ scw_org }}"
+    description: "{{ description }}"
+    tags: "{{ tags }}"
     wait: true
   register: lb_creation_task
 
@@ -62,11 +62,11 @@
 - name: Create load-balancer (Confirmation)
   scaleway_lb:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    organization_id: '{{ scw_org }}'
-    tags: '{{ tags }}'
-    description: '{{ description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    organization_id: "{{ scw_org }}"
+    tags: "{{ tags }}"
+    description: "{{ description }}"
   register: lb_creation_confirmation_task
 
 - debug: var=lb_creation_confirmation_task
@@ -90,11 +90,11 @@
   check_mode: true
   scaleway_lb:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    organization_id: '{{ scw_org }}'
-    tags: '{{ tags }}'
-    description: '{{ updated_description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    organization_id: "{{ scw_org }}"
+    tags: "{{ tags }}"
+    description: "{{ updated_description }}"
   register: lb_update_check_task
 
 - debug: var=lb_update_check_task
@@ -112,11 +112,11 @@
 - name: Update load-balancer
   scaleway_lb:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    tags: '{{ tags }}'
-    organization_id: '{{ scw_org }}'
-    description: '{{ updated_description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    tags: "{{ tags }}"
+    organization_id: "{{ scw_org }}"
+    description: "{{ updated_description }}"
     wait: true
   register: lb_update_task
 
@@ -140,11 +140,11 @@
 - name: Update load-balancer (Confirmation)
   scaleway_lb:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    tags: '{{ tags }}'
-    organization_id: '{{ scw_org }}'
-    description: '{{ updated_description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    tags: "{{ tags }}"
+    organization_id: "{{ scw_org }}"
+    description: "{{ updated_description }}"
   register: lb_update_confirmation_task
 
 - debug: var=lb_update_confirmation_task
@@ -168,10 +168,10 @@
   check_mode: true
   scaleway_lb:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    organization_id: '{{ scw_org }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    organization_id: "{{ scw_org }}"
   register: lb_deletion_check_task
 
 - name: lb_deletion_check_task is success
@@ -187,10 +187,10 @@
 - name: Delete load-balancer
   scaleway_lb:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    organization_id: '{{ scw_org }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    organization_id: "{{ scw_org }}"
     wait: true
   register: lb_deletion_task
 
@@ -207,10 +207,10 @@
 - name: Delete load-balancer (Confirmation)
   scaleway_lb:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    organization_id: '{{ scw_org }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    organization_id: "{{ scw_org }}"
   register: lb_deletion_confirmation_task
 
 - name: lb_deletion_confirmation_task is success

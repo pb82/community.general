@@ -22,7 +22,7 @@
 - name: Start container
   community.docker.docker_container:
     name: mssql-test
-    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    image: mcr.microsoft.com/mssql/server:2019-latest
     env:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "{{ mssql_login_password }}"
@@ -37,9 +37,9 @@
   ansible.builtin.wait_for:
     host: "{{ mssql_host }}"
     port: "{{ mssql_port }}"
-    state: started         # Port should be open
-    delay: 10              # Wait 10 secs before first check
-    timeout: 30            # Stop checking after timeout (sec)
+    state: started # Port should be open
+    delay: 10 # Wait 10 secs before first check
+    timeout: 30 # Stop checking after timeout (sec)
 
 - name: Check DB connection
   community.general.mssql_script:
@@ -47,7 +47,7 @@
     login_password: "{{ mssql_login_password }}"
     login_host: "{{ mssql_host }}"
     login_port: "{{ mssql_port }}"
-    script: "SELECT 1"
+    script: SELECT 1
 
 - name: Execute a malformed query
   community.general.mssql_script:
@@ -55,7 +55,7 @@
     login_password: "{{ mssql_login_password }}"
     login_host: "{{ mssql_host }}"
     login_port: "{{ mssql_port }}"
-    script: "SELCT 1"
+    script: SELCT 1
   failed_when: false
   register: bad_query
 - assert:
@@ -99,12 +99,11 @@
 
 - assert:
     that:
-      - result_batches.query_results | length == 2  # two batch results
-      - result_batches.query_results[0] | length == 2  # two selects in first batch
-      - result_batches.query_results[0][0] | length == 1  # one row in first select
-      - result_batches.query_results[0][0][0] | length == 1  # one column in first row
-      - result_batches.query_results[0][0][0][0] == 'Batch 0 - Select 0'  # first column of first row
-
+      - result_batches.query_results | length == 2 # two batch results
+      - result_batches.query_results[0] | length == 2 # two selects in first batch
+      - result_batches.query_results[0][0] | length == 1 # one row in first select
+      - result_batches.query_results[0][0][0] | length == 1 # one column in first row
+      - result_batches.query_results[0][0][0][0] == 'Batch 0 - Select 0' # first column of first row
 
 - name: two batches with dict output
   community.general.mssql_script:
@@ -143,10 +142,10 @@
 # ]
 - assert:
     that:
-      - result_batches_dict.query_results_dict | length == 2  # two batch results
-      - result_batches_dict.query_results_dict[0] | length == 2  # two selects in first batch
-      - result_batches_dict.query_results_dict[0][0] | length == 1  # one row in first select
-      - result_batches_dict.query_results_dict[0][0][0]['b0s0'] == 'Batch 0 - Select 0'  # column 'b0s0' of first row
+      - result_batches_dict.query_results_dict | length == 2 # two batch results
+      - result_batches_dict.query_results_dict[0] | length == 2 # two selects in first batch
+      - result_batches_dict.query_results_dict[0][0] | length == 1 # one row in first select
+      - result_batches_dict.query_results_dict[0][0][0]['b0s0'] == 'Batch 0 - Select 0' # column 'b0s0' of first row
 
 - name: Multiple batches with no resultsets and mixed-case GO
   community.general.mssql_script:
@@ -167,10 +166,10 @@
   register: empty_batches
 - assert:
     that:
-      - empty_batches.query_results | length == 5  # five batch results
-      - empty_batches.query_results[3][0] | length == 1  # one row in select
-      - empty_batches.query_results[3][0][0] | length == 2  # two columns in row
-      - empty_batches.query_results[3][0][0][1] == 'C2_VALUE2'  # value has been updated
+      - empty_batches.query_results | length == 5 # five batch results
+      - empty_batches.query_results[3][0] | length == 1 # one row in select
+      - empty_batches.query_results[3][0][0] | length == 2 # two columns in row
+      - empty_batches.query_results[3][0][0][1] == 'C2_VALUE2' # value has been updated
 
 - name: Stored procedure may return multiple result sets
   community.general.mssql_script:
@@ -183,9 +182,9 @@
   register: result_spaceused
 - assert:
     that:
-      - result_spaceused.query_results_dict | length == 1  # one batch
-      - result_spaceused.query_results_dict[0] | length == 2  # stored procedure returns two result sets
-      - result_spaceused.query_results_dict[0][0][0]['database_name'] == 'master'  # output dict
+      - result_spaceused.query_results_dict | length == 1 # one batch
+      - result_spaceused.query_results_dict[0] | length == 2 # stored procedure returns two result sets
+      - result_spaceused.query_results_dict[0][0][0]['database_name'] == 'master' # output dict
 
 - name: Ensure that passed 'db' is used
   community.general.mssql_script:
@@ -243,12 +242,12 @@
 - name: check types
   assert:
     that:
-      - result_databases.query_results[0][0][0][0] == '00000000-0000-0000-0000-000000000000'  # guid
-      - result_databases.query_results[0][0][0][1] == 'master'  # string
-      - result_databases.query_results[0][0][0][3] == None  # byte string representation
-      - result_databases.query_results[0][0][0][4] == "b'\\x01'"  # byte string representation
-      - result_databases.query_results[0][0][0][6] == 150  # int
-      - result_databases.query_results[0][0][0][10] == false  # bool
+      - result_databases.query_results[0][0][0][0] == '00000000-0000-0000-0000-000000000000' # guid
+      - result_databases.query_results[0][0][0][1] == 'master' # string
+      - result_databases.query_results[0][0][0][3] == None # byte string representation
+      - result_databases.query_results[0][0][0][4] == "b'\\x01'" # byte string representation
+      - result_databases.query_results[0][0][0][6] == 150 # int
+      - result_databases.query_results[0][0][0][10] == false # bool
 
 - name: "Test: Value of unknown type: <class 'uuid.UUID'>-dict"
   community.general.mssql_script:
@@ -276,8 +275,8 @@
   register: empty_result
 - assert:
     that:
-      - empty_result.query_results[0] | length == 3  # == 1 ; issue: only first result is returned
+      - empty_result.query_results[0] | length == 3 # == 1 ; issue: only first result is returned
       - empty_result.query_results[0][0][0][0] == 'msdb'
       - empty_result.query_results[0][1] | length == 0
       - empty_result.query_results[0][2][0][0] == 'msdb'
-  failed_when: false  # known issue
+  failed_when: false # known issue

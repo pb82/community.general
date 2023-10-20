@@ -7,8 +7,7 @@
   block:
     - name: Merge 2 lists by attribute name. list_merge='keep'. set
       set_fact:
-        my_list: "{{ [list100, list101]|
-                     community.general.lists_mergeby('name', list_merge='keep') }}"
+        my_list: "{{ [list100, list101]| community.general.lists_mergeby('name', list_merge='keep') }}"
     - name: Merge 2 lists by attribute name. list_merge='keep'. debug
       debug:
         msg: |-
@@ -26,8 +25,7 @@
   block:
     - name: Merge 2 lists by attribute name. list_merge='append'. set
       set_fact:
-        my_list: "{{ [list100, list101]|
-                     community.general.lists_mergeby('name', list_merge='append') }}"
+        my_list: "{{ [list100, list101]| community.general.lists_mergeby('name', list_merge='append') }}"
     - name: Merge 2 lists by attribute name. list_merge='append'. debug
       debug:
         msg: |-
@@ -45,8 +43,7 @@
   block:
     - name: Merge 2 lists by attribute name. list_merge='prepend'. set
       set_fact:
-        my_list: "{{ [list100, list101]|
-                     community.general.lists_mergeby('name', list_merge='prepend') }}"
+        my_list: "{{ [list100, list101]| community.general.lists_mergeby('name', list_merge='prepend') }}"
     - name: Merge 2 lists by attribute name. list_merge='prepend'. debug
       debug:
         msg: |-
@@ -64,8 +61,7 @@
   block:
     - name: Merge 2 lists by attribute name. list_merge='append_rp'. set
       set_fact:
-        my_list: "{{ [list102, list103]|
-                     community.general.lists_mergeby('name', list_merge='append_rp') }}"
+        my_list: "{{ [list102, list103]| community.general.lists_mergeby('name', list_merge='append_rp') }}"
     - name: Merge 2 lists by attribute name. list_merge='append_rp'. debug
       debug:
         msg: |-
@@ -83,8 +79,7 @@
   block:
     - name: Merge 2 lists by attribute name. list_merge='prepend_rp'. set
       set_fact:
-        my_list: "{{ [list102, list103]|
-                     community.general.lists_mergeby('name', list_merge='prepend_rp') }}"
+        my_list: "{{ [list102, list103]| community.general.lists_mergeby('name', list_merge='prepend_rp') }}"
     - name: Merge 2 lists by attribute name. list_merge='prepend_rp'. debug
       debug:
         msg: |-
@@ -104,10 +99,7 @@
   block:
     - name: Merge by name. recursive=True list_merge='append_rp'. set
       set_fact:
-        my_list: "{{ [list200, list201]|
-                     community.general.lists_mergeby('name',
-                                                     recursive=True,
-                                                     list_merge='append_rp') }}"
+        my_list: "{{ [list200, list201]| community.general.lists_mergeby('name', recursive=True, list_merge='append_rp') }}"
     - name: Merge by name. recursive=True list_merge='append_rp'. debug
       debug:
         msg: |-
@@ -125,10 +117,7 @@
   block:
     - name: Merge by name. recursive=False list_merge='append_rp'. set
       set_fact:
-        my_list: "{{ [list200, list201]|
-                     community.general.lists_mergeby('name',
-                                                     recursive=False,
-                                                     list_merge='append_rp') }}"
+        my_list: "{{ [list200, list201]| community.general.lists_mergeby('name', recursive=False, list_merge='append_rp') }}"
     - name: Merge by name. recursive=False list_merge='append_rp'. debug
       debug:
         msg: |-

@@ -19,7 +19,7 @@
   assert:
     that:
       - addition_result is changed
-    msg: "Adding an absent flatpak remote shall mark module execution as changed"
+    msg: Adding an absent flatpak remote shall mark module execution as changed
 
 - name: Test non-existent idempotency of addition of absent flatpak remote (check mode)
   flatpak_remote:
@@ -30,14 +30,14 @@
   check_mode: true
 
 - name: >
-      Verify non-existent idempotency of addition of absent flatpak remote
-      test result (check mode)
+    Verify non-existent idempotency of addition of absent flatpak remote
+    test result (check mode)
   assert:
     that:
       - double_addition_result is changed
     msg: |
-        Adding an absent flatpak remote a second time shall still mark module execution
-        as changed in check mode
+      Adding an absent flatpak remote a second time shall still mark module execution
+      as changed in check mode
 
 # state=absent
 
@@ -52,8 +52,7 @@
   assert:
     that:
       - removal_result is not changed
-    msg: "Removing an absent flatpak remote shall mark module execution as not changed"
-
+    msg: Removing an absent flatpak remote shall mark module execution as not changed
 
 # - Tests with present flatpak remote -------------------------------------------
 
@@ -71,7 +70,7 @@
   assert:
     that:
       - addition_result is not changed
-    msg: "Adding a present flatpak remote shall mark module execution as not changed"
+    msg: Adding a present flatpak remote shall mark module execution as not changed
 
 # state=absent
 
@@ -86,7 +85,7 @@
   assert:
     that:
       - removal_result is changed
-    msg: "Removing a present flatpak remote shall mark module execution as changed"
+    msg: Removing a present flatpak remote shall mark module execution as changed
 
 - name: Test non-existent idempotency of removal of present flatpak remote (check mode)
   flatpak_remote:
@@ -96,14 +95,14 @@
   check_mode: true
 
 - name: >
-      Verify non-existent idempotency of removal of present flatpak remote
-      test result (check mode)
+    Verify non-existent idempotency of removal of present flatpak remote
+    test result (check mode)
   assert:
     that:
       - double_removal_result is changed
     msg: |
-        Removing a present flatpak remote a second time shall still mark module execution
-        as changed in check mode
+      Removing a present flatpak remote a second time shall still mark module execution
+      as changed in check mode
 
 
 # - Tests with disabled flatpak remote ------------------------------------------
@@ -121,7 +120,7 @@
   assert:
     that:
       - activation_result is changed
-    msg: "Enabling an disabled flatpak remote shall mark module execution as changed"
+    msg: Enabling an disabled flatpak remote shall mark module execution as changed
 
 - name: Test non-existent idempotency of activation of disabled flatpak remote (check mode)
   flatpak_remote:
@@ -131,14 +130,14 @@
   check_mode: true
 
 - name: >
-      Verify non-existent idempotency of activation of disabled flatpak remote
-      test result (check mode)
+    Verify non-existent idempotency of activation of disabled flatpak remote
+    test result (check mode)
   assert:
     that:
       - double_activation_result is changed
     msg: |
-        Enabling an disabled flatpak remote a second time shall still mark module execution
-        as changed in check mode
+      Enabling an disabled flatpak remote a second time shall still mark module execution
+      as changed in check mode
 
 # enabled=false
 
@@ -153,8 +152,7 @@
   assert:
     that:
       - deactivation_result is not changed
-    msg: "Disabling an disabled flatpak remote shall mark module execution as not changed"
-
+    msg: Disabling an disabled flatpak remote shall mark module execution as not changed
 
 # - Tests with enabled flatpak remote ------------------------------------------
 
@@ -171,7 +169,7 @@
   assert:
     that:
       - activation_result is not changed
-    msg: "Enabling a enabled flatpak remote shall mark module execution as not changed"
+    msg: Enabling a enabled flatpak remote shall mark module execution as not changed
 
 # enabled=false
 
@@ -186,7 +184,7 @@
   assert:
     that:
       - deactivation_result is changed
-    msg: "Disabling a enabled flatpak remote shall mark module execution as changed"
+    msg: Disabling a enabled flatpak remote shall mark module execution as changed
 
 - name: Test non-existent idempotency of deactivation of enabled flatpak remote (check mode)
   flatpak_remote:
@@ -196,11 +194,11 @@
   check_mode: true
 
 - name: >
-      Verify non-existent idempotency of deactivation of enabled flatpak remote
-      test result (check mode)
+    Verify non-existent idempotency of deactivation of enabled flatpak remote
+    test result (check mode)
   assert:
     that:
       - double_deactivation_result is changed
     msg: |
-        "Disabling a enabled flatpak remote a second time shall still mark module execution
-        as changed in check mode
+      "Disabling a enabled flatpak remote a second time shall still mark module execution
+      as changed in check mode

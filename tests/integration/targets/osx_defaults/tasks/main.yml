@@ -21,7 +21,7 @@
 - name: Test if state and value are required together
   assert:
     that:
-    - "'following are missing: value' in '{{ missing_value['msg'] }}'"
+      - "'following are missing: value' in '{{ missing_value['msg'] }}'"
 
 - name: Change value of AppleMeasurementUnits to centimeter in check_mode
   osx_defaults:
@@ -36,7 +36,7 @@
 - name: Test if AppleMeasurementUnits value is changed to Centimeters in check_mode
   assert:
     that:
-    - measure_task_check_mode.changed
+      - measure_task_check_mode.changed
 
 - name: Find the current value of AppleMeasurementUnits
   osx_defaults:
@@ -49,11 +49,11 @@
     msg: "{{ apple_measure_value['value'] }}"
 
 - set_fact:
-    new_value: "Centimeters"
+    new_value: Centimeters
   when: apple_measure_value['value'] == 'Inches' or apple_measure_value['value'] == None
 
 - set_fact:
-    new_value: "Inches"
+    new_value: Inches
   when: apple_measure_value['value'] == 'Centimeters'
 
 - name: Change value of AppleMeasurementUnits to {{ new_value }}
@@ -68,7 +68,7 @@
 - name: Test if AppleMeasurementUnits value is changed to {{ new_value }}
   assert:
     that:
-    - change_value.changed
+      - change_value.changed
 
 - name: Again change value of AppleMeasurementUnits to {{ new_value }}
   osx_defaults:
@@ -82,7 +82,7 @@
 - name: Again test if AppleMeasurementUnits value is not changed to {{ new_value }}
   assert:
     that:
-    - not change_value.changed
+      - not change_value.changed
 
 - name: Check a fake setting for delete operation
   osx_defaults:
@@ -173,7 +173,6 @@
     that:
       - not absent_check_mode_task.changed
 
-
 - name: Use different data types and check if it works with them
   osx_defaults:
     domain: com.ansible.fake_values
@@ -182,15 +181,15 @@
     value: "{{ item.value }}"
     state: present
   with_items: &data_type
-    - { type: 'int', value: 1, key: 'sample_int'}
-    - { type: 'integer', value: 1, key: 'sample_int_2'}
-    - { type: 'integer', value: -1, key: 'negative_int'}
-    - { type: 'bool', value: true, key: 'sample_bool'}
-    - { type: 'boolean', value: true, key: 'sample_bool_2'}
-    - { type: 'date', value: "2019-02-19 10:10:10", key: 'sample_date'}
-    - { type: 'float', value: 1.2, key: 'sample_float'}
-    - { type: 'string', value: 'sample', key: 'sample_string'}
-    - { type: 'array', value: ['1', '2'], key: 'sample_array'}
+    - { type: int, value: 1, key: sample_int }
+    - { type: integer, value: 1, key: sample_int_2 }
+    - { type: integer, value: -1, key: negative_int }
+    - { type: bool, value: true, key: sample_bool }
+    - { type: boolean, value: true, key: sample_bool_2 }
+    - { type: date, value: "2019-02-19 10:10:10", key: sample_date }
+    - { type: float, value: 1.2, key: sample_float }
+    - { type: string, value: sample, key: sample_string }
+    - { type: array, value: ["1", "2"], key: sample_array }
   register: test_data_types
 
 - assert:
@@ -211,7 +210,6 @@
     that: "{{ item.changed }}"
   with_items: "{{ test_data_types.results }}"
 
-
 - name: Ensure test key does not exist
   osx_defaults:
     domain: com.ansible.fake_array_value
@@ -223,7 +221,7 @@
     domain: com.ansible.fake_array_value
     key: ExampleArrayKey
     value:
-      - 'Value with spaces'
+      - Value with spaces
     type: array
     array_add: true
   register: test_array_add
@@ -236,7 +234,7 @@
     domain: com.ansible.fake_array_value
     key: ExampleArrayKey
     value:
-      - 'Value with spaces'
+      - Value with spaces
     type: array
     array_add: true
   register: test_array_add

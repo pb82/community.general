@@ -34,20 +34,20 @@
       clientSecret: clientsecret
       syncMode: FORCE
     mappers:
-      - name: "first_name"
-        identityProviderAlias: "oidc-idp"
-        identityProviderMapper: "oidc-user-attribute-idp-mapper"
+      - name: first_name
+        identityProviderAlias: oidc-idp
+        identityProviderMapper: oidc-user-attribute-idp-mapper
         config:
-          claim: "first_name"
-          user.attribute: "first_name"
-          syncMode: "INHERIT"
-      - name: "last_name"
-        identityProviderAlias: "oidc-idp"
-        identityProviderMapper: "oidc-user-attribute-idp-mapper"
+          claim: first_name
+          user.attribute: first_name
+          syncMode: INHERIT
+      - name: last_name
+        identityProviderAlias: oidc-idp
+        identityProviderMapper: oidc-user-attribute-idp-mapper
         config:
-          claim: "last_name"
-          user.attribute: "last_name"
-          syncMode: "INHERIT"
+          claim: last_name
+          user.attribute: last_name
+          syncMode: INHERIT
     state: present
   register: result
 
@@ -83,20 +83,20 @@
       clientSecret: "**********"
       syncMode: FORCE
     mappers:
-      - name: "first_name"
-        identityProviderAlias: "oidc-idp"
-        identityProviderMapper: "oidc-user-attribute-idp-mapper"
+      - name: first_name
+        identityProviderAlias: oidc-idp
+        identityProviderMapper: oidc-user-attribute-idp-mapper
         config:
-          claim: "first_name"
-          user.attribute: "first_name"
-          syncMode: "INHERIT"
-      - name: "last_name"
-        identityProviderAlias: "oidc-idp"
-        identityProviderMapper: "oidc-user-attribute-idp-mapper"
+          claim: first_name
+          user.attribute: first_name
+          syncMode: INHERIT
+      - name: last_name
+        identityProviderAlias: oidc-idp
+        identityProviderMapper: oidc-user-attribute-idp-mapper
         config:
-          claim: "last_name"
-          user.attribute: "last_name"
-          syncMode: "INHERIT"
+          claim: last_name
+          user.attribute: last_name
+          syncMode: INHERIT
     state: present
   register: result
 

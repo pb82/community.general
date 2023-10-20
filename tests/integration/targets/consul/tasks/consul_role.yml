@@ -7,12 +7,12 @@
   consul_policy:
     name: foo-access-for-role
     rules: |
-        key "foo" {
-            policy = "read"
-        }
-        key "private/foo" {
-            policy = "deny"
-        }
+      key "foo" {
+          policy = "read"
+      }
+      key "private/foo" {
+          policy = "deny"
+      }
     token: "{{ consul_management_token }}"
   register: policy_result
 
@@ -20,12 +20,12 @@
   consul_policy:
     name: bar-access-for-role
     rules: |
-        key "bar" {
-            policy = "read"
-        }
-        key "private/bar" {
-            policy = "deny"
-        }
+      key "bar" {
+          policy = "read"
+      }
+      key "private/bar" {
+          policy = "deny"
+      }
     token: "{{ consul_management_token }}"
   register: policy_result
 
@@ -33,7 +33,7 @@
   consul_role:
     name: foo-role-with-policy
     policies:
-      - name: "foo-access-for-role"
+      - name: foo-access-for-role
     token: "{{ consul_management_token }}"
   register: result
 
@@ -45,9 +45,9 @@
 - name: Update policy description, in check mode
   consul_role:
     name: foo-role-with-policy
-    description: "Testing updating description"
+    description: Testing updating description
     token: "{{ consul_management_token }}"
-  check_mode: yes
+  check_mode: true
   register: result
 
 - assert:
@@ -59,7 +59,7 @@
 - name: Update policy to add the description
   consul_role:
     name: foo-role-with-policy
-    description: "Role for testing policies"
+    description: Role for testing policies
     token: "{{ consul_management_token }}"
   register: result
 
@@ -73,8 +73,8 @@
   consul_role:
     name: foo-role-with-policy
     policies:
-      - name: "foo-access-for-role"
-      - name: "bar-access-for-role"
+      - name: foo-access-for-role
+      - name: bar-access-for-role
     token: "{{ consul_management_token }}"
   register: result
 
@@ -110,7 +110,7 @@
         datacenters:
           - dc2
   register: result
-  check_mode: yes
+  check_mode: true
 
 - assert:
     that:
@@ -123,7 +123,7 @@
     token: "{{ consul_management_token }}"
     name: role-with-service-identity
     policies:
-      - name: "foo-access-for-role"
+      - name: foo-access-for-role
   register: result
 
 - assert:
@@ -153,7 +153,7 @@
     name: role-with-service-identity
     node_identities: []
   register: result
-  check_mode: yes
+  check_mode: true
 
 - assert:
     that:

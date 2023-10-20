@@ -6,13 +6,13 @@
 - name: Create a server with no IP (Check)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
 
   register: server_creation_absent_check_task
 
@@ -25,13 +25,13 @@
 
 - name: Create a server
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
   register: server_creation_absent_task
@@ -45,13 +45,13 @@
 
 - name: Create a server (Confirmation)
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
   register: server_creation_absent_confirmation_task
@@ -68,13 +68,13 @@
 - name: Patch server tags (Check)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: dynamic
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
 
   register: ip_patching_check_task
 
@@ -87,13 +87,13 @@
 
 - name: Patch server tags
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: dynamic
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
   register: ip_patching_task
 
@@ -106,13 +106,13 @@
 
 - name: Patch server tags (Confirmation)
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: dynamic
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
   register: ip_patching_confirmation_task
@@ -129,13 +129,13 @@
 - name: Patch server tags (Check)
   check_mode: true
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
 
   register: remove_ip_check_task
 
@@ -148,13 +148,13 @@
 
 - name: Patch server tags
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
   register: remove_ip_task
@@ -168,13 +168,13 @@
 
 - name: Patch server tags (Confirmation)
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
     public_ip: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
   register: remove_ip_confirmation_task
@@ -188,12 +188,12 @@
 
 - name: Destroy it
   scaleway_compute:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
 
   register: server_destroy_task

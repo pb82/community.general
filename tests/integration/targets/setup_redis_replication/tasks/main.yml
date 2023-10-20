@@ -1,3 +1,4 @@
+---
 ####################################################################
 # WARNING: These are designed specifically for Ansible tests       #
 # and should not be used as examples of how to write Ansible roles #
@@ -9,4 +10,4 @@
 
 - import_tasks: setup_redis_cluster.yml
   when:
-  - ansible_distribution in ['CentOS', 'Fedora', 'FreeBSD', 'openSUSE Leap', 'Ubuntu', 'Debian', 'Archlinux', 'Alpine']
+    - ansible_distribution in ['CentOS', 'Fedora', 'FreeBSD', 'openSUSE Leap', 'Ubuntu', 'Debian', 'Archlinux', 'Alpine']

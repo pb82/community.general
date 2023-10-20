@@ -10,9 +10,8 @@
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_1_launchd_start_result_check_mode"
+  register: test_1_launchd_start_result_check_mode
   check_mode: true
-
 
 - name: "[{{ item }}] Validate that service was started in check mode"
   assert:
@@ -20,14 +19,12 @@
       - test_1_launchd_start_result_check_mode is success
       - test_1_launchd_start_result_check_mode is changed
 
-
 - name: "[{{ item }}] Given a started service..."
   launchd:
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_1_launchd_start_result"
-
+  register: test_1_launchd_start_result
 
 - name: "[{{ item }}] Validate that service was started"
   assert:
@@ -47,7 +44,7 @@
     name: "{{ launchd_service_name }}"
     state: stopped
   become: true
-  register: "test_2_launchd_stop_result"
+  register: test_2_launchd_stop_result
 
 - name: "[{{ item }}] Validate that service was stopped after it was started"
   assert:
@@ -66,7 +63,7 @@
     name: "{{ launchd_service_name }}"
     state: stopped
   become: true
-  register: "test_3_launchd_stop_result"
+  register: test_3_launchd_stop_result
 
 - name: "[{{ item }}] Validate that service can be stopped after being already stopped"
   assert:
@@ -85,7 +82,7 @@
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_4_launchd_start_result"
+  register: test_4_launchd_start_result
 
 - name: "[{{ item }}] Validate that service was started..."
   assert:
@@ -103,7 +100,7 @@
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_5_launchd_start_result"
+  register: test_5_launchd_start_result
 
 - name: "[{{ item }}] Validate that service is still in the same state as before"
   assert:

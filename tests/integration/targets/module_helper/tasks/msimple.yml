@@ -1,3 +1,4 @@
+---
 # Copyright (c) 2021, Alexei Znamensky
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
@@ -59,7 +60,7 @@
 
 - name: test msimple 5a
   msimple:
-    a: 3   # should triple b and c
+    a: 3 # should triple b and c
     b: oh
     c: my
   register: simple5a
@@ -67,7 +68,7 @@
 - name: test msimple 5b
   check_mode: true
   msimple:
-    a: 3   # should triple b and c
+    a: 3 # should triple b and c
     b: oh
     c: my
   register: simple5b

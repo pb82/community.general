@@ -9,11 +9,11 @@
     channel: xfwm4
     property: /general/inactive_opacity
   output:
-    value: '100'
+    value: "100"
     is_array: false
   run_command_calls:
     - command: [/testbin/xfconf-query, --channel, xfwm4, --property, /general/inactive_opacity]
-      environ: &env-def {environ_update: {LANGUAGE: C, LC_ALL: C}, check_rc: true}
+      environ: &env-def { environ_update: { LANGUAGE: C, LC_ALL: C }, check_rc: true }
       rc: 0
       out: "100\n"
       err: ""
@@ -27,7 +27,7 @@
       environ: *env-def
       rc: 1
       out: ""
-      err: 'Property "/general/i_dont_exist" does not exist on channel "xfwm4".\n'
+      err: Property "/general/i_dont_exist" does not exist on channel "xfwm4".\n
 - id: test_property_no_channel
   input:
     property: /general/i_dont_exist

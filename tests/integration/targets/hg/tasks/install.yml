@@ -68,7 +68,7 @@
 - name: bypass the mercurial python interpreter symlink (if needed)
   lineinfile:
     path: "{{ which_hg.stdout }}"
-    regexp: "^#!.*$"
+    regexp: ^#!.*$
     line: "#!{{ stat_hg_interpreter.stat.lnk_source }}"
   when: stat_hg_interpreter.stat.islnk
 

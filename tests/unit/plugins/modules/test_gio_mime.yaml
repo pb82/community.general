@@ -13,7 +13,7 @@
     changed: true
   run_command_calls:
     - command: [/testbin/gio, mime, x-scheme-handler/http]
-      environ: &env-def {environ_update: {LANGUAGE: C, LC_ALL: C}, check_rc: true}
+      environ: &env-def { environ_update: { LANGUAGE: C, LC_ALL: C }, check_rc: true }
       rc: 0
       out: ""
       err: >

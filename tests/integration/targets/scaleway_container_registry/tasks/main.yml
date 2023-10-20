@@ -12,10 +12,10 @@
   check_mode: true
   community.general.scaleway_container_registry:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
   register: cr_creation_check_task
 
 - ansible.builtin.debug:
@@ -30,10 +30,10 @@
 - name: Create container_registry
   community.general.scaleway_container_registry:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
   register: cr_creation_task
 
 - ansible.builtin.debug:
@@ -49,10 +49,10 @@
 - name: Create container registry (Confirmation)
   community.general.scaleway_container_registry:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
   register: cr_creation_confirmation_task
 
 - ansible.builtin.debug:
@@ -69,10 +69,10 @@
   check_mode: true
   community.general.scaleway_container_registry:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
   register: cr_update_check_task
 
 - ansible.builtin.debug:
@@ -87,10 +87,10 @@
 - name: Update container registry
   community.general.scaleway_container_registry:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
   register: cr_update_task
 
 - ansible.builtin.debug:
@@ -106,10 +106,10 @@
 - name: Update container registry (Confirmation)
   community.general.scaleway_container_registry:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
   register: cr_update_confirmation_task
 
 - ansible.builtin.debug:
@@ -126,10 +126,10 @@
   check_mode: true
   community.general.scaleway_container_registry:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"
   register: cr_deletion_check_task
 
 - ansible.builtin.debug:
@@ -144,10 +144,10 @@
 - name: Delete container registry
   community.general.scaleway_container_registry:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"
   register: cr_deletion_task
 
 - ansible.builtin.debug:
@@ -162,10 +162,10 @@
 - name: Delete container regitry (Confirmation)
   community.general.scaleway_container_registry:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"
   register: cr_deletion_confirmation_task
 
 - ansible.builtin.debug:

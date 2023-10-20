@@ -1,3 +1,4 @@
+---
 # Copyright (c) 2022, Ansible Project
 # Copyright (c) 2022, VMware, Inc. All Rights Reserved.
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
@@ -13,7 +14,7 @@
 - name: "Testcase:: dest dir does not exists"
   community.general.iso_customize:
     src_iso: "{{ test_dir }}/test1.iso"
-    dest_iso: "/aaa/{{ dest_iso_name }}"
+    dest_iso: /aaa/{{ dest_iso_name }}
   register: customized_result
   failed_when: customized_result.msg.find('does not exist') == -1
 
@@ -43,7 +44,7 @@
     src_iso: "{{ test_dir }}/test1.iso"
     dest_iso: "{{ test_dir }}/{{ dest_iso_name }}"
     delete_files:
-      - "/test03.cfg"
+      - /test03.cfg
   register: customized_result
   failed_when: customized_result.msg.find("does not exist") == -1
 
@@ -54,7 +55,7 @@
     dest_iso: "{{ test_dir }}/{{ dest_iso_name }}"
     add_files:
       - src_file: "{{ test_dir }}/test03.cfg"
-        dest_file: "/preseed/ubuntu.seed"
+        dest_file: /preseed/ubuntu.seed
   register: customized_result
   failed_when: customized_result.msg.find("does not exist") == -1
 
@@ -66,6 +67,6 @@
     dest_iso: "{{ test_dir }}/{{ dest_iso_name }}"
     add_files:
       - src_file: " {{ test_dir }}/test01.cfg "
-        dest_file: "/preseed/ubuntu.seed"
+        dest_file: /preseed/ubuntu.seed
   register: customized_result
   failed_when: customized_result.msg.find("does not exist") == -1

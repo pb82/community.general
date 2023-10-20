@@ -26,4 +26,3 @@
       - unset_result.diff.before == option_value + "\n"
       - unset_result.diff.after == "\n"
       - get_result.config_value == ''
-...

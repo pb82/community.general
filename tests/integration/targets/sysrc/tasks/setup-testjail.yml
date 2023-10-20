@@ -14,7 +14,7 @@
     line: cloned_interfaces=lo1
 
 - name: Activate cloned interfaces
-  command: "service netif cloneup"
+  command: service netif cloneup
   changed_when: false
 
 - name: Install ezjail
@@ -49,7 +49,7 @@
 
 - name: Setup ezjail base
   when: not ezjail_base_jail.stat.exists
-  shell: "ezjail-admin install >> /tmp/ezjail.log"
+  shell: ezjail-admin install >> /tmp/ezjail.log
   changed_when: false
 
 - name: Has testjail
@@ -59,15 +59,15 @@
 
 - name: Create testjail
   when: not ezjail_test_jail.stat.exists
-  shell: "ezjail-admin create testjail 'lo1|127.0.1.1' >> /tmp/ezjail.log"
+  shell: ezjail-admin create testjail 'lo1|127.0.1.1' >> /tmp/ezjail.log
   changed_when: false
 
 - name: Is testjail running
-  shell: "jls | grep testjail"
+  shell: jls | grep testjail
   changed_when: false
   failed_when: false
   register: is_testjail_up
 
 - name: Start testjail
   when: is_testjail_up.rc == 1
-  command: "ezjail-admin start testjail"
+  command: ezjail-admin start testjail

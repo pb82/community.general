@@ -45,8 +45,8 @@
     - name: Enable authentication
       lineinfile:
         path: /etc/influxdb/influxdb.conf
-        regexp: 'auth-enabled ='
-        line: '  auth-enabled = true'
+        regexp: auth-enabled =
+        line: "  auth-enabled = true"
 
     - name: Restart InfluxDB service
       service: name=influxdb state=restarted

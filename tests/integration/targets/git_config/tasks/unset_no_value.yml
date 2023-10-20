@@ -24,4 +24,3 @@
       - unset_result is not changed
       - unset_result.msg == 'no setting to unset'
       - get_result.config_value == ''
-...

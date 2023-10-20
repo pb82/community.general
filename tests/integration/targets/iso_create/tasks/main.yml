@@ -1,3 +1,4 @@
+---
 ####################################################################
 # WARNING: These are designed specifically for Ansible tests       #
 # and should not be used as examples of how to write Ansible roles #
@@ -10,19 +11,19 @@
 - name: install pycdlib
   pip:
     name: pycdlib
-    extra_args: "-c {{ remote_constraints }}"
+    extra_args: -c {{ remote_constraints }}
   register: install_pycdlib
 - debug: var=install_pycdlib
 
 - set_fact:
-    output_test_dir: '{{ remote_tmp_dir }}/test_iso_create'
+    output_test_dir: "{{ remote_tmp_dir }}/test_iso_create"
 
 # - include_tasks: prepare_dest_dir.yml
 
 - name: Copy files and directories
   copy:
-    src: '{{ item }}'
-    dest: '{{ remote_tmp_dir }}/{{ item }}'
+    src: "{{ item }}"
+    dest: "{{ remote_tmp_dir }}/{{ item }}"
   loop:
     - test1.cfg
     - test_dir
@@ -44,8 +45,8 @@
 - debug: var=iso_file
 - assert:
     that:
-    - iso_result is changed
-    - iso_file.stat.exists == False
+      - iso_result is changed
+      - iso_file.stat.exists == False
 
 - name: Create iso file with a specified file
   iso_create:
@@ -63,8 +64,8 @@
 
 - assert:
     that:
-    - iso_result is changed
-    - iso_file.stat.exists == True
+      - iso_result is changed
+      - iso_file.stat.exists == True
 
 - name: Create iso file with a specified file and folder
   iso_create:
@@ -83,15 +84,15 @@
 
 - assert:
     that:
-    - iso_result is changed
-    - iso_file.stat.exists == True
+      - iso_result is changed
+      - iso_file.stat.exists == True
 
 - name: Create iso file with volume identification string
   iso_create:
     src_files:
       - "{{ remote_tmp_dir }}/test1.cfg"
     dest_iso: "{{ output_test_dir }}/test2.iso"
-    vol_ident: "OEMDRV"
+    vol_ident: OEMDRV
   register: iso_result
 - debug: var=iso_result
 
@@ -102,8 +103,8 @@
 
 - assert:
     that:
-    - iso_result is changed
-    - iso_file.stat.exists == True
+      - iso_result is changed
+      - iso_file.stat.exists == True
 
 - name: Create iso file with Rock Ridge extension
   iso_create:
@@ -121,8 +122,8 @@
 
 - assert:
     that:
-    - iso_result is changed
-    - iso_file.stat.exists == True
+      - iso_result is changed
+      - iso_file.stat.exists == True
 
 - name: Create iso file with Joliet extension
   iso_create:
@@ -140,8 +141,8 @@
 
 - assert:
     that:
-    - iso_result is changed
-    - iso_file.stat.exists == True
+      - iso_result is changed
+      - iso_file.stat.exists == True
 
 - name: Create iso file with UDF enabled
   iso_create:
@@ -159,5 +160,5 @@
 
 - assert:
     that:
-    - iso_result is changed
-    - iso_file.stat.exists == True
+      - iso_result is changed
+      - iso_file.stat.exists == True

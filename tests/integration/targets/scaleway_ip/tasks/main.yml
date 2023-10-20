@@ -12,8 +12,8 @@
   check_mode: true
   scaleway_ip:
     state: present
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
   register: ip_creation_check_task
 
 - debug: var=ip_creation_check_task
@@ -31,8 +31,8 @@
 - name: Create IP
   scaleway_ip:
     state: present
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
   register: ip_creation_task
 
 - debug: var=ip_creation_task
@@ -50,14 +50,14 @@
 - name: ip_creation_task.scaleway_ip.server is none
   assert:
     that:
-      - '{{ ip_creation_task.scaleway_ip.server is none }}'
+      - "{{ ip_creation_task.scaleway_ip.server is none }}"
 
 - name: Create IP (Confirmation)
   scaleway_ip:
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
     state: present
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
   register: ip_creation_confirmation_task
 
 - debug: var=ip_creation_confirmation_task
@@ -75,16 +75,16 @@
 - name: ip_creation_confirmation_task.scaleway_ip.server is none
   assert:
     that:
-      - '{{ ip_creation_task.scaleway_ip.server is none }}'
+      - "{{ ip_creation_task.scaleway_ip.server is none }}"
 
 - name: Assign reverse to server (Check)
   check_mode: true
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_reverse_assignation_check_task
 
 - debug: var=ip_reverse_assignation_check_task
@@ -102,10 +102,10 @@
 - name: Assign reverse to an IP
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_reverse_assignation_task
 
 - debug: var=ip_reverse_assignation_task
@@ -123,10 +123,10 @@
 - name: Assign reverse to an IP (Confirmation)
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_reverse_assignation_confirmation_task
 
 - debug: var=ip_reverse_assignation_confirmation_task
@@ -144,11 +144,11 @@
 - name: Create a server
   scaleway_compute:
     state: present
-    name: '{{ scaleway_server_name }}'
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    name: "{{ scaleway_server_name }}"
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     dynamic_ip_required: false
     wait: true
 
@@ -165,11 +165,11 @@
   check_mode: true
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    server: '{{ server_creation_task.msg.id }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    server: "{{ server_creation_task.msg.id }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_assignation_check_task
 
 - debug: var=ip_assignation_check_task
@@ -187,11 +187,11 @@
 - name: Assign IP to server
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    server: '{{ server_creation_task.msg.id }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    server: "{{ server_creation_task.msg.id }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_assignation_task
 
 - debug: var=ip_assignation_task
@@ -209,11 +209,11 @@
 - name: Assign IP to server (Confirmation)
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    server: '{{ server_creation_task.msg.id }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    server: "{{ server_creation_task.msg.id }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_assignation_confirmation_task
 
 - debug: var=ip_assignation_confirmation_task
@@ -232,10 +232,10 @@
   check_mode: true
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_unassignation_check_task
 
 - debug: var=ip_unassignation_check_task
@@ -253,10 +253,10 @@
 - name: Unassign IP to server
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_unassignation_task
 
 - debug: var=ip_unassignation_task
@@ -274,15 +274,15 @@
 - name: ip_unassignation_task.scaleway_ip.server is none
   assert:
     that:
-      - '{{ ip_unassignation_task.scaleway_ip.server is none }}'
+      - "{{ ip_unassignation_task.scaleway_ip.server is none }}"
 
 - name: Unassign IP to server (Confirmation)
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
-    reverse: '{{ scaleway_reverse_name }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
+    reverse: "{{ scaleway_reverse_name }}"
   register: ip_unassignation_confirmation_task
 
 - debug: var=ip_unassignation_confirmation_task
@@ -300,15 +300,15 @@
 - name: ip_unassignation_confirmation_task.scaleway_ip.server is none
   assert:
     that:
-      - '{{ ip_unassignation_task.scaleway_ip.server is none }}'
+      - "{{ ip_unassignation_task.scaleway_ip.server is none }}"
 
 - name: Unassign reverse to IP (Check)
   check_mode: true
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
   register: ip_reverse_unassignation_check_task
 
 - debug: var=ip_reverse_unassignation_check_task
@@ -326,9 +326,9 @@
 - name: Unassign reverse to an IP
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
   register: ip_reverse_unassignation_task
 
 - debug: var=ip_reverse_unassignation_task
@@ -346,14 +346,14 @@
 - name: ip_reverse_unassignation_task.scaleway_ip.reverse is none
   assert:
     that:
-      - '{{ ip_reverse_unassignation_task.scaleway_ip.reverse is none }}'
+      - "{{ ip_reverse_unassignation_task.scaleway_ip.reverse is none }}"
 
 - name: Unassign reverse to an IP (Confirmation)
   scaleway_ip:
     state: present
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
-    region: '{{ scaleway_region }}'
-    organization: '{{ scaleway_organization }}'
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
+    region: "{{ scaleway_region }}"
+    organization: "{{ scaleway_organization }}"
   register: ip_reverse_unassignation_confirmation_task
 
 - debug: var=ip_reverse_unassignation_confirmation_task
@@ -371,16 +371,16 @@
 - name: ip_reverse_unassignation_confirmation_task.scaleway_ip.server is none
   assert:
     that:
-      - '{{ ip_reverse_unassignation_confirmation_task.scaleway_ip.reverse is none }}'
+      - "{{ ip_reverse_unassignation_confirmation_task.scaleway_ip.reverse is none }}"
 
 - name: Destroy a server
   scaleway_compute:
-    name: '{{ scaleway_server_name }}'
+    name: "{{ scaleway_server_name }}"
     state: absent
-    image: '{{ scaleway_image_id }}'
-    organization: '{{ scaleway_organization }}'
-    region: '{{ scaleway_region }}'
-    commercial_type: '{{ scaleway_commerial_type }}'
+    image: "{{ scaleway_image_id }}"
+    organization: "{{ scaleway_organization }}"
+    region: "{{ scaleway_region }}"
+    commercial_type: "{{ scaleway_commerial_type }}"
     wait: true
   register: server_destroy_task
 
@@ -400,8 +400,8 @@
   check_mode: true
   scaleway_ip:
     state: absent
-    region: '{{ scaleway_region }}'
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
+    region: "{{ scaleway_region }}"
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
   register: ip_deletion_check_task
 
 - name: ip_deletion_check_task is success
@@ -417,8 +417,8 @@
 - name: Delete IP
   scaleway_ip:
     state: absent
-    region: '{{ scaleway_region }}'
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
+    region: "{{ scaleway_region }}"
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
   register: ip_deletion_task
 
 - name: ip_deletion_task is success
@@ -434,8 +434,8 @@
 - name: Delete IP (Confirmation)
   scaleway_ip:
     state: absent
-    region: '{{ scaleway_region }}'
-    id: '{{ ip_creation_task.scaleway_ip.id }}'
+    region: "{{ scaleway_region }}"
+    id: "{{ ip_creation_task.scaleway_ip.id }}"
   register: ip_deletion_confirmation_task
 
 - name: ip_deletion_confirmation_task is success

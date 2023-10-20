@@ -1,3 +1,4 @@
+---
 # Copyright (c) 2021, Alexei Znamensky
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
@@ -33,7 +34,7 @@
     number: 1
     state: present
     fs_type: ext4
-    part_end: "50%"
+    part_end: 50%
   register: partition1
 
 - name: Make filesystem
@@ -56,7 +57,7 @@
     state: present
     fs_type: ext4
     part_start: "{{ partition1.partitions[0].end + 1 }}KiB"
-    part_end: "100%"
+    part_end: 100%
   register: partition2
 
 - name: Make filesystem

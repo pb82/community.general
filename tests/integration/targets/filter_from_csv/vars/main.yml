@@ -23,9 +23,9 @@ invalid_comma_separated: |
   1,foo,bar
   2,"b"ar",baz
 expected_result:
-  - id: '1'
+  - id: "1"
     name: foo
     role: bar
-  - id: '2'
+  - id: "2"
     name: bar
     role: baz

@@ -65,7 +65,7 @@
       - '"Anywhere on foo ALLOW 1.1.1.1 3333/tcp " in stdout'
       - '"Anywhere ALLOW OUT 1.1.1.1 4444/tcp on bar " in stdout'
   vars:
-    stdout: '{{ ufw_status.stdout_lines }}'
+    stdout: "{{ ufw_status.stdout_lines }}"
 
 - name: Non-route with interface_in and interface_out
   ufw:

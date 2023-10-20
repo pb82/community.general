@@ -16,21 +16,21 @@
 - name: Install redis module
   pip:
     name: "{{ redis_module }}"
-    extra_args: "-c {{ remote_constraints }}"
+    extra_args: -c {{ remote_constraints }}
     state: present
   notify: cleanup redis
 
 - name: Create redis directories
-  file:                                                                                                                                                                                                 
+  file:
     path: "{{ item }}"
-    state: directory                                                                                                                                                                                    
+    state: directory
     owner: redis
     group: redis
   loop:
-  - "{{ master_datadir }}"
-  - "{{ master_logdir }}"
-  - "{{ replica_datadir }}"
-  - "{{ replica_logdir }}"
+    - "{{ master_datadir }}"
+    - "{{ master_logdir }}"
+    - "{{ replica_datadir }}"
+    - "{{ replica_logdir }}"
 
 - name: Create redis configs
   copy:
@@ -44,14 +44,14 @@
       requirepass {{ redis_password }}
       masterauth {{ redis_password }}
   loop:
-  - file: "{{ master_conf }}"
-    port: "{{ master_port }}"
-    logdir: "{{ master_logdir }}"
-    datadir: "{{ master_datadir }}"
-  - file: "{{ replica_conf }}"
-    port: "{{ replica_port }}"
-    logdir: "{{ replica_logdir }}"
-    datadir: "{{ replica_datadir }}"
+    - file: "{{ master_conf }}"
+      port: "{{ master_port }}"
+      logdir: "{{ master_logdir }}"
+      datadir: "{{ master_datadir }}"
+    - file: "{{ replica_conf }}"
+      port: "{{ replica_port }}"
+      logdir: "{{ replica_logdir }}"
+      datadir: "{{ replica_datadir }}"
 
 - name: Start redis master
   shell: "{{ redis_bin[ansible_distribution] }} {{ master_conf }}"
