@@ -9,34 +9,34 @@
   block:
     - name: Make sure that {{ package_name }} is not installed
       pacman:
-        name: '{{ package_name }}'
+        name: "{{ package_name }}"
         state: absent
 
     - name: Make sure {{config_file}}.pacsave file doesn't exist
       file:
-        path: '{{config_file}}.pacsave'
+        path: "{{config_file}}.pacsave"
         state: absent
 
     - name: Install {{ package_name }}
       pacman:
-        name: '{{ package_name }}'
+        name: "{{ package_name }}"
         state: present
 
     - name: Modify {{config_file}}
       blockinfile:
-        path: '{{config_file}}'
+        path: "{{config_file}}"
         block: |
           # something something
           # on 2 lines
 
     - name: Remove {{ package_name }} - generate pacsave
       pacman:
-        name: '{{ package_name }}'
+        name: "{{ package_name }}"
         state: absent
 
     - name: Make sure {{config_file}}.pacsave exists
       stat:
-        path: '{{config_file}}.pacsave'
+        path: "{{config_file}}.pacsave"
       register: pacsave_st_1
 
     - assert:
@@ -45,30 +45,30 @@
 
     - name: Delete {{config_file}}.pacsave
       file:
-        path: '{{config_file}}.pacsave'
+        path: "{{config_file}}.pacsave"
         state: absent
 
     - name: Install {{ package_name }}
       pacman:
-        name: '{{ package_name }}'
+        name: "{{ package_name }}"
         state: present
 
     - name: Modify {{config_file}}
       blockinfile:
-        path: '{{config_file}}'
+        path: "{{config_file}}"
         block: |
           # something something
           # on 2 lines
 
     - name: Remove {{ package_name }} - nosave
       pacman:
-        name: '{{ package_name }}'
+        name: "{{ package_name }}"
         remove_nosave: true
         state: absent
 
     - name: Make sure {{config_file}}.pacsave does not exist
       stat:
-        path: '{{config_file}}.pacsave'
+        path: "{{config_file}}.pacsave"
       register: pacsave_st_2
 
     - assert:

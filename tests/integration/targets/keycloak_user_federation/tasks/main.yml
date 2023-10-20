@@ -38,16 +38,16 @@
       usernameLDAPAttribute: uid
       rdnLDAPAttribute: uid
       uuidLDAPAttribute: entryUUID
-      userObjectClasses: "inetOrgPerson, organizationalPerson"
-      connectionUrl: "ldaps://ldap.example.com:636"
-      usersDn: "ou=Users,dc=example,dc=com"
+      userObjectClasses: inetOrgPerson, organizationalPerson
+      connectionUrl: ldaps://ldap.example.com:636
+      usersDn: ou=Users,dc=example,dc=com
       authType: simple
       bindDn: cn=directory reader
       bindCredential: secret
       searchScope: 1
       validatePasswordPolicy: false
       trustEmail: false
-      useTruststoreSpi: "ldapsOnly"
+      useTruststoreSpi: ldapsOnly
       connectionPooling: true
       pagination: true
       allowKerberosAuthentication: false
@@ -91,16 +91,16 @@
       usernameLDAPAttribute: uid
       rdnLDAPAttribute: uid
       uuidLDAPAttribute: entryUUID
-      userObjectClasses: "inetOrgPerson, organizationalPerson"
-      connectionUrl: "ldaps://ldap.example.com:636"
-      usersDn: "ou=Users,dc=example,dc=com"
+      userObjectClasses: inetOrgPerson, organizationalPerson
+      connectionUrl: ldaps://ldap.example.com:636
+      usersDn: ou=Users,dc=example,dc=com
       authType: simple
       bindDn: cn=directory reader
       bindCredential: secret
       searchScope: 1
       validatePasswordPolicy: false
       trustEmail: false
-      useTruststoreSpi: "ldapsOnly"
+      useTruststoreSpi: ldapsOnly
       connectionPooling: true
       pagination: true
       allowKerberosAuthentication: false
@@ -144,16 +144,16 @@
       usernameLDAPAttribute: uid
       rdnLDAPAttribute: uid
       uuidLDAPAttribute: entryUUID
-      userObjectClasses: "inetOrgPerson, organizationalPerson"
-      connectionUrl: "ldaps://ldap.example.com:636"
-      usersDn: "ou=Users,dc=example,dc=com"
+      userObjectClasses: inetOrgPerson, organizationalPerson
+      connectionUrl: ldaps://ldap.example.com:636
+      usersDn: ou=Users,dc=example,dc=com
       authType: simple
       bindDn: cn=directory reader
       bindCredential: "**********"
       searchScope: 1
       validatePasswordPolicy: false
       trustEmail: false
-      useTruststoreSpi: "ldapsOnly"
+      useTruststoreSpi: ldapsOnly
       connectionPooling: true
       pagination: true
       allowKerberosAuthentication: false
@@ -199,16 +199,16 @@
       usernameLDAPAttribute: uid
       rdnLDAPAttribute: uid
       uuidLDAPAttribute: entryUUID
-      userObjectClasses: "inetOrgPerson, organizationalPerson"
-      connectionUrl: "ldaps://ldap.example.com:636"
-      usersDn: "ou=Users,dc=example,dc=com"
+      userObjectClasses: inetOrgPerson, organizationalPerson
+      connectionUrl: ldaps://ldap.example.com:636
+      usersDn: ou=Users,dc=example,dc=com
       authType: simple
       bindDn: cn=directory reader
       bindCredential: "**********"
       searchScope: 1
       validatePasswordPolicy: false
       trustEmail: false
-      useTruststoreSpi: "ldapsOnly"
+      useTruststoreSpi: ldapsOnly
       connectionPooling: true
       pagination: true
       allowKerberosAuthentication: false
@@ -254,16 +254,16 @@
       usernameLDAPAttribute: uid
       rdnLDAPAttribute: uid
       uuidLDAPAttribute: entryUUID
-      userObjectClasses: "inetOrgPerson, organizationalPerson"
-      connectionUrl: "ldaps://ldap.example.com:636"
-      usersDn: "ou=Users,dc=example,dc=com"
+      userObjectClasses: inetOrgPerson, organizationalPerson
+      connectionUrl: ldaps://ldap.example.com:636
+      usersDn: ou=Users,dc=example,dc=com
       authType: simple
       bindDn: cn=directory reader
       bindCredential: "**********"
       searchScope: 1
       validatePasswordPolicy: false
       trustEmail: false
-      useTruststoreSpi: "ldapsOnly"
+      useTruststoreSpi: ldapsOnly
       connectionPooling: true
       pagination: true
       allowKerberosAuthentication: false
@@ -271,16 +271,16 @@
       debug: false
     mappers:
       # overwrite / update pre existing default mapper
-      - name: "username"
-        providerId: "user-attribute-ldap-mapper"
+      - name: username
+        providerId: user-attribute-ldap-mapper
         config:
           ldap.attribute: ldap_user
           user.model.attribute: usr
           read.only: true
       # create new mapper
-      - name: "full name"
-        providerId: "full-name-ldap-mapper"
-        providerType: "org.keycloak.storage.ldap.mappers.LDAPStorageMapper"
+      - name: full name
+        providerId: full-name-ldap-mapper
+        providerType: org.keycloak.storage.ldap.mappers.LDAPStorageMapper
         config:
           ldap.full.name.attribute: cn
           read.only: true
@@ -369,16 +369,16 @@
       usernameLDAPAttribute: uid
       rdnLDAPAttribute: uid
       uuidLDAPAttribute: entryUUID
-      userObjectClasses: "inetOrgPerson, organizationalPerson"
-      connectionUrl: "ldaps://ldap.example.com:636"
-      usersDn: "ou=Users,dc=example,dc=com"
+      userObjectClasses: inetOrgPerson, organizationalPerson
+      connectionUrl: ldaps://ldap.example.com:636
+      usersDn: ou=Users,dc=example,dc=com
       authType: simple
       bindDn: cn=directory reader
       bindCredential: secret
       searchScope: 1
       validatePasswordPolicy: false
       trustEmail: false
-      useTruststoreSpi: "ldapsOnly"
+      useTruststoreSpi: ldapsOnly
       connectionPooling: true
       pagination: true
       allowKerberosAuthentication: false
@@ -386,16 +386,16 @@
       debug: false
     mappers:
       # overwrite / update pre existing default mapper
-      - name: "username"
-        providerId: "user-attribute-ldap-mapper"
+      - name: username
+        providerId: user-attribute-ldap-mapper
         config:
           ldap.attribute: ldap_user
           user.model.attribute: usr
           read.only: true
       # create new mapper
-      - name: "full name"
-        providerId: "full-name-ldap-mapper"
-        providerType: "org.keycloak.storage.ldap.mappers.LDAPStorageMapper"
+      - name: full name
+        providerId: full-name-ldap-mapper
+        providerType: org.keycloak.storage.ldap.mappers.LDAPStorageMapper
         config:
           ldap.full.name.attribute: cn
           read.only: true

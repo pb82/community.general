@@ -12,12 +12,12 @@
   check_mode: true
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: cn_creation_check_task
 
 - ansible.builtin.debug:
@@ -32,12 +32,12 @@
 - name: Create container_namespace
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: cn_creation_task
 
 - ansible.builtin.debug:
@@ -53,12 +53,12 @@
 - name: Create container namespace (Confirmation)
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: cn_creation_confirmation_task
 
 - ansible.builtin.debug:
@@ -75,12 +75,12 @@
   check_mode: true
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: cn_update_check_task
 
 - ansible.builtin.debug:
@@ -95,12 +95,12 @@
 - name: Update container namespace
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: cn_update_task
 
 - ansible.builtin.debug:
@@ -116,12 +116,12 @@
 - name: Update container namespace (Confirmation)
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: cn_update_confirmation_task
 
 - ansible.builtin.debug:
@@ -138,12 +138,12 @@
   check_mode: true
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
   register: cn_update_secret_check_task
 
 - ansible.builtin.debug:
@@ -158,12 +158,12 @@
 - name: Update container namespace secret variables
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
   register: cn_update_secret_task
 
 - ansible.builtin.debug:
@@ -180,12 +180,12 @@
 - name: Update container namespace secret variables (Confirmation)
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
   register: cn_update_secret_congfirmation_task
 
 - ansible.builtin.debug:
@@ -203,10 +203,10 @@
   check_mode: true
   community.general.scaleway_container_namespace:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"
   register: cn_deletion_check_task
 
 - ansible.builtin.debug:
@@ -221,10 +221,10 @@
 - name: Delete container namespace
   community.general.scaleway_container_namespace:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"
   register: cn_deletion_task
 
 - ansible.builtin.debug:
@@ -239,10 +239,10 @@
 - name: Delete container namespace (Confirmation)
   community.general.scaleway_container_namespace:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"
   register: cn_deletion_confirmation_task
 
 - ansible.builtin.debug:

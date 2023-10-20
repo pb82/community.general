@@ -11,7 +11,7 @@
 
 # ENVIRONMENT PREPARATION
 
-- name: "copy fixtures to test host"
+- name: copy fixtures to test host
   copy:
     src: testhost/tmp/opennebula-fixtures.json.gz
     dest: /tmp
@@ -19,10 +19,9 @@
     - opennebula_test_fixture
     - opennebula_test_fixture_replay
 
-
 # Create a new template
 
-- name: "Create a new TEMPLATE"
+- name: Create a new TEMPLATE
   one_template:
     api_url: "{{ opennebula_url }}"
     api_username: "{{ opennebula_username }}"
@@ -67,15 +66,14 @@
     PYONE_TEST_FIXTURE_UNIT: test_create_template
   register: result
 
-- name: "assert that creation worked"
+- name: assert that creation worked
   assert:
     that:
-    - result is changed
-
+      - result is changed
 
 # Updating a template
 
-- name: "Update an existing TEMPLATE"
+- name: Update an existing TEMPLATE
   one_template:
     api_url: "{{ opennebula_url }}"
     api_username: "{{ opennebula_username }}"
@@ -120,12 +118,12 @@
     PYONE_TEST_FIXTURE_UNIT: test_update_existing_template
   register: result
 
-- name: "assert that it updated the template"
+- name: assert that it updated the template
   assert:
     that:
-    - result is changed
+      - result is changed
 
-- name: "Update an existing TEMPLATE with the same changes again"
+- name: Update an existing TEMPLATE with the same changes again
   one_template:
     api_url: "{{ opennebula_url }}"
     api_username: "{{ opennebula_username }}"
@@ -170,15 +168,14 @@
     PYONE_TEST_FIXTURE_UNIT: test_update_existing_and_already_updated_template
   register: result
 
-- name: "assert that there was no change"
+- name: assert that there was no change
   assert:
     that:
-    - result is not changed
-
+      - result is not changed
 
 # Deletion of templates
 
-- name: "Delete a nonexisting TEMPLATE"
+- name: Delete a nonexisting TEMPLATE
   one_template:
     api_url: "{{ opennebula_url }}"
     api_username: "{{ opennebula_username }}"
@@ -192,12 +189,12 @@
     PYONE_TEST_FIXTURE_UNIT: test_delete_nonexisting_template
   register: result
 
-- name: "assert that there was no change"
+- name: assert that there was no change
   assert:
     that:
-    - result is not changed
+      - result is not changed
 
-- name: "Delete an existing TEMPLATE"
+- name: Delete an existing TEMPLATE
   one_template:
     api_url: "{{ opennebula_url }}"
     api_username: "{{ opennebula_username }}"
@@ -211,15 +208,14 @@
     PYONE_TEST_FIXTURE_UNIT: test_delete_existing_template
   register: result
 
-- name: "assert that there was a change"
+- name: assert that there was a change
   assert:
     that:
-    - result is changed
-
+      - result is changed
 
 # Usage without `template` parameter
 
-- name: "Try to create use one_template with state=present and without the template parameter"
+- name: Try to create use one_template with state=present and without the template parameter
   one_template:
     api_url: "{{ opennebula_url }}"
     api_username: "{{ opennebula_username }}"
@@ -229,15 +225,14 @@
   register: result
   ignore_errors: true
 
-- name: "assert that it failed because template is missing"
+- name: assert that it failed because template is missing
   assert:
     that:
-    - result is failed
-
+      - result is failed
 
 # TEARDOWN
 
-- name: "fetch fixtures"
+- name: fetch fixtures
   fetch:
     src: /tmp/opennebula-fixtures.json.gz
     dest: targets/one_host/files

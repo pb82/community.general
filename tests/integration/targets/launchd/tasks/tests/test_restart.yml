@@ -10,15 +10,14 @@
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_1_launchd_start_result"
-
+  register: test_1_launchd_start_result
 
 - name: "[{{ item }}] When restarting the service in check mode"
   launchd:
     name: "{{ launchd_service_name }}"
     state: restarted
   become: true
-  register: "test_1_launchd_restart_result_check_mode"
+  register: test_1_launchd_restart_result_check_mode
   check_mode: true
 
 - name: "[{{ item }}] Validate that service was restarted in check mode"
@@ -32,7 +31,7 @@
     name: "{{ launchd_service_name }}"
     state: restarted
   become: true
-  register: "test_1_launchd_restart_result"
+  register: test_1_launchd_restart_result
 
 - name: "[{{ item }}] Validate that service was restarted"
   assert:

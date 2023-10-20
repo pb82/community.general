@@ -18,8 +18,7 @@
     - name: Test lists merged by attribute name assert
       assert:
         that:
-          - "(list1 | community.general.lists_mergeby(list2, 'name') | list |
-              difference(list3) | length) == 0"
+          - (list1 | community.general.lists_mergeby(list2, 'name') | list | difference(list3) | length) == 0
   tags: t1
 
 - name: 2.Test list1 empty
@@ -31,8 +30,7 @@
     - name: Test list1 empty assert
       assert:
         that:
-          - "([] | community.general.lists_mergeby(list2, 'name') | list |
-              difference(list2) | length) == 0"
+          - ([] | community.general.lists_mergeby(list2, 'name') | list | difference(list2) | length) == 0
   tags: t2
 
 - name: 3.Test all lists empty
@@ -44,8 +42,7 @@
     - name: Test all lists empty assert
       assert:
         that:
-          - "([] | community.general.lists_mergeby([], 'name') | list |
-              length) == 0"
+          - ([] | community.general.lists_mergeby([], 'name') | list | length) == 0
   tags: t3
 
 - name: 4.First argument must be list

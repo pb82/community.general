@@ -339,8 +339,8 @@
     state: present
     parent_id: "{{ realm }}"
     config:
-      private_key: "a different private key string"
-      certificate: "a different certificate string"
+      private_key: a different private key string
+      certificate: a different certificate string
       enabled: true
       active: true
       priority: 150

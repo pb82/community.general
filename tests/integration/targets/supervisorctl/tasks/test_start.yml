@@ -5,23 +5,24 @@
 
 - name: start py1 service (without auth)
   supervisorctl:
-    name: 'pys:py1'
+    name: pys:py1
     state: started
-    config: '{{ remote_dir }}/supervisord.conf'
+    config: "{{ remote_dir }}/supervisord.conf"
   register: result
   when: credentials.username == ''
 
 - name: start py1 service (with auth)
   supervisorctl:
-    name: 'pys:py1'
+    name: pys:py1
     state: started
     server_url: http://127.0.0.1:9001
-    username: '{{ credentials.username }}'
-    password: '{{ credentials.password }}'
+    username: "{{ credentials.username }}"
+    password: "{{ credentials.password }}"
   register: result_with_auth
   when: credentials.username != ''
 
-- command: "supervisorctl -c {{ remote_dir }}/supervisord.conf {% if credentials.username %}-u {{ credentials.username }} -p {{ credentials.password }}{% endif %} status"
+- command: supervisorctl -c {{ remote_dir }}/supervisord.conf {% if credentials.username %}-u {{ credentials.username }} -p {{ credentials.password }}{% endif %}
+    status
 
 - name: check that service is started
   assert:
@@ -30,14 +31,13 @@
       - (result is changed and result_with_auth is skip) or (result is skip and result_with_auth is changed)
 
 - name: check that service is running (part1) # py1.log content is checked below
-  script: "files/sendProcessStdin.py 'pys:py1' 2 \
-    '{{ credentials.username }}' '{{ credentials.password }}'"
+  script: files/sendProcessStdin.py 'pys:py1' 2 '{{ credentials.username }}' '{{ credentials.password }}'
 
 - name: try again to start py1 service (without auth)
   supervisorctl:
     name: pys:py1
     state: started
-    config: '{{ remote_dir }}/supervisord.conf'
+    config: "{{ remote_dir }}/supervisord.conf"
   register: result
   when: credentials.username == ''
 
@@ -46,8 +46,8 @@
     name: pys:py1
     state: started
     server_url: http://127.0.0.1:9001
-    username: '{{ credentials.username }}'
-    password: '{{ credentials.password }}'
+    username: "{{ credentials.username }}"
+    password: "{{ credentials.password }}"
   register: result_with_auth
   when: credentials.username != ''
 
@@ -61,26 +61,26 @@
 
 # supervisord has been stopped, check logfile
 - name: check that service has done what it was expected (part 2)
-  shell: 'test "$(tail -2 {{ remote_dir }}/py1.log | head -1)" = ">>> 2"'
+  shell: test "$(tail -2 {{ remote_dir }}/py1.log | head -1)" = ">>> 2"
 
 # restart supervisord and py1 service for next tasks
 - import_tasks: start_supervisord.yml
 
 - name: start py1 service (without auth)
   supervisorctl:
-    name: 'pys:py1'
+    name: pys:py1
     state: started
-    config: '{{ remote_dir }}/supervisord.conf'
+    config: "{{ remote_dir }}/supervisord.conf"
   register: result
   when: credentials.username == ''
 
 - name: start py1 service (with auth)
   supervisorctl:
-    name: 'pys:py1'
+    name: pys:py1
     state: started
     server_url: http://127.0.0.1:9001
-    username: '{{ credentials.username }}'
-    password: '{{ credentials.password }}'
+    username: "{{ credentials.username }}"
+    password: "{{ credentials.password }}"
   register: result_with_auth
   when: credentials.username != ''
 
@@ -97,8 +97,8 @@
     name: pys:py1
     state: started
     server_url: http://127.0.0.1:9001
-    username: '{{ credentials.username }}wrong_creds'
-    password: '{{ credentials.password }}same_here'
+    username: "{{ credentials.username }}wrong_creds"
+    password: "{{ credentials.password }}same_here"
   register: result
   failed_when: result is not skip and (result is success or result is not failed)
   when: credentials.username != ''
@@ -113,28 +113,28 @@
 
 - name: Check an error occurs when wrong config path is used
   supervisorctl:
-    name: 'pys:py1'
+    name: pys:py1
     state: started
-    config: '{{ remote_dir }}/supervisord_not_here.conf'
+    config: "{{ remote_dir }}/supervisord_not_here.conf"
   register: result
   failed_when: result is success or result is not failed
 
 - name: Check an error occurs wrong name is used (without auth)
   supervisorctl:
-    name: 'invalid'
+    name: invalid
     state: started
-    config: '{{ remote_dir }}/supervisord.conf'
+    config: "{{ remote_dir }}/supervisord.conf"
   register: result
   failed_when: result is skip or (result is success or result is not failed)
   when: credentials.username == ''
 
 - name: Check an error occurs wrong name is used (with auth)
   supervisorctl:
-    name: 'invalid'
+    name: invalid
     state: started
-    config: '{{ remote_dir }}/supervisord.conf'
-    username: '{{ credentials.username }}wrong_creds'
-    password: '{{ credentials.password }}same_here'
+    config: "{{ remote_dir }}/supervisord.conf"
+    username: "{{ credentials.username }}wrong_creds"
+    password: "{{ credentials.password }}same_here"
   register: result
   failed_when: result is skip or (result is success or result is not failed)
   when: credentials.username != ''

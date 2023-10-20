@@ -5,7 +5,7 @@
 
 ## testing values
 
-- name: "test-values 1 - set 'state=present' and 'values=[]' and 'allow_no_value=false' and fail"
+- name: test-values 1 - set 'state=present' and 'values=[]' and 'allow_no_value=false' and fail
   ini_file:
     path: "{{ output_file }}"
     section: cars
@@ -22,8 +22,7 @@
       - result1 is failed
       - result1.msg == "Parameter 'value(s)' must be defined if state=present and allow_no_value=False."
 
-
-- name: "test-values 2 - set 'state=present' and omit 'values' and 'allow_no_value=false' and fail"
+- name: test-values 2 - set 'state=present' and omit 'values' and 'allow_no_value=false' and fail
   ini_file:
     path: "{{ output_file }}"
     section: cars
@@ -39,8 +38,7 @@
       - result2 is failed
       - result2.msg == "Parameter 'value(s)' must be defined if state=present and allow_no_value=False."
 
-
-- name: "test-values 3 - ensure 'fav=lemonade' and 'fav=cocktail' is 'present' in section '[drinks]' in specified file"
+- name: test-values 3 - ensure 'fav=lemonade' and 'fav=cocktail' is 'present' in section '[drinks]' in specified file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -58,7 +56,7 @@
 
 - name: test-values 3 - set expected content and get current ini file content
   set_fact:
-    expected3: |
+    expected3: |2
 
       [drinks]
       fav = lemonade
@@ -72,8 +70,7 @@
       - result3.msg == 'section and option added'
       - content3 == expected3
 
-
-- name: "test-values 4 - remove option 'fav=lemonade' from section '[drinks]' in specified file"
+- name: test-values 4 - remove option 'fav=lemonade' from section '[drinks]' in specified file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -91,7 +88,7 @@
 
 - name: test-values 4 - set expected content and get current ini file content
   set_fact:
-    expected4: |
+    expected4: |2
 
       [drinks]
       fav = cocktail
@@ -104,8 +101,7 @@
       - result4.msg == 'option changed'
       - content4 == expected4
 
-
-- name: "test-values 5 - add option 'fav=lemonade' in section '[drinks]' in specified file"
+- name: test-values 5 - add option 'fav=lemonade' in section '[drinks]' in specified file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -123,7 +119,7 @@
 
 - name: test-values 5 - set expected content and get current ini file content
   set_fact:
-    expected5: |
+    expected5: |2
 
       [drinks]
       fav = cocktail
@@ -137,8 +133,7 @@
       - result5.msg == 'option added'
       - content5 == expected5
 
-
-- name: "test-values 6 - ensure 'fav=lemonade' and 'fav=cocktail' is 'present' in section '[drinks]' and check for idempotency"
+- name: test-values 6 - ensure 'fav=lemonade' and 'fav=cocktail' is 'present' in section '[drinks]' and check for idempotency
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -155,8 +150,7 @@
       - result6 is not changed
       - result6.msg == 'OK'
 
-
-- name: "test-values 7 - ensure 'fav=cocktail' and 'fav=lemonade' (list reverse order) is 'present' in section '[drinks]' and check for idempotency"
+- name: test-values 7 - ensure 'fav=cocktail' and 'fav=lemonade' (list reverse order) is 'present' in section '[drinks]' and check for idempotency
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -173,8 +167,7 @@
       - result7 is not changed
       - result7.msg == 'OK'
 
-
-- name: "test-values 8 - add option 'fav=lemonade' in section '[drinks]' again and ensure idempotency"
+- name: test-values 8 - add option 'fav=lemonade' in section '[drinks]' again and ensure idempotency
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -191,8 +184,7 @@
       - result8 is not changed
       - result8.msg == 'OK'
 
-
-- name: "test-values 9 - ensure only 'fav=lemonade' is 'present' in section '[drinks]' in specified file"
+- name: test-values 9 - ensure only 'fav=lemonade' is 'present' in section '[drinks]' in specified file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -209,7 +201,7 @@
 
 - name: test-values 9 - set expected content and get current ini file content
   set_fact:
-    expected9: |
+    expected9: |2
 
       [drinks]
       fav = lemonade
@@ -222,8 +214,7 @@
       - result9.msg == 'option changed'
       - content9 == expected9
 
-
-- name: "test-values 10 - remove non-existent 'fav=cocktail' from section '[drinks]' in specified file"
+- name: test-values 10 - remove non-existent 'fav=cocktail' from section '[drinks]' in specified file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -240,11 +231,10 @@
 
 - name: test-values 10 - set expected content and get current ini file content
   set_fact:
-    expected10: |
+    expected10: |2
 
       [drinks]
     content10: "{{ output_content.content | b64decode }}"
-
 
 - name: test-values 10 - Ensure unchanged
   assert:
@@ -253,8 +243,7 @@
       - result10.msg == 'option changed'
       - content10 == expected10
 
-
-- name: "test-values 11 - Ensure 'fav=lemonade' and 'beverage=coke' is 'present' in section '[drinks]'"
+- name: test-values 11 - Ensure 'fav=lemonade' and 'beverage=coke' is 'present' in section '[drinks]'
   block:
     - name: "test-values 11 - resetting ini_fie: Ensure 'fav=lemonade' is 'present' in section '[drinks]'"
       ini_file:
@@ -264,7 +253,7 @@
         values:
           - lemonade
         state: present
-    - name: "test-values 11 - Ensure 'beverage=coke' is 'present' in section '[drinks]'"
+    - name: test-values 11 - Ensure 'beverage=coke' is 'present' in section '[drinks]'
       ini_file:
         path: "{{ output_file }}"
         section: drinks
@@ -281,7 +270,7 @@
 
 - name: test-values 11 - set expected content and get current ini file content
   set_fact:
-    expected11: |
+    expected11: |2
 
       [drinks]
       fav = lemonade
@@ -295,8 +284,7 @@
       - result11.msg == 'option added'
       - content11 == expected11
 
-
-- name: "test-values 12 - add option 'fav=lemonade' in section '[drinks]' again and ensure idempotency"
+- name: test-values 12 - add option 'fav=lemonade' in section '[drinks]' again and ensure idempotency
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -313,8 +301,7 @@
       - result12 is not changed
       - result12.msg == 'OK'
 
-
-- name: "test-values 13 - add option 'fav=cocktail' in section '[drinks]' in specified file"
+- name: test-values 13 - add option 'fav=cocktail' in section '[drinks]' in specified file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -332,7 +319,7 @@
 
 - name: test-values 13 - set expected content and get current ini file content
   set_fact:
-    expected13: |
+    expected13: |2
 
       [drinks]
       fav = lemonade
@@ -347,8 +334,7 @@
       - result13.msg == 'option added'
       - content13 == expected13
 
-
-- name: "test-values 14 - Ensure 'refreshment=[water, juice, soft drink]' is 'present' in section '[drinks]'"
+- name: test-values 14 - Ensure 'refreshment=[water, juice, soft drink]' is 'present' in section '[drinks]'
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -367,7 +353,7 @@
 
 - name: test-values 14 - set expected content and get current ini file content
   set_fact:
-    expected14: |
+    expected14: |2
 
       [drinks]
       fav = lemonade
@@ -385,8 +371,7 @@
       - result14.msg == 'option added'
       - content14 == expected14
 
-
-- name: "test-values 15 - ensure 'fav=lemonade' and 'fav=cocktail' is 'present' in section '[drinks]' and check for idempotency"
+- name: test-values 15 - ensure 'fav=lemonade' and 'fav=cocktail' is 'present' in section '[drinks]' and check for idempotency
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -403,8 +388,7 @@
       - result15 is not changed
       - result15.msg == 'OK'
 
-
-- name: "test-values 16 - ensure 'fav=cocktail' and 'fav=lemonade' (list reverse order) is 'present' in section '[drinks]' and check for idempotency"
+- name: test-values 16 - ensure 'fav=cocktail' and 'fav=lemonade' (list reverse order) is 'present' in section '[drinks]' and check for idempotency
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -421,8 +405,7 @@
       - result16 is not changed
       - result16.msg == 'OK'
 
-
-- name: "test-values 17 - Ensure option 'refreshment' is 'absent' in section '[drinks]'"
+- name: test-values 17 - Ensure option 'refreshment' is 'absent' in section '[drinks]'
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -437,7 +420,7 @@
 
 - name: test-values 17 - set expected content and get current ini file content
   set_fact:
-    expected17: |
+    expected17: |2
 
       [drinks]
       fav = lemonade
@@ -452,8 +435,7 @@
       - result17.msg == 'option changed'
       - content17 == expected17
 
-
-- name: "test-values 18 - Ensure 'beverage=coke' is 'absent' in section '[drinks]'"
+- name: test-values 18 - Ensure 'beverage=coke' is 'absent' in section '[drinks]'
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -468,7 +450,7 @@
 
 - name: test-values 18 - set expected content and get current ini file content
   set_fact:
-    expected18: |
+    expected18: |2
 
       [drinks]
       fav = lemonade
@@ -482,8 +464,7 @@
       - result18.msg == 'option changed'
       - content18 == expected18
 
-
-- name: "test-values 19 - Ensure non-existent 'beverage=coke' is 'absent' in section '[drinks]'"
+- name: test-values 19 - Ensure non-existent 'beverage=coke' is 'absent' in section '[drinks]'
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -499,7 +480,6 @@
       - result19 is not changed
       - result19.msg == 'OK'
 
-
 - name: test-values 20 - remove section 'drinks'
   ini_file:
     path: "{{ output_file }}"
@@ -512,7 +492,7 @@
     path: "{{ output_file }}"
     section: drinks
     state: absent
-  register: result20_remove_again  
+  register: result20_remove_again
 
 - name: test-values 20 - read content from output file
   slurp:
@@ -531,8 +511,7 @@
       - result20.msg == 'section removed'
       - content20 == "\n"
 
-
-- name: "test-values 21 - Ensure 'refreshment=[water, juice, soft drink, juice]' (duplicates removed) is 'present' in section '[drinks]'"
+- name: test-values 21 - Ensure 'refreshment=[water, juice, soft drink, juice]' (duplicates removed) is 'present' in section '[drinks]'
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -552,7 +531,7 @@
 
 - name: test-values 21 - set expected content and get current ini file content
   set_fact:
-    expected21: |
+    expected21: |2
 
       [drinks]
       refreshment = water
@@ -567,11 +546,10 @@
       - result21.msg == 'section and option added'
       - content21 == expected21
 
-
 - name: test-values 22 - Create starting ini file
   copy:
-    content: |
-      
+    content: |2
+
       # Some comment to test
       [mysqld]
       connect_timeout = 300
@@ -587,7 +565,7 @@
       # comment after section
     dest: "{{ output_file }}"
 
-- name: "test-values 22 - Ensure 'skip-name' with 'allow_no_value' is 'present' in section '[mysqld]' test allow_no_value"
+- name: test-values 22 - Ensure 'skip-name' with 'allow_no_value' is 'present' in section '[mysqld]' test allow_no_value
   ini_file:
     path: "{{ output_file }}"
     section: mysqld
@@ -603,8 +581,8 @@
 
 - name: test-values 22 - set expected content and get current ini file content
   set_fact:
-    expected22: |
-      
+    expected22: |2
+
       # Some comment to test
       [mysqld]
       connect_timeout = 300
@@ -628,13 +606,12 @@
       - result22.msg == 'option added'
       - content22 == expected22
 
-
-- name: "test-values 23 - Ensure 'var2=foo' is 'present' in section '[section1]', replacing commented option 'var2=some value'"
+- name: test-values 23 - Ensure 'var2=foo' is 'present' in section '[section1]', replacing commented option 'var2=some value'
   ini_file:
     path: "{{ output_file }}"
     section: section1
     option: var2
-    values: 
+    values:
       - foo
     state: present
   register: result23
@@ -646,8 +623,8 @@
 
 - name: test-values 23 - set expected content and get current ini file content
   set_fact:
-    expected23: |
-      
+    expected23: |2
+
       # Some comment to test
       [mysqld]
       connect_timeout = 300
@@ -671,8 +648,7 @@
       - result23.msg == 'option changed'
       - content23 == expected23
 
-
-- name: "test-values 24 - Ensure 'var2=[foo, foobar]' is 'present' in section '[section1]'"
+- name: test-values 24 - Ensure 'var2=[foo, foobar]' is 'present' in section '[section1]'
   ini_file:
     path: "{{ output_file }}"
     section: section1
@@ -690,8 +666,8 @@
 
 - name: test-values 24 - set expected content and get current ini file content
   set_fact:
-    expected24: |
-      
+    expected24: |2
+
       # Some comment to test
       [mysqld]
       connect_timeout = 300
@@ -716,14 +692,13 @@
       - result24.msg == 'option added'
       - content24 == expected24
 
-
 - name: test-values 25 - Clean test file
   copy:
     content: ""
     dest: "{{ output_file }}"
     force: true
 
-- name: "test-values 25 - Ensure 'beverage=[coke, pepsi]' is created within no section"
+- name: test-values 25 - Ensure 'beverage=[coke, pepsi]' is created within no section
   ini_file:
     section:
     path: "{{ output_file }}"
@@ -754,8 +729,7 @@
       - result25.msg == 'option added'
       - content25 == expected25
 
-
-- name: "test-values 26 - Ensure 'beverage=coke' and 'beverage=pepsi' are modified within no section"
+- name: test-values 26 - Ensure 'beverage=coke' and 'beverage=pepsi' are modified within no section
   ini_file:
     path: "{{ output_file }}"
     option: beverage
@@ -777,7 +751,7 @@
     expected26: |+
       beverage = water
       beverage = orange juice
-      
+
     content26: "{{ output_content.content | b64decode }}"
 
 - name: test-values 26 - assert 'changed' is true and content is OK (no section)
@@ -787,8 +761,7 @@
       - result26.msg == 'option changed'
       - content26 == expected26
 
-
-- name: "test-values 27 - ensure option 'beverage' is 'absent' within no section"
+- name: test-values 27 - ensure option 'beverage' is 'absent' within no section
   ini_file:
     section:
     path: "{{ output_file }}"
@@ -812,15 +785,14 @@
       - result27.msg == 'option changed'
       - content27 == "\n"
 
-
-- name: "test-values 28 - Ensure option 'present' without section before existing section"
+- name: test-values 28 - Ensure option 'present' without section before existing section
   block:
     - name: test-values 28 - ensure option present within section
       ini_file:
         path: "{{ output_file }}"
         section: drinks
         option: beverage
-        values: 
+        values:
           - water
           - orange juice
         state: present
@@ -856,7 +828,6 @@
     that:
       - content28 == expected28
 
-
 - name: test-value 29 - Create starting ini file
   copy:
     content: |
@@ -867,7 +838,7 @@
       beverage = orange juice
     dest: "{{ output_file }}"
 
-- name: "test-value 29 - Test 'state=absent' with 'exclusive=true' with multiple options in ini_file"
+- name: test-value 29 - Test 'state=absent' with 'exclusive=true' with multiple options in ini_file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -897,7 +868,6 @@
       - result29.msg == 'option changed'
       - content29 == expected29
 
-
 - name: test-value 30 - Create starting ini file
   copy:
     content: |
@@ -908,7 +878,7 @@
       beverage = orange juice
     dest: "{{ output_file }}"
 
-- name: "test-value 30 - Test 'state=absent' with 'exclusive=false' with multiple options in ini_file"
+- name: test-value 30 - Test 'state=absent' with 'exclusive=false' with multiple options in ini_file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -940,7 +910,6 @@
       - result30.msg == 'option changed'
       - content30 == expected30
 
-
 - name: test-value 31 - Create starting ini file
   copy:
     content: |
@@ -951,7 +920,7 @@
       beverage = orange juice
     dest: "{{ output_file }}"
 
-- name: "test-value 31 - Test 'state=absent' with 'exclusive=true' and no value given with multiple options in ini_file"
+- name: test-value 31 - Test 'state=absent' with 'exclusive=true' and no value given with multiple options in ini_file
   ini_file:
     path: "{{ output_file }}"
     section: drinks
@@ -979,7 +948,6 @@
       - result31.msg == 'option changed'
       - content31 == expected31
 
-
 - name: test-value 32 - Create starting ini file
   copy:
     content: |
@@ -990,7 +958,7 @@
       beverage = orange juice
     dest: "{{ output_file }}"
 
-- name: "test-value 32 - Test 'state=absent' with 'exclusive=false' and no value given with multiple options in ini_file"
+- name: test-value 32 - Test 'state=absent' with 'exclusive=false' and no value given with multiple options in ini_file
   ini_file:
     path: "{{ output_file }}"
     section: drinks

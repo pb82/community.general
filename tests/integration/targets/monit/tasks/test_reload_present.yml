@@ -36,7 +36,7 @@
 - import_tasks: check_state.yml
   vars:
     reason: verify service running
-    service_state: "up"
+    service_state: up
 
 - name: add process config
   blockinfile:

@@ -13,10 +13,10 @@
 
 - name: Install package
   pkgng: &pkgng_install_params
-    name: '{{ pkgng_test_pkg_name }}'
-    jail: '{{ pkgng_test_jail | default(omit) }}'
-    chroot: '{{ pkgng_test_chroot | default(omit) }}'
-    rootdir: '{{ pkgng_test_rootdir | default(omit) }}'
+    name: "{{ pkgng_test_pkg_name }}"
+    jail: "{{ pkgng_test_jail | default(omit) }}"
+    chroot: "{{ pkgng_test_chroot | default(omit) }}"
+    rootdir: "{{ pkgng_test_rootdir | default(omit) }}"
   register: pkgng_install
 
 - name: Remove package (checkmode)
@@ -44,7 +44,7 @@
   pkgng:
     <<: *pkgng_install_params
     state: absent
-  when: 'pkgng_test_install_cleanup | default(False)'
+  when: pkgng_test_install_cleanup | default(False)
 
 - name: Ensure pkgng installs package correctly
   assert:

@@ -10,6 +10,6 @@
 
 - name: disable supervisord system service
   service:
-    name: '{{ supervisor_service_name }}'
+    name: "{{ supervisor_service_name }}"
     state: stopped
     enabled: false

@@ -1,3 +1,4 @@
+---
 ####################################################################
 # WARNING: These are designed specifically for Ansible tests       #
 # and should not be used as examples of how to write Ansible roles #
@@ -19,8 +20,8 @@
 
 - assert:
     that:
-    - results is not changed
-    - results.proxmox_domains is defined
+      - results is not changed
+      - results.proxmox_domains is defined
 
 - name: Retrieve info about pve
   proxmox_domain_info:
@@ -35,10 +36,10 @@
 
 - assert:
     that:
-    - results is not changed
-    - results.proxmox_domains is defined
-    - results.proxmox_domains|length == 1
-    - results.proxmox_domains[0].type == 'pve'
+      - results is not changed
+      - results.proxmox_domains is defined
+      - results.proxmox_domains|length == 1
+      - results.proxmox_domains[0].type == 'pve'
 
 - name: List groups
   proxmox_group_info:
@@ -52,8 +53,8 @@
 
 - assert:
     that:
-    - results is not changed
-    - results.proxmox_groups is defined
+      - results is not changed
+      - results.proxmox_groups is defined
 
 - name: List users
   proxmox_user_info:
@@ -67,8 +68,8 @@
 
 - assert:
     that:
-    - results is not changed
-    - results.proxmox_users is defined
+      - results is not changed
+      - results.proxmox_users is defined
 
 - name: Retrieve info about api_user using name and domain
   proxmox_user_info:
@@ -84,12 +85,12 @@
 
 - assert:
     that:
-    - results_user_domain is not changed
-    - results_user_domain.proxmox_users is defined
-    - results_user_domain.proxmox_users|length == 1
-    - results_user_domain.proxmox_users[0].domain == "{{ domain }}"
-    - results_user_domain.proxmox_users[0].user == "{{ user }}"
-    - results_user_domain.proxmox_users[0].userid == "{{ user }}@{{ domain }}"
+      - results_user_domain is not changed
+      - results_user_domain.proxmox_users is defined
+      - results_user_domain.proxmox_users|length == 1
+      - results_user_domain.proxmox_users[0].domain == "{{ domain }}"
+      - results_user_domain.proxmox_users[0].user == "{{ user }}"
+      - results_user_domain.proxmox_users[0].userid == "{{ user }}@{{ domain }}"
 
 - name: Retrieve info about api_user using userid
   proxmox_user_info:
@@ -104,12 +105,12 @@
 
 - assert:
     that:
-    - results_userid is not changed
-    - results_userid.proxmox_users is defined
-    - results_userid.proxmox_users|length == 1
-    - results_userid.proxmox_users[0].domain == "{{ domain }}"
-    - results_userid.proxmox_users[0].user == "{{ user }}"
-    - results_userid.proxmox_users[0].userid == "{{ user }}@{{ domain }}"
+      - results_userid is not changed
+      - results_userid.proxmox_users is defined
+      - results_userid.proxmox_users|length == 1
+      - results_userid.proxmox_users[0].domain == "{{ domain }}"
+      - results_userid.proxmox_users[0].user == "{{ user }}"
+      - results_userid.proxmox_users[0].userid == "{{ user }}@{{ domain }}"
 
 - name: Retrieve info about storage
   proxmox_storage_info:
@@ -124,13 +125,13 @@
 
 - assert:
     that:
-    - results_storage is not changed
-    - results_storage.proxmox_storages is defined
-    - results_storage.proxmox_storages|length == 1
-    - results_storage.proxmox_storages[0].storage == "{{ storage }}"
+      - results_storage is not changed
+      - results_storage.proxmox_storages is defined
+      - results_storage.proxmox_storages|length == 1
+      - results_storage.proxmox_storages[0].storage == "{{ storage }}"
 
 - name: VM creation
-  tags: [ 'create' ]
+  tags: [create]
   block:
     - name: Create test vm test-instance
       proxmox_kvm:
@@ -144,7 +145,7 @@
         storage: "{{ storage }}"
         vmid: "{{ from_vmid }}"
         name: test-instance
-        clone: 'yes'
+        clone: "yes"
         state: present
         timeout: 500
       register: results_kvm
@@ -154,15 +155,15 @@
 
     - assert:
         that:
-        - results_kvm is changed
-        - results_kvm.vmid == from_vmid
-        - results_kvm.msg == "VM test-instance with newid {{ vmid }} cloned from vm with vmid {{ from_vmid }}"
+          - results_kvm is changed
+          - results_kvm.vmid == from_vmid
+          - results_kvm.msg == "VM test-instance with newid {{ vmid }} cloned from vm with vmid {{ from_vmid }}"
 
     - pause:
         seconds: 30
 
 - name: VM start
-  tags: [ 'start' ]
+  tags: [start]
   block:
     - name: Start test VM
       proxmox_kvm:
@@ -179,10 +180,10 @@
 
     - assert:
         that:
-        - results_action_start is changed
-        - results_action_start.status == 'stopped'
-        - results_action_start.vmid == {{ vmid }}
-        - results_action_start.msg == "VM {{ vmid }} started"
+          - results_action_start is changed
+          - results_action_start.status == 'stopped'
+          - results_action_start.vmid == {{ vmid }}
+          - results_action_start.msg == "VM {{ vmid }} started"
 
     - pause:
         seconds: 90
@@ -202,10 +203,10 @@
 
     - assert:
         that:
-        - results_action_start_again is not changed
-        - results_action_start_again.status == 'running'
-        - results_action_start_again.vmid == {{ vmid }}
-        - results_action_start_again.msg == "VM {{ vmid }} is already running"
+          - results_action_start_again is not changed
+          - results_action_start_again.status == 'running'
+          - results_action_start_again.vmid == {{ vmid }}
+          - results_action_start_again.msg == "VM {{ vmid }} is already running"
 
     - name: Check current status
       proxmox_kvm:
@@ -222,13 +223,13 @@
 
     - assert:
         that:
-        - results_action_current is not changed
-        - results_action_current.status == 'running'
-        - results_action_current.vmid == {{ vmid }}
-        - results_action_current.msg == "VM test-instance with vmid = {{ vmid }} is running"
+          - results_action_current is not changed
+          - results_action_current.status == 'running'
+          - results_action_current.vmid == {{ vmid }}
+          - results_action_current.msg == "VM test-instance with vmid = {{ vmid }} is running"
 
 - name: VM add/change/delete NIC
-  tags: [ 'nic' ]
+  tags: [nic]
   block:
     - name: Add NIC to test VM
       proxmox_nic:
@@ -247,9 +248,9 @@
 
     - assert:
         that:
-        - results is changed
-        - results.vmid == {{ vmid }}
-        - results.msg == "Nic net5 updated on VM with vmid {{ vmid }}"
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Nic net5 updated on VM with vmid {{ vmid }}"
 
     - name: Update NIC no changes
       proxmox_nic:
@@ -268,9 +269,9 @@
 
     - assert:
         that:
-        - results is not changed
-        - results.vmid == {{ vmid }}
-        - results.msg == "Nic net5 unchanged on VM with vmid {{ vmid }}"
+          - results is not changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Nic net5 unchanged on VM with vmid {{ vmid }}"
 
     - name: Update NIC with changes
       proxmox_nic:
@@ -290,9 +291,9 @@
 
     - assert:
         that:
-        - results is changed
-        - results.vmid == {{ vmid }}
-        - results.msg == "Nic net5 updated on VM with vmid {{ vmid }}"
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Nic net5 updated on VM with vmid {{ vmid }}"
 
     - name: Delete NIC
       proxmox_nic:
@@ -309,208 +310,207 @@
 
     - assert:
         that:
-        - results is changed
-        - results.vmid == {{ vmid }}
-        - results.msg == "Nic net5 deleted on VM with vmid {{ vmid }}"
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Nic net5 deleted on VM with vmid {{ vmid }}"
 
 - name: Create new disk in VM
-  tags: ['create_disk']
+  tags: [create_disk]
   block:
-  - name: Add new disk (without force) to VM
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ vmid }}"
-      disk: "{{ disk }}"
-      storage: "{{ storage }}"
-      size: 1
-      state: present
-    register: results
+    - name: Add new disk (without force) to VM
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ vmid }}"
+        disk: "{{ disk }}"
+        storage: "{{ storage }}"
+        size: 1
+        state: present
+      register: results
 
-  - assert:
-      that:
-      - results is changed
-      - results.vmid == {{ vmid }}
-      - results.msg == "Disk {{ disk }} created in VM {{ vmid }}"
+    - assert:
+        that:
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Disk {{ disk }} created in VM {{ vmid }}"
 
-  - name: Try add disk again with same options (expect no-op)
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ vmid }}"
-      disk: "{{ disk }}"
-      storage: "{{ storage }}"
-      size: 1
-      state: present
-    register: results
+    - name: Try add disk again with same options (expect no-op)
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ vmid }}"
+        disk: "{{ disk }}"
+        storage: "{{ storage }}"
+        size: 1
+        state: present
+      register: results
 
-  - assert:
-      that:
-      - results is not changed
-      - results.vmid == {{ vmid }}
-      - results.msg == "Disk {{ disk }} is up to date in VM {{ vmid }}"
+    - assert:
+        that:
+          - results is not changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Disk {{ disk }} is up to date in VM {{ vmid }}"
 
-  - name: Add new disk replacing existing disk (detach old and leave unused)
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ vmid }}"
-      disk: "{{ disk }}"
-      storage: "{{ storage }}"
-      size: 2
-      create: forced
-      state: present
-    register: results
+    - name: Add new disk replacing existing disk (detach old and leave unused)
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ vmid }}"
+        disk: "{{ disk }}"
+        storage: "{{ storage }}"
+        size: 2
+        create: forced
+        state: present
+      register: results
 
-  - assert:
-      that:
-      - results is changed
-      - results.vmid == {{ vmid }}
-      - results.msg == "Disk {{ disk }} created in VM {{ vmid }}"
+    - assert:
+        that:
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Disk {{ disk }} created in VM {{ vmid }}"
 
 - name: Update existing disk in VM
-  tags: ['update_disk']
+  tags: [update_disk]
   block:
-  - name: Update disk configuration
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ vmid }}"
-      disk: "{{ disk }}"
-      backup: false
-      ro: true
-      aio: native
-      state: present
-    register: results
+    - name: Update disk configuration
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ vmid }}"
+        disk: "{{ disk }}"
+        backup: false
+        ro: true
+        aio: native
+        state: present
+      register: results
 
-  - assert:
-      that:
-      - results is changed
-      - results.vmid == {{ vmid }}
-      - results.msg == "Disk {{ disk }} updated in VM {{ vmid }}"
+    - assert:
+        that:
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Disk {{ disk }} updated in VM {{ vmid }}"
 
 - name: Grow existing disk in VM
-  tags: ['grow_disk']
+  tags: [grow_disk]
   block:
-  - name: Increase disk size
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ vmid }}"
-      disk: "{{ disk }}"
-      size: +1G
-      state: resized
-    register: results
+    - name: Increase disk size
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ vmid }}"
+        disk: "{{ disk }}"
+        size: +1G
+        state: resized
+      register: results
 
-  - assert:
-      that:
-      - results is changed
-      - results.vmid == {{ vmid }}
-      - results.msg == "Disk {{ disk }} resized in VM {{ vmid }}"
+    - assert:
+        that:
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Disk {{ disk }} resized in VM {{ vmid }}"
 
 - name: Detach disk and leave it unused
-  tags: ['detach_disk']
+  tags: [detach_disk]
   block:
-  - name: Detach disk
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ vmid }}"
-      disk: "{{ disk }}"
-      state: detached
-    register: results
+    - name: Detach disk
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ vmid }}"
+        disk: "{{ disk }}"
+        state: detached
+      register: results
 
-  - assert:
-      that:
-      - results is changed
-      - results.vmid == {{ vmid }}
-      - results.msg == "Disk {{ disk }} detached from VM {{ vmid }}"
+    - assert:
+        that:
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Disk {{ disk }} detached from VM {{ vmid }}"
 
 - name: Move disk to another storage or another VM
-  tags: ['move_disk']
+  tags: [move_disk]
   block:
-  - name: Move disk to another storage inside same VM
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ vmid }}"
-      disk: "{{ disk }}"
-      target_storage: "{{ target_storage }}"
-      format: "{{ target_format }}"
-      state: moved
-    register: results
+    - name: Move disk to another storage inside same VM
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ vmid }}"
+        disk: "{{ disk }}"
+        target_storage: "{{ target_storage }}"
+        format: "{{ target_format }}"
+        state: moved
+      register: results
 
-  - assert:
-      that:
-      - results is changed
-      - results.vmid == {{ vmid }}
-      - results.msg == "Disk {{ disk }} moved from VM {{ vmid }} storage {{ results.storage }}"
+    - assert:
+        that:
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Disk {{ disk }} moved from VM {{ vmid }} storage {{ results.storage }}"
 
-  - name: Move disk to another VM (same storage)
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ vmid }}"
-      disk: "{{ disk }}"
-      target_vmid: "{{ target_vm }}"
-      target_disk: "{{ target_disk }}"
-      state: moved
-    register: results
+    - name: Move disk to another VM (same storage)
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ vmid }}"
+        disk: "{{ disk }}"
+        target_vmid: "{{ target_vm }}"
+        target_disk: "{{ target_disk }}"
+        state: moved
+      register: results
 
-  - assert:
-      that:
-      - results is changed
-      - results.vmid == {{ vmid }}
-      - results.msg == "Disk {{ disk }} moved from VM {{ vmid }} storage {{ results.storage }}"
-
+    - assert:
+        that:
+          - results is changed
+          - results.vmid == {{ vmid }}
+          - results.msg == "Disk {{ disk }} moved from VM {{ vmid }} storage {{ results.storage }}"
 
 - name: Remove disk permanently
-  tags: ['remove_disk']
+  tags: [remove_disk]
   block:
-  - name: Remove disk
-    proxmox_disk:
-      api_host: "{{ api_host }}"
-      api_user: "{{ user }}@{{ domain }}"
-      api_password: "{{ api_password | default(omit) }}"
-      api_token_id: "{{ api_token_id | default(omit) }}"
-      api_token_secret: "{{ api_token_secret | default(omit) }}"
-      vmid: "{{ target_vm }}"
-      disk: "{{ target_disk }}"
-      state: absent
-    register: results
+    - name: Remove disk
+      proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_user: "{{ user }}@{{ domain }}"
+        api_password: "{{ api_password | default(omit) }}"
+        api_token_id: "{{ api_token_id | default(omit) }}"
+        api_token_secret: "{{ api_token_secret | default(omit) }}"
+        vmid: "{{ target_vm }}"
+        disk: "{{ target_disk }}"
+        state: absent
+      register: results
 
-  - assert:
-      that:
-      - results is changed
-      - results.vmid == {{ target_vm }}
-      - results.msg == "Disk {{ target_disk }} removed from VM {{ target_vm }}"
+    - assert:
+        that:
+          - results is changed
+          - results.vmid == {{ target_vm }}
+          - results.msg == "Disk {{ target_disk }} removed from VM {{ target_vm }}"
 
 - name: VM stop
-  tags: [ 'stop' ]
+  tags: [stop]
   block:
     - name: Stop test VM
       proxmox_kvm:
@@ -527,10 +527,10 @@
 
     - assert:
         that:
-        - results_action_stop is changed
-        - results_action_stop.status == 'running'
-        - results_action_stop.vmid == {{ vmid }}
-        - results_action_stop.msg == "VM {{ vmid }} is shutting down"
+          - results_action_stop is changed
+          - results_action_stop.status == 'running'
+          - results_action_stop.vmid == {{ vmid }}
+          - results_action_stop.msg == "VM {{ vmid }} is shutting down"
 
     - pause:
         seconds: 5
@@ -550,13 +550,13 @@
 
     - assert:
         that:
-        - results_action_current is not changed
-        - results_action_current.status == 'stopped'
-        - results_action_current.vmid == {{ vmid }}
-        - results_action_current.msg == "VM test-instance with vmid = {{  vmid }} is stopped"
+          - results_action_current is not changed
+          - results_action_current.status == 'stopped'
+          - results_action_current.vmid == {{ vmid }}
+          - results_action_current.msg == "VM test-instance with vmid = {{  vmid }} is stopped"
 
 - name: VM destroy
-  tags: [ 'destroy' ]
+  tags: [destroy]
   block:
     - name: Destroy test VM
       proxmox_kvm:
@@ -566,7 +566,7 @@
         api_token_id: "{{ api_token_id | default(omit) }}"
         api_token_secret: "{{ api_token_secret | default(omit) }}"
         validate_certs: "{{ validate_certs }}"
-        proxmox_default_behavior: "no_defaults"
+        proxmox_default_behavior: no_defaults
         node: "{{ node }}"
         vmid: "{{ vmid }}"
         state: absent
@@ -574,6 +574,6 @@
 
     - assert:
         that:
-        - results_kvm_destroy is changed
-        - results_kvm_destroy.vmid == {{ vmid }}
-        - results_kvm_destroy.msg == "VM {{ vmid }} removed"
+          - results_kvm_destroy is changed
+          - results_kvm_destroy.vmid == {{ vmid }}
+          - results_kvm_destroy.msg == "VM {{ vmid }} removed"

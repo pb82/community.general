@@ -27,7 +27,6 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-
     - block:
         - import_tasks: example-001.yml
           tags: t001

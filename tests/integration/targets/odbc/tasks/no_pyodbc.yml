@@ -5,8 +5,8 @@
 
 - name: Testing the module without pyodbc
   odbc:
-    dsn: "Test"
-    query: "SELECT * FROM nothing"
+    dsn: Test
+    query: SELECT * FROM nothing
   ignore_errors: true
   register: results
 

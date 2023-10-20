@@ -13,6 +13,6 @@ userlist:
   - username2
 dedicated_access_users:
   - name: username1
-    access_level: "developer"
+    access_level: developer
   - name: username2
-    access_level: "maintainer"
+    access_level: maintainer

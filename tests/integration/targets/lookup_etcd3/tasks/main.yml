@@ -12,17 +12,17 @@
 - name: put key/values with an etcd prefix
   etcd3:
     key: "{{ etcd3_prefix }}foo{{ item }}"
-    value: "bar{{ item }}"
+    value: bar{{ item }}
     state: present
   loop:
-  - 1
-  - 2
-  - 3
+    - 1
+    - 2
+    - 3
 
 - name: put a single key/values in etcd
   etcd3:
     key: "{{ etcd3_singlekey }}"
-    value: "foobar"
+    value: foobar
     state: present
 
 - import_tasks: tests.yml

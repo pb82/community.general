@@ -33,4 +33,3 @@
     that:
       - unlock_bash is changed
       - unlock_bash.locklist_post | length == 0
-...

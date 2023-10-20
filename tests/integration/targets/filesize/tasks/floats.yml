@@ -21,7 +21,6 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_01
 
-
 - name: Create a file with a size of 512.512kB
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -33,25 +32,23 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_02
 
-
 - name: Create a file with a size of 0.512512MB (check mode, idempotency)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
-    size: 0.512512MB
+    size: "0.512512MB"
   register: filesize_test_float_03
   check_mode: true
 
 - name: Create a file with a size of 0.512512MB (idempotency)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
-    size: 0.512512MB
+    size: "0.512512MB"
   register: filesize_test_float_04
 
 - name: Stat the file (should still exist, unchanged)
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_04
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -88,8 +85,6 @@
       - filesize_stat_float_02.stat.size == 512512
       - filesize_stat_float_04.stat.size == 512512
 
-
-
 - name: Create a file with a size of 512.513kB (check mode)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -102,7 +97,6 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_11
 
-
 - name: Create a file with a size of 512.513kB
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -114,25 +108,23 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_12
 
-
 - name: Create a file with a size of 0.512513MB (check mode, idempotency)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
-    size: 0.512513MB
+    size: "0.512513MB"
   register: filesize_test_float_13
   check_mode: true
 
 - name: Create a file with a size of 0.512513MB (idempotency)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
-    size: 0.512513MB
+    size: "0.512513MB"
   register: filesize_test_float_14
 
 - name: Stat the file again (should remain the same)
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_14
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -165,8 +157,6 @@
       - filesize_stat_float_12.stat.size == 512513
       - filesize_stat_float_14.stat.size == 512513
 
-
-
 - name: Create a file with a size of 4.004MB (check mode)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -179,7 +169,6 @@
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_21
 
-
 - name: Create a file with a size of 4.004MB
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -190,7 +179,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_22
-
 
 - name: Create a file with a size of 4.004MB (check mode, idempotency)
   community.general.filesize:
@@ -209,7 +197,6 @@
   ansible.builtin.stat:
     path: "{{ filesize_testfile }}"
   register: filesize_stat_float_24
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -241,7 +228,6 @@
       - filesize_stat_float_21.stat.size == 512513
       - filesize_stat_float_22.stat.size == 4004000
       - filesize_stat_float_24.stat.size == 4004000
-
 
 - name: Remove test file
   ansible.builtin.file:

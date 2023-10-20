@@ -20,7 +20,7 @@
 - name: ensure TLS files are present
   copy:
     src: "{{ item }}"
-    dest: "/tls/{{ item }}"
+    dest: /tls/{{ item }}
   loop:
     - ca_certificate.pem
     - ca_key.pem

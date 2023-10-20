@@ -12,7 +12,7 @@
     msg: installed 1 package(s)
   run_command_calls:
     - command: [/testbin/opkg, list-installed, zlib-dev]
-      environ: &env-def {environ_update: {LANGUAGE: C, LC_ALL: C}, check_rc: false}
+      environ: &env-def { environ_update: { LANGUAGE: C, LC_ALL: C }, check_rc: false }
       rc: 0
       out: ""
       err: ""
@@ -100,7 +100,7 @@
     - command: [/testbin/opkg, list-installed, zlib-dev]
       environ: *env-def
       rc: 0
-      out: "zlib-dev - 1.2.11-6 \n"   # This output has the extra space at the end, to satisfy the behaviour of Yocto/OpenEmbedded's opkg
+      out: "zlib-dev - 1.2.11-6 \n" # This output has the extra space at the end, to satisfy the behaviour of Yocto/OpenEmbedded's opkg
       err: ""
 - id: install_vim_updatecache
   input:
@@ -138,5 +138,5 @@
     - command: [/testbin/opkg, list-installed, vim-fuller]
       environ: *env-def
       rc: 0
-      out: "vim-fuller - 9.0-1 \n"   # This output has the extra space at the end, to satisfy the behaviour of Yocto/OpenEmbedded's opkg
+      out: "vim-fuller - 9.0-1 \n" # This output has the extra space at the end, to satisfy the behaviour of Yocto/OpenEmbedded's opkg
       err: ""

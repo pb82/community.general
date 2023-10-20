@@ -14,7 +14,7 @@
 
 - name: create zone with incorrect API key
   memset_zone:
-    api_key: "wa9aerahhie0eekee9iaphoorovooyia"
+    api_key: wa9aerahhie0eekee9iaphoorovooyia
     state: present
     name: "{{ zone_name }}"
     ttl: 300

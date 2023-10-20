@@ -5,7 +5,7 @@
 
 # Get systemd version and if it doesn't exist don't run these tests.
 - name: check systemd version
-  command: "systemctl --version"
+  command: systemctl --version
   register: systemd_version
   ignore_errors: true
 
@@ -62,7 +62,7 @@
     - name: Use option 'disksize=1G' without option resize (allowed)
       community.general.homectl:
         name: foobar
-        password: "uq4895738!@#$%dfd"
+        password: uq4895738!@#$%dfd
         state: present
         disksize: 1G
       register: disk_out
@@ -94,7 +94,9 @@
         name: jake
         password: myreallysecurepassword12!
         mountopts: noexec,nosuid,nodev
-        sshkeys: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDUSW/q2qFZPr2vS0qrmAs+1iQI1jLIBdJ4CVIhE3KnIwxkkiInS8mJ+t0FBTeK3ks3GZLPVYC1v9o2P+oqyUk1CiBnCsMXGJud+L/t8b5r8MiJMyP7Jzd6yhmcvenjvz+vY06jQ9chWAtThEknuaOMongIpQQzSLGbdMy0yMsz4GEjicwdcj1PDwItPvUt4TL4K7V9NE672idADlRt6qng4UwpziqlYgsyIG46ettDras8hGAPricrhFWUS2rLDsCD0thkPFdR8HL1ZWTZ6LtolhO4MYtgntzXn708TTmFC2oIDluzyxVoUYmsfVotVdXFZcOWffnwbCgU+tn75JXTLozgTbV3VWmkxpJFErCWPerxcZv3+7b0f36/Y0gRNjM9HERLDSE1c8yz29NOLY0qH5306aByjOaerxNq9+ZOU/Fmf5/VfGIUp/FdLxDw+V0AzejFG580VAcstEMsOHSdwTbi3gf6LoGSiRyWKKDod0TZCMC6RzfdsfdsfI9CClGl0s= test@router.home"
+        sshkeys: ssh-rsa 
+          AAAAB3NzaC1yc2EAAAADAQABAAABgQDUSW/q2qFZPr2vS0qrmAs+1iQI1jLIBdJ4CVIhE3KnIwxkkiInS8mJ+t0FBTeK3ks3GZLPVYC1v9o2P+oqyUk1CiBnCsMXGJud+L/t8b5r8MiJMyP7Jzd6yhmcvenjvz+vY06jQ9chWAtThEknuaOMongIpQQzSLGbdMy0yMsz4GEjicwdcj1PDwItPvUt4TL4K7V9NE672idADlRt6qng4UwpziqlYgsyIG46ettDras8hGAPricrhFWUS2rLDsCD0thkPFdR8HL1ZWTZ6LtolhO4MYtgntzXn708TTmFC2oIDluzyxVoUYmsfVotVdXFZcOWffnwbCgU+tn75JXTLozgTbV3VWmkxpJFErCWPerxcZv3+7b0f36/Y0gRNjM9HERLDSE1c8yz29NOLY0qH5306aByjOaerxNq9+ZOU/Fmf5/VfGIUp/FdLxDw+V0AzejFG580VAcstEMsOHSdwTbi3gf6LoGSiRyWKKDod0TZCMC6RzfdsfdsfI9CClGl0s=
+          test@router.home
       register: jake_out
 
     - name: Try to remove user 'janet' that doesn't exist
@@ -178,5 +180,5 @@
   # homectl was first introduced in systemd 245 so check version  >= 245 and make sure system has systemd and homectl command
   when:
     - systemd_version.rc == 0 and (systemd_version.stdout | regex_search('[0-9][0-9][0-9]') | int >= 245) and homectl_version.rc == 0
-    - ansible_distribution != 'Archlinux'  # TODO!
+    - ansible_distribution != 'Archlinux' # TODO!
     - ansible_distribution != 'Fedora' or ansible_distribution_major_version|int < 36 # TODO!

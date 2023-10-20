@@ -11,11 +11,11 @@
 - name: Create a backup (Check)
   check_mode: true
   scaleway_database_backup:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    region: '{{ scaleway_region }}'
-    database_name: '{{ scaleway_database_name }}'
-    instance_id: '{{ scaleway_instance_id }}'
+    region: "{{ scaleway_region }}"
+    database_name: "{{ scaleway_database_name }}"
+    instance_id: "{{ scaleway_instance_id }}"
 
   register: backup_creation_check_task
 
@@ -28,11 +28,11 @@
 
 - name: Create a backup
   scaleway_database_backup:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    region: '{{ scaleway_region }}'
-    database_name: '{{ scaleway_database_name }}'
-    instance_id: '{{ scaleway_instance_id }}'
+    region: "{{ scaleway_region }}"
+    database_name: "{{ scaleway_database_name }}"
+    instance_id: "{{ scaleway_instance_id }}"
     wait: true
 
   register: backup_creation_task
@@ -46,12 +46,12 @@
 
 - name: Create a backup (Confirmation)
   scaleway_database_backup:
-    name: '{{ scaleway_name }}'
+    name: "{{ scaleway_name }}"
     state: present
-    region: '{{ scaleway_region }}'
-    database_name: '{{ scaleway_database_name }}'
-    instance_id: '{{ scaleway_instance_id }}'
-    id: '{{ backup_creation_task.metadata.id }}'
+    region: "{{ scaleway_region }}"
+    database_name: "{{ scaleway_database_name }}"
+    instance_id: "{{ scaleway_instance_id }}"
+    id: "{{ backup_creation_task.metadata.id }}"
 
   register: backup_creation_confirmation_task
 
@@ -65,12 +65,12 @@
 - name: Patch backup name (Check)
   check_mode: true
   scaleway_database_backup:
-    name: '{{ scaleway_name }}-changed'
+    name: "{{ scaleway_name }}-changed"
     state: present
-    region: '{{ scaleway_region }}'
-    database_name: '{{ scaleway_database_name }}'
-    instance_id: '{{ scaleway_instance_id }}'
-    id: '{{ backup_creation_task.metadata.id }}'
+    region: "{{ scaleway_region }}"
+    database_name: "{{ scaleway_database_name }}"
+    instance_id: "{{ scaleway_instance_id }}"
+    id: "{{ backup_creation_task.metadata.id }}"
   register: backup_patching_check_task
 
 - debug: var=backup_patching_check_task
@@ -82,12 +82,12 @@
 
 - name: Patch backup name
   scaleway_database_backup:
-    name: '{{ scaleway_name }}-changed'
+    name: "{{ scaleway_name }}-changed"
     state: present
-    region: '{{ scaleway_region }}'
-    database_name: '{{ scaleway_database_name }}'
-    instance_id: '{{ scaleway_instance_id }}'
-    id: '{{ backup_creation_task.metadata.id }}'
+    region: "{{ scaleway_region }}"
+    database_name: "{{ scaleway_database_name }}"
+    instance_id: "{{ scaleway_instance_id }}"
+    id: "{{ backup_creation_task.metadata.id }}"
   register: backup_patching_task
 
 - debug: var=backup_patching_task
@@ -99,12 +99,12 @@
 
 - name: Patch backup name (Confirmation)
   scaleway_database_backup:
-    name: '{{ scaleway_name }}-changed'
+    name: "{{ scaleway_name }}-changed"
     state: present
-    region: '{{ scaleway_region }}'
-    database_name: '{{ scaleway_database_name }}'
-    instance_id: '{{ scaleway_instance_id }}'
-    id: '{{ backup_creation_task.metadata.id }}'
+    region: "{{ scaleway_region }}"
+    database_name: "{{ scaleway_database_name }}"
+    instance_id: "{{ scaleway_instance_id }}"
+    id: "{{ backup_creation_task.metadata.id }}"
   register: backup_patching_confirmation_task
 
 - debug: var=backup_patching_confirmation_task
@@ -117,9 +117,9 @@
 - name: Export backup (Check)
   check_mode: true
   scaleway_database_backup:
-    id: '{{ backup_creation_task.metadata.id }}'
+    id: "{{ backup_creation_task.metadata.id }}"
     state: exported
-    region: '{{ scaleway_region }}'
+    region: "{{ scaleway_region }}"
   register: backup_export_check_task
 
 - debug: var=backup_export_check_task
@@ -131,9 +131,9 @@
 
 - name: Export backup
   scaleway_database_backup:
-    id: '{{ backup_creation_task.metadata.id }}'
+    id: "{{ backup_creation_task.metadata.id }}"
     state: exported
-    region: '{{ scaleway_region }}'
+    region: "{{ scaleway_region }}"
     wait: true
   register: backup_export_task
 
@@ -147,9 +147,9 @@
 
 - name: Export backup (Confirmation)
   scaleway_database_backup:
-    id: '{{ backup_creation_task.metadata.id }}'
+    id: "{{ backup_creation_task.metadata.id }}"
     state: exported
-    region: '{{ scaleway_region }}'
+    region: "{{ scaleway_region }}"
   register: backup_export_confirmation_task
 
 - debug: var=backup_export_confirmation_task
@@ -163,11 +163,11 @@
 - name: Restore backup (Check)
   check_mode: true
   scaleway_database_backup:
-    id: '{{ backup_creation_task.metadata.id }}'
+    id: "{{ backup_creation_task.metadata.id }}"
     state: restored
-    region: '{{ scaleway_region }}'
-    database_name: '{{ scaleway_database_name }}'
-    instance_id: '{{ scaleway_instance_id }}'
+    region: "{{ scaleway_region }}"
+    database_name: "{{ scaleway_database_name }}"
+    instance_id: "{{ scaleway_instance_id }}"
   register: backup_restore_check_task
 
 - debug: var=backup_restore_check_task
@@ -179,11 +179,11 @@
 
 - name: Restore backup
   scaleway_database_backup:
-    id: '{{ backup_creation_task.metadata.id }}'
+    id: "{{ backup_creation_task.metadata.id }}"
     state: restored
-    region: '{{ scaleway_region }}'
-    database_name: '{{ scaleway_database_name }}'
-    instance_id: '{{ scaleway_instance_id }}'
+    region: "{{ scaleway_region }}"
+    database_name: "{{ scaleway_database_name }}"
+    instance_id: "{{ scaleway_instance_id }}"
     wait: true
   register: backup_restore_task
 
@@ -197,9 +197,9 @@
 - name: Delete backup (Check)
   check_mode: true
   scaleway_database_backup:
-    id: '{{ backup_creation_task.metadata.id }}'
+    id: "{{ backup_creation_task.metadata.id }}"
     state: absent
-    region: '{{ scaleway_region }}'
+    region: "{{ scaleway_region }}"
   register: backup_delete_check_task
 
 - debug: var=backup_delete_check_task
@@ -211,9 +211,9 @@
 
 - name: Delete backup
   scaleway_database_backup:
-    id: '{{ backup_creation_task.metadata.id }}'
+    id: "{{ backup_creation_task.metadata.id }}"
     state: absent
-    region: '{{ scaleway_region }}'
+    region: "{{ scaleway_region }}"
   register: backup_delete_task
 
 - debug: var=backup_delete_task
@@ -225,9 +225,9 @@
 
 - name: Delete backup (Confirmation)
   scaleway_database_backup:
-    id: '{{ backup_creation_task.metadata.id }}'
+    id: "{{ backup_creation_task.metadata.id }}"
     state: absent
-    region: '{{ scaleway_region }}'
+    region: "{{ scaleway_region }}"
   register: backup_delete_confirmation_task
 
 - debug: var=backup_delete_confirmation_task

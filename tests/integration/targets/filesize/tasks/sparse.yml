@@ -19,7 +19,6 @@
     get_checksum: false
   register: filesize_stat_sparse_01
 
-
 - name: Create a huge sparse file of 4TB
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -32,7 +31,6 @@
     path: "{{ filesize_testfile }}"
     get_checksum: false
   register: filesize_stat_sparse_02
-
 
 - name: Create a huge sparse file of 4TB (4000GB) (check mode, idempotency)
   community.general.filesize:
@@ -71,7 +69,6 @@
     path: "{{ filesize_testfile }}"
     get_checksum: false
   register: filesize_stat_sparse_06
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -118,8 +115,6 @@
       - filesize_stat_sparse_02.stat.size == 4*1000**4
       - filesize_stat_sparse_06.stat.size == 4*1000**4
 
-
-
 - name: Change sparse file size to 4TiB (check mode)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -134,7 +129,6 @@
     get_checksum: false
   register: filesize_stat_sparse_11
 
-
 - name: Change sparse file size to 4TiB
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -147,7 +141,6 @@
     path: "{{ filesize_testfile }}"
     get_checksum: false
   register: filesize_stat_sparse_12
-
 
 - name: Change sparse file size to 4TiB (4096GiB) (check mode, idempotency)
   community.general.filesize:
@@ -169,7 +162,6 @@
     path: "{{ filesize_testfile }}"
     get_checksum: false
   register: filesize_stat_sparse_14
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -197,8 +189,6 @@
       - filesize_stat_sparse_12.stat.size == 4398046511104
       - filesize_stat_sparse_14.stat.size == 4398046511104
 
-
-
 - name: Change sparse file size to 4.321TB (check mode)
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -213,7 +203,6 @@
     get_checksum: false
   register: filesize_stat_sparse_21
 
-
 - name: Change sparse file size to 4.321TB
   community.general.filesize:
     path: "{{ filesize_testfile }}"
@@ -226,7 +215,6 @@
     path: "{{ filesize_testfile }}"
     get_checksum: false
   register: filesize_stat_sparse_22
-
 
 - name: Change sparse file size to 4321×1GB (check mode, idempotency)
   community.general.filesize:
@@ -250,7 +238,6 @@
     path: "{{ filesize_testfile }}"
     get_checksum: false
   register: filesize_stat_sparse_24
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -277,8 +264,6 @@
       - filesize_stat_sparse_21.stat.size == 4398046511104
       - filesize_stat_sparse_22.stat.size == 4321000000000
       - filesize_stat_sparse_24.stat.size == 4321000000000
-
-
 
 - name: Remove test file
   ansible.builtin.file:

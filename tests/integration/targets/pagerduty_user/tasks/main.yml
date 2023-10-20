@@ -1,3 +1,4 @@
+---
 # Test code for pagerduty_user module
 #
 # Copyright (c) 2020, Zainab Alsaffar <Zainab.Alsaffar@mail.rit.edu>
@@ -10,11 +11,11 @@
 
 - name: Create a user account on PagerDuty
   pagerduty_user:
-    access_token: '{{ pd_api_access_token }}'
-    pd_user: '{{ fullname }}'
-    pd_email: '{{ email }}'
-    pd_role: '{{ pd_role }}'
-    pd_teams: '{{ pd_team }}'
+    access_token: "{{ pd_api_access_token }}"
+    pd_user: "{{ fullname }}"
+    pd_email: "{{ email }}"
+    pd_role: "{{ pd_role }}"
+    pd_teams: "{{ pd_team }}"
     state: present
 
 - name: Remove a user account from PagerDuty
@@ -22,4 +23,4 @@
     access_token: "{{ pd_api_access_token }}"
     pd_user: "{{ fullname }}"
     pd_email: "{{ email }}"
-    state: "absent"
+    state: absent

@@ -25,6 +25,6 @@
 
 - name: "[{{ item }}] Remove test service server"
   file:
-    path: "/usr/local/sbin/ansible_test_service"
+    path: /usr/local/sbin/ansible_test_service
     state: absent
   become: true

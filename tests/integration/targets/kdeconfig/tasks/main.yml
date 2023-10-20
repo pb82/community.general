@@ -17,7 +17,7 @@
   copy:
     dest: "{{ kwriteconf_fake }}"
     src: kwriteconf_fake
-    mode: 0755
+    mode: "0755"
 
 - name: Simple test
   kdeconfig:
@@ -182,7 +182,7 @@
     values:
       - group: test
         key: test1
-        bool_value: on
+        bool_value: true
     kwriteconfig_path: "{{ kwriteconf_fake }}"
   register: result_bool_idem
   ignore_errors: true
@@ -207,7 +207,7 @@
         value: test2
       - groups: [testx, testy]
         key: testz
-        bool_value: on
+        bool_value: true
     kwriteconfig_path: "{{ kwriteconf_fake }}"
   register: result_checkmode
   ignore_errors: true
@@ -236,7 +236,7 @@
         value: test2
       - groups: [testx, testy]
         key: testz
-        bool_value: on
+        bool_value: true
     kwriteconfig_path: "{{ kwriteconf_fake }}"
   register: result_checkmode_apply
   ignore_errors: true
@@ -248,8 +248,8 @@
     that:
       - result_checkmode_apply is changed
       - result_checkmode_apply is not failed
-      - "result_checkmode_apply['diff']['after'] == result_checkmode['diff']['after']"
-      - "result_checkmode_apply['diff']['before'] == result_checkmode['diff']['before']"
+      - result_checkmode_apply['diff']['after'] == result_checkmode['diff']['after']
+      - result_checkmode_apply['diff']['before'] == result_checkmode['diff']['before']
 
 - name: check_mode test - idempotence
   kdeconfig:
@@ -260,7 +260,7 @@
         value: test2
       - groups: [testx, testy]
         key: testz
-        bool_value: on
+        bool_value: true
     kwriteconfig_path: "{{ kwriteconf_fake }}"
   register: result_checkmode2
   ignore_errors: true
@@ -355,7 +355,7 @@
     path: "{{ output_file }}"
     values:
       - group: test1
-        key: ''
+        key: ""
         value: test2
     kwriteconfig_path: "{{ kwriteconf_fake }}"
   register: result_ekey
@@ -366,4 +366,4 @@
     that:
       - result_ekey is not changed
       - result_ekey is failed
-      - "result_ekey.msg == \"'key' cannot be empty\""
+      - result_ekey.msg == "'key' cannot be empty"

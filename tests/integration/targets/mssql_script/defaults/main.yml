@@ -6,4 +6,4 @@
 mssql_host: localhost
 mssql_port: 1433
 mssql_login_user: sa
-mssql_login_password: "Abcd!234"
+mssql_login_password: Abcd!234

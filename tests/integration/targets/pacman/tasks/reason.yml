@@ -14,10 +14,10 @@
     - name: Make sure that test packages are not installed
       pacman:
         name:
-          - '{{reg_pkg}}'
-          - '{{url_pkg}}'
-          - '{{file_pkg}}'
-          - '{{extra_pkg}}'
+          - "{{reg_pkg}}"
+          - "{{url_pkg}}"
+          - "{{file_pkg}}"
+          - "{{extra_pkg}}"
         state: absent
 
     - name: Get URL for {{url_pkg}}
@@ -31,15 +31,15 @@
       register: file_pkg_url
     - name: Download {{file_pkg}} pkg
       get_url:
-        url: '{{file_pkg_url.stdout}}'
-        dest: '{{file_pkg_path}}'
+        url: "{{file_pkg_url.stdout}}"
+        dest: "{{file_pkg_path}}"
 
     - name: Install packages from mixed sources as dependency (check mode)
       pacman:
         name:
-          - '{{reg_pkg}}'
-          - '{{url_pkg_url.stdout}}'
-          - '{{file_pkg_path}}'
+          - "{{reg_pkg}}"
+          - "{{url_pkg_url.stdout}}"
+          - "{{file_pkg_path}}"
         reason: dependency
       check_mode: true
       register: install_1
@@ -47,38 +47,38 @@
     - name: Install packages from mixed sources as explicit
       pacman:
         name:
-          - '{{reg_pkg}}'
-          - '{{url_pkg_url.stdout}}'
-          - '{{file_pkg_path}}'
+          - "{{reg_pkg}}"
+          - "{{url_pkg_url.stdout}}"
+          - "{{file_pkg_path}}"
         reason: explicit
       register: install_2
 
     - name: Install packages from mixed sources with new packages being installed as dependency - (idempotency)
       pacman:
         name:
-          - '{{reg_pkg}}'
-          - '{{url_pkg_url.stdout}}'
-          - '{{file_pkg_path}}'
+          - "{{reg_pkg}}"
+          - "{{url_pkg_url.stdout}}"
+          - "{{file_pkg_path}}"
         reason: dependency
       register: install_3
 
     - name: Install new package with already installed packages from mixed sources as dependency
       pacman:
         name:
-          - '{{reg_pkg}}'
-          - '{{url_pkg_url.stdout}}'
-          - '{{file_pkg_path}}'
-          - '{{extra_pkg}}'
+          - "{{reg_pkg}}"
+          - "{{url_pkg_url.stdout}}"
+          - "{{file_pkg_path}}"
+          - "{{extra_pkg}}"
         reason: dependency
       register: install_4
 
     - name: Set install reason for all packages to dependency
       pacman:
         name:
-          - '{{reg_pkg}}'
-          - '{{url_pkg_url.stdout}}'
-          - '{{file_pkg_path}}'
-          - '{{extra_pkg}}'
+          - "{{reg_pkg}}"
+          - "{{url_pkg_url.stdout}}"
+          - "{{file_pkg_path}}"
+          - "{{extra_pkg}}"
         reason: dependency
         reason_for: all
       register: install_5

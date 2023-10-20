@@ -41,11 +41,11 @@
 
         - name: Lock packages wildcard
           community.general.yum_versionlock:
-            name: "nss*"
+            name: nss*
             state: present
           register: lock_nss_wildcard
 
-          # This should fail when it needs user interaction and missing -y is on purpose.
+        # This should fail when it needs user interaction and missing -y is on purpose.
         - name: Update all packages (not really)
           command: yum update --setopt=obsoletes=0
           register: update_all_locked_packages
@@ -61,7 +61,7 @@
 
         - name: Update all packages
           yum:
-            name: '*'
+            name: "*"
             state: latest
           check_mode: true
           register: update_all_packages
@@ -83,5 +83,4 @@
         name: yum-plugin-versionlock
         state: absent
       when: yum_versionlock_install is changed
-  when: (ansible_distribution in ['CentOS', 'RedHat'] and ansible_distribution_major_version is version('7', '>=')) or
-        (ansible_distribution == 'Fedora')
+  when: (ansible_distribution in ['CentOS', 'RedHat'] and ansible_distribution_major_version is version('7', '>=')) or (ansible_distribution == 'Fedora')

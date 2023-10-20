@@ -6,47 +6,45 @@
 ################################################################################
 # TEST 05: rename=yes, state=present
 
-- name: "create diversion for foobarrc (check mode, rename, must report a change)"
+- name: create diversion for foobarrc (check mode, rename, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
   register: diversion_0
   check_mode: true
 
-- name: "create diversion for foobarrc (rename, must report a change)"
+- name: create diversion for foobarrc (rename, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
   register: diversion_1
 
-
-- name: "create diversion for foobarrc (rename, must NOT report a change, idempotency)"
+- name: create diversion for foobarrc (rename, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
   register: diversion_2
 
-- name: "create diversion for foobarrc (check mode, rename, must NOT report a change, idempotency)"
+- name: create diversion for foobarrc (check mode, rename, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
   register: diversion_3
   check_mode: true
 
-
 # Get results
 
-- name: "stat foobarrc (must not exist)"
+- name: stat foobarrc (must not exist)
   stat:
     path: "{{ foobarrc }}"
   register: diversion_4
 
-- name: "stat foobarrc.distrib (must exist)"
+- name: stat foobarrc.distrib (must exist)
   stat:
     path: "{{ foobarrc_distrib }}"
   register: diversion_5
 
-- name: "assert that results of test 05 are as expected"
+- name: assert that results of test 05 are as expected
   assert:
     that:
       - diversion_0 is changed
@@ -62,11 +60,10 @@
       - diversion_2.commands == diversion_3.commands
     quiet: true
 
-
 ################################################################################
 # TEST 06: rename=yes, state=absent
 
-- name: "remove diversion for foobarrc (check mode, rename, must report a change)"
+- name: remove diversion for foobarrc (check mode, rename, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
@@ -74,22 +71,21 @@
   register: diversion_0
   check_mode: true
 
-- name: "remove diversion for foobarrc (rename, must report a change)"
+- name: remove diversion for foobarrc (rename, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
     state: absent
   register: diversion_1
 
-
-- name: "remove diversion for foobarrc (rename, must NOT report a change, idempotency)"
+- name: remove diversion for foobarrc (rename, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
     state: absent
   register: diversion_2
 
-- name: "remove diversion for foobarrc (check mode, rename, must NOT report a change, idempotency)"
+- name: remove diversion for foobarrc (check mode, rename, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
@@ -97,20 +93,19 @@
   register: diversion_3
   check_mode: true
 
-
 # Check results
 
-- name: "stat foobarrc (must exist)"
+- name: stat foobarrc (must exist)
   stat:
     path: "{{ foobarrc }}"
   register: diversion_4
 
-- name: "stat foobarrc.distrib (must not exist)"
+- name: stat foobarrc.distrib (must not exist)
   stat:
     path: "{{ foobarrc_distrib }}"
   register: diversion_5
 
-- name: "assert that results of test 06 are as expected"
+- name: assert that results of test 06 are as expected
   assert:
     that:
       - diversion_0 is changed
@@ -126,17 +121,15 @@
       - diversion_2.commands == diversion_3.commands
     quiet: true
 
-
 ################################################################################
 # TEST 07: rename=yes, force=yes, state=present
 
-- name: "create foobarrc.distrib for tests"
+- name: create foobarrc.distrib for tests
   copy:
     dest: "{{ foobarrc_distrib }}"
     content: "{{ foobarrc_oldtext }}"
 
-
-- name: "create diversion for foobarrc (check mode, rename, must fail)"
+- name: create diversion for foobarrc (check mode, rename, must fail)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
@@ -144,15 +137,14 @@
   ignore_errors: true
   check_mode: true
 
-- name: "create diversion for foobarrc (rename, must fail)"
+- name: create diversion for foobarrc (rename, must fail)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
   register: diversion_1
   ignore_errors: true
 
-
-- name: "create diversion for foobarrc (check mode, force rename, must report a change)"
+- name: create diversion for foobarrc (check mode, force rename, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
@@ -160,22 +152,21 @@
   register: diversion_2
   check_mode: true
 
-- name: "create diversion for foobarrc (force rename, must report a change)"
+- name: create diversion for foobarrc (force rename, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
     force: true
   register: diversion_3
 
-
-- name: "create diversion for foobarrc (force rename, must NOT report a change, idempotency)"
+- name: create diversion for foobarrc (force rename, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
     force: true
   register: diversion_4
 
-- name: "create diversion for foobarrc (check mode, force rename, must NOT report a change, idempotency)"
+- name: create diversion for foobarrc (check mode, force rename, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     rename: true
@@ -183,20 +174,19 @@
   register: diversion_5
   check_mode: true
 
-
 # Check results
 
-- name: "stat foobarrc (must not exist)"
+- name: stat foobarrc (must not exist)
   stat:
     path: "{{ foobarrc }}"
   register: diversion_6
 
-- name: "stat foobarrc.distrib (must exist)"
+- name: stat foobarrc.distrib (must exist)
   stat:
     path: "{{ foobarrc_distrib }}"
   register: diversion_7
 
-- name: "assert that results of test 07 are as expected"
+- name: assert that results of test 07 are as expected
   assert:
     that:
       - diversion_0 is failed
@@ -215,62 +205,58 @@
       - diversion_4.commands == diversion_5.commands
     quiet: true
 
-
 ################################################################################
 # TEST 08: state=present, update an existing divert path
 
-- name: "create foobarrc with new contents for tests"
+- name: create foobarrc with new contents for tests
   copy:
     dest: "{{ foobarrc }}"
     content: "{{ foobarrc_newtext }}"
 
-
-- name: "create diversion for foobarrc (check mode, update divert path, must report a change)"
+- name: create diversion for foobarrc (check mode, update divert path, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     divert: "{{ foobarrc_ansible }}"
   register: diversion_0
   check_mode: true
 
-- name: "create diversion for foobarrc (update divert path, must report a change)"
+- name: create diversion for foobarrc (update divert path, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     divert: "{{ foobarrc_ansible }}"
   register: diversion_1
 
-
-- name: "create diversion for foobarrc (update divert path, must NOT report a change, idempotency)"
+- name: create diversion for foobarrc (update divert path, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     divert: "{{ foobarrc_ansible }}"
   register: diversion_2
 
-- name: "create diversion for foobarrc (check mode, update divert path, must NOT report a change, idempotency)"
+- name: create diversion for foobarrc (check mode, update divert path, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     divert: "{{ foobarrc_ansible }}"
   register: diversion_3
   check_mode: true
 
-
 # Check results
 
-- name: "stat foobarrc (must exist)"
+- name: stat foobarrc (must exist)
   stat:
     path: "{{ foobarrc }}"
   register: diversion_4
 
-- name: "stat foobarrc.ansible (must exist)"
+- name: stat foobarrc.ansible (must exist)
   stat:
     path: "{{ foobarrc_ansible }}"
   register: diversion_5
 
-- name: "stat foobarrc.distrib (must not exist)"
+- name: stat foobarrc.distrib (must not exist)
   stat:
     path: "{{ foobarrc_distrib }}"
   register: diversion_6
 
-- name: "assert that results of test 08 are as expected"
+- name: assert that results of test 08 are as expected
   assert:
     that:
       - diversion_0 is changed
@@ -288,11 +274,10 @@
       - diversion_2.commands == diversion_3.commands
     quiet: true
 
-
 ################################################################################
 # TEST 09: rename=yes, force=yes, state=absent
 
-- name: "remove diversion for foobarrc (check mode, rename, must fail)"
+- name: remove diversion for foobarrc (check mode, rename, must fail)
   dpkg_divert:
     path: "{{ foobarrc }}"
     state: absent
@@ -301,7 +286,7 @@
   ignore_errors: true
   check_mode: true
 
-- name: "remove diversion for foobarrc (rename, must fail)"
+- name: remove diversion for foobarrc (rename, must fail)
   dpkg_divert:
     path: "{{ foobarrc }}"
     state: absent
@@ -309,8 +294,7 @@
   register: diversion_1
   ignore_errors: true
 
-
-- name: "remove diversion for foobarrc (check mode, force rename, must report a change)"
+- name: remove diversion for foobarrc (check mode, force rename, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     state: absent
@@ -319,7 +303,7 @@
   register: diversion_2
   check_mode: true
 
-- name: "remove diversion for foobarrc (force rename, must report a change)"
+- name: remove diversion for foobarrc (force rename, must report a change)
   dpkg_divert:
     path: "{{ foobarrc }}"
     state: absent
@@ -327,8 +311,7 @@
     force: true
   register: diversion_3
 
-
-- name: "remove diversion for foobarrc (force rename, must NOT report a change, idempotency)"
+- name: remove diversion for foobarrc (force rename, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     state: absent
@@ -336,7 +319,7 @@
     force: true
   register: diversion_4
 
-- name: "remove diversion for foobarrc (check mode, force rename, must NOT report a change, idempotency)"
+- name: remove diversion for foobarrc (check mode, force rename, must NOT report a change, idempotency)
   dpkg_divert:
     path: "{{ foobarrc }}"
     state: absent
@@ -345,25 +328,24 @@
   register: diversion_5
   check_mode: true
 
-
 # Check results
 
-- name: "stat foobarrc (must exist)"
+- name: stat foobarrc (must exist)
   stat:
     path: "{{ foobarrc }}"
   register: diversion_6
 
-- name: "stat foobarrc.distrib (must not exist)"
+- name: stat foobarrc.distrib (must not exist)
   stat:
     path: "{{ foobarrc_distrib }}"
   register: diversion_7
 
-- name: "stat foobarrc.ansible (must not exist)"
+- name: stat foobarrc.ansible (must not exist)
   stat:
     path: "{{ foobarrc_ansible }}"
   register: diversion_8
 
-- name: "assert that results of test 09 are as expected"
+- name: assert that results of test 09 are as expected
   assert:
     that:
       - diversion_0 is failed

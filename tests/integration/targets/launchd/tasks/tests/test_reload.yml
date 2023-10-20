@@ -10,7 +10,7 @@
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_1_launchd_start_result_check_mode"
+  register: test_1_launchd_start_result_check_mode
   check_mode: true
 
 - name: "[{{ item }}] Assert that everything work in check mode"
@@ -24,8 +24,7 @@
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_1_launchd_start_result"
-
+  register: test_1_launchd_start_result
 
 - name: "[{{ item }}] The started service should run on port 21212"
   wait_for:
@@ -35,7 +34,7 @@
 
 - name: "[{{ item }}] Deploy a new test service configuration with a new port 21213"
   template:
-    src: "modified.{{ launchd_service_name }}.plist.j2"
+    src: modified.{{ launchd_service_name }}.plist.j2
     dest: "{{ launchd_plist_location }}"
   become: true
 
@@ -44,7 +43,7 @@
     name: "{{ launchd_service_name }}"
     state: reloaded
   become: true
-  register: "test_1_launchd_reload_result"
+  register: test_1_launchd_reload_result
 
 - name: "[{{ item }}] Validate that service was reloaded"
   assert:
@@ -61,8 +60,7 @@
     name: "{{ launchd_service_name }}"
     state: started
   become: true
-  register: "test_1_launchd_start_result"
-
+  register: test_1_launchd_start_result
 
 - name: "[{{ item }}] The started service should run on port 21213"
   wait_for:

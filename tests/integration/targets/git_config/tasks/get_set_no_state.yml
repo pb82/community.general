@@ -26,4 +26,3 @@
       - set_result.diff.after == option_value + "\n"
       - get_result is not changed
       - get_result.config_value == option_value
-...

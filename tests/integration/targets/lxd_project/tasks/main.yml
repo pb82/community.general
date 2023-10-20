@@ -1,3 +1,4 @@
+---
 ####################################################################
 # WARNING: These are designed specifically for Ansible tests       #
 # and should not be used as examples of how to write Ansible roles #
@@ -75,7 +76,7 @@
   lxd_project:
     name: ansible-test-project
     merge_project: false
-    description: "ansible test project"
+    description: ansible test project
     config:
       features.images: "false"
       features.networks: "true"
@@ -94,7 +95,7 @@
   lxd_project:
     name: ansible-test-project
     merge_project: false
-    description: "ansible test project"
+    description: ansible test project
     config:
       features.images: "false"
       features.networks: "true"
@@ -114,7 +115,7 @@
     name: ansible-test-project
     new_name: ansible-test-project-renamed
     merge_project: true
-    description: "ansible test project"
+    description: ansible test project
     config:
       features.images: "false"
       features.networks: "true"

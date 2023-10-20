@@ -71,4 +71,3 @@
           - update_packages is changed
 
   when: updates.results | length > 0
-...

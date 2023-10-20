@@ -28,7 +28,7 @@
   assert:
     that:
       - archive_no_options is changed
-      - "archive_no_options.dest_state == 'archive'"
+      - archive_no_options.dest_state == 'archive'
       - "{{ archive_no_options.archived | length }} == 3"
 
 - name: Remove the archive - no options ({{ format }})
@@ -41,7 +41,7 @@
     path: "{{ remote_tmp_dir }}/*.txt"
     dest: "{{ remote_tmp_dir }}/archive_file_options.{{ format }}"
     format: "{{ format }}"
-    mode: "u+rwX,g-rwx,o-rwx"
+    mode: u+rwX,g-rwx,o-rwx
   register: archive_file_options
 
 - name: Retrieve archive file information - file options ({{ format }})
@@ -53,7 +53,7 @@
   assert:
     that:
       - archive_file_options_stat is not changed
-      - "archive_file_options.mode == '0600'"
+      - archive_file_options.mode == '0600'
       - "{{ archive_file_options.archived | length }} == 3"
 
 - name: Remove the archive - file options ({{ format }})
@@ -120,7 +120,7 @@
           - "'foo.txt' in archive_single_target_contents.files"
       # ``unarchive`` fails for RHEL and FreeBSD on ansible 2.x
       when: archive_single_target_contents is success and archive_single_target_contents is not skipped
-  when: "format == 'zip'"
+  when: format == 'zip'
 
 - name: Remove archive - single target ({{ format }})
   file:
@@ -167,7 +167,7 @@
   assert:
     that:
       - archive_missing_paths is changed
-      - "archive_missing_paths.dest_state == 'incomplete'"
+      - archive_missing_paths.dest_state == 'incomplete'
       - "'{{ remote_tmp_dir }}/dne.txt' in archive_missing_paths.missing"
       - "'{{ remote_tmp_dir }}/foo.txt' not in archive_missing_paths.missing"
 

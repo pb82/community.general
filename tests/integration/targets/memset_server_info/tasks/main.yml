@@ -10,8 +10,8 @@
 
 - name: query API with invalid API key
   memset_server_info:
-    api_key: 'wa9aerahhie0eekee9iaphoorovooyia'
-    name: 'testyaa1'
+    api_key: wa9aerahhie0eekee9iaphoorovooyia
+    name: testyaa1
   ignore_errors: true
   register: result
 
@@ -24,7 +24,7 @@
 - name: request server infos
   memset_server_info:
     api_key: "{{ api_key }}"
-    name: 'testyaa1'
+    name: testyaa1
   register: result
 
 - name: check the request succeeded

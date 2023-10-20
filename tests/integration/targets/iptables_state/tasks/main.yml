@@ -14,11 +14,10 @@
       - iptables
   become: true
 
-
 - name: include tasks
   vars:
-    iptables_saved: "/tmp/test_iptables_state.saved"
-    iptables_tests: "/tmp/test_iptables_state.tests"
+    iptables_saved: /tmp/test_iptables_state.saved
+    iptables_tests: /tmp/test_iptables_state.tests
 
   block:
     - name: include tasks to perform basic tests (check_mode, async, idempotency)

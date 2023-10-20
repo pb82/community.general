@@ -69,10 +69,10 @@
 
 - name: Worklog on issue
   community.general.jira:
-    uri: '{{ server }}'
-    username: '{{ user }}'
-    password: '{{ pass }}'
-    issue: '{{ issue.meta.key }}'
+    uri: "{{ server }}"
+    username: "{{ user }}"
+    password: "{{ pass }}"
+    issue: "{{ issue.meta.key }}"
     operation: worklog
     comment: Worklog
     fields:

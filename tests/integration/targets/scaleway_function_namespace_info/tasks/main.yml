@@ -11,17 +11,17 @@
 - name: Create function_namespace
   community.general.scaleway_function_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
 
 - name: Get function namespace info
   community.general.scaleway_function_namespace_info:
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
   register: fn_info_task
 
 - ansible.builtin.debug:
@@ -37,7 +37,7 @@
 - name: Delete function namespace
   community.general.scaleway_function_namespace:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"

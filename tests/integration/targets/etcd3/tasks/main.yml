@@ -10,8 +10,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # ============================================================
-
-
 - name: run_tests for supported distros
   include_tasks: run_tests.yml
   when:

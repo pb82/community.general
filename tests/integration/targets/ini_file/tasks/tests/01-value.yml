@@ -10,7 +10,7 @@
     path: "{{ output_file }}"
     section: cars
     option: audi
-    value: null
+    value:
     allow_no_value: false
   register: result_value_1
   ignore_errors: true
@@ -21,7 +21,6 @@
       - result_value_1 is not changed
       - result_value_1 is failed
       - result_value_1.msg == "Parameter 'value(s)' must be defined if state=present and allow_no_value=False."
-
 
 - name: test-value 2 - set "state=present" and omit "value" and "allow_no_value=false" and fail
   ini_file:
@@ -39,7 +38,6 @@
       - result_value_2 is failed
       - result_value_2.msg == "Parameter 'value(s)' must be defined if state=present and allow_no_value=False."
 
-
 - name: test-value 3 - add "fav=lemonade" in section "[drinks]" in specified file
   ini_file:
     path: "{{ output_file }}"
@@ -55,7 +53,7 @@
 
 - name: test-value 3 - set expected content and get current ini file content
   set_fact:
-    expected3: |
+    expected3: |2
 
       [drinks]
       fav = lemonade
@@ -67,7 +65,6 @@
       - result3 is changed
       - result3.msg == 'section and option added'
       - content3 == expected3
-
 
 - name: test-value 4 - add "fav=lemonade" is in section "[drinks]" again
   ini_file:
@@ -82,7 +79,6 @@
     that:
       - result4 is not changed
       - result4.msg == 'OK'
-
 
 - name: test-value 5 - Ensure "beverage=coke" is in section "[drinks]"
   ini_file:
@@ -99,7 +95,7 @@
 
 - name: test-value 5 - set expected content and get current ini file content
   set_fact:
-    expected5: |
+    expected5: |2
 
       [drinks]
       fav = lemonade
@@ -112,7 +108,6 @@
       - result5 is changed
       - result5.msg == 'option added'
       - content5 == expected5
-
 
 - name: test-value 6 - Remove option "beverage=coke"
   ini_file:
@@ -129,7 +124,7 @@
 
 - name: test-value 6 - set expected content and get current ini file content
   set_fact:
-    expected6: |
+    expected6: |2
 
       [drinks]
       fav = lemonade
@@ -141,7 +136,6 @@
       - result6 is changed
       - result6.msg == 'option changed'
       - content6 == expected6
-
 
 - name: test-value 7 - remove section 'drinks'
   ini_file:
@@ -166,7 +160,6 @@
       - result7.msg == 'section removed'
       - content7 == "\n"
 
-
 # allow_no_value
 
 - name: test-value 8 - test allow_no_value
@@ -185,7 +178,7 @@
 - name: test-value 8 - set expected content and get current ini file content
   set_fact:
     content8: "{{ output_content.content | b64decode }}"
-    expected8: |
+    expected8: |2
 
       [mysqld]
       skip-name
@@ -196,7 +189,6 @@
       - result8 is changed
       - result8.msg == 'section and option added'
       - content8 == expected8
-
 
 - name: test-value 9 - test allow_no_value idempotency
   ini_file:
@@ -212,7 +204,6 @@
       - result9 is not changed
       - result9.msg == 'OK'
 
-
 - name: test-value 10 - test create empty section
   ini_file:
     path: "{{ output_file }}"
@@ -226,7 +217,6 @@
       - result10 is changed
       - result10.msg == 'only section added'
 
-
 - name: test-value 11 - test create empty section idempotency
   ini_file:
     path: "{{ output_file }}"
@@ -239,7 +229,6 @@
     that:
       - result11 is not changed
       - result11.msg == 'OK'
-
 
 - name: test-value 12 - test remove empty section
   ini_file:
@@ -256,8 +245,8 @@
     value: "{{ item.v | d(omit) }}"
     allow_no_value: true
   loop:
-    - { o: "skip-name-resolve" }
-    - { o: "max_connections", v: "500" }
+    - { o: skip-name-resolve }
+    - { o: max_connections, v: "500" }
 
 - name: test-value 12 - read content from output file
   slurp:
@@ -267,18 +256,17 @@
 - name: test-value 12 - set expected content and get current ini file content
   set_fact:
     content12: "{{ output_content.content | b64decode }}"
-    expected12: |
+    expected12: |2
 
       [mysqld]
       skip-name
       skip-name-resolve
       max_connections = 500
-  
+
 - name: test-value 12 - Verify content of ini file is as expected
   assert:
     that:
       - content12 == expected12
-
 
 - name: test-value 13 - change option with no value to option with value
   ini_file:
@@ -296,7 +284,7 @@
 - name: test-value 13 - set expected content and get current ini file content
   set_fact:
     content13: "{{ output_content.content | b64decode }}"
-    expected13: |
+    expected13: |2
 
       [mysqld]
       skip-name = myvalue
@@ -309,7 +297,6 @@
       - result13 is changed
       - result13.msg == 'option changed'
       - content13 == expected13
-
 
 - name: test-value 14 - change option with value to option with no value
   ini_file:
@@ -327,7 +314,7 @@
 - name: test-value 14 - set expected content and get current ini file content
   set_fact:
     content14: "{{ output_content.content | b64decode }}"
-    expected14: |
+    expected14: |2
 
       [mysqld]
       skip-name
@@ -340,7 +327,6 @@
       - result14 is changed
       - result14.msg == 'option changed'
       - content14 == expected14
-
 
 - name: test-value 15 - Remove option with no value
   ini_file:
@@ -358,7 +344,7 @@
 - name: test-value 15 - set expected content and get current ini file content
   set_fact:
     content15: "{{ output_content.content | b64decode }}"
-    expected15: |
+    expected15: |2
 
       [mysqld]
       skip-name
@@ -370,7 +356,6 @@
       - result15 is changed
       - result15.msg == 'option changed'
       - content15 == expected15
-
 
 - name: test-value 16 - Clean test file
   copy:
@@ -395,7 +380,7 @@
   set_fact:
     expected16: |+
       beverage = coke
-      
+
     content16: "{{ output_content.content | b64decode }}"
 
 - name: test-value 16 - assert 'changed' is true and content is OK (no section)
@@ -404,7 +389,6 @@
       - result16 is changed
       - result16.msg == 'option added'
       - content16 == expected16
-
 
 - name: test-value 17 - Ensure "beverage=coke" is modified as "beverage=water" within no section
   ini_file:
@@ -423,7 +407,7 @@
   set_fact:
     expected17: |+
       beverage = water
-      
+
     content17: "{{ output_content.content | b64decode }}"
 
 - name: test-value 17 - assert 'changed' is true and content is OK (no section)
@@ -432,7 +416,6 @@
       - result17 is changed
       - result17.msg == 'option changed'
       - content17 == expected17
-
 
 - name: test-value 18 - remove option 'beverage' within no section
   ini_file:
@@ -457,7 +440,6 @@
       - result18 is changed
       - result18.msg == 'option changed'
       - content18 == "\n"
-
 
 - name: test-value 19 - Check add option without section before existing section
   block:
@@ -492,7 +474,6 @@
   assert:
     that:
       - content19 == expected19
-
 
 - name: test-value 20 - Check add option with empty string value
   block:
@@ -532,8 +513,8 @@
 
 - name: test-value 20 - set expected content and get current ini file content
   set_fact:
-    expected20: |+
-      
+    expected20: |2
+
       [extensions]
       evolve = 
       regress = 
@@ -546,7 +527,6 @@
   assert:
     that:
       - content20 == expected20
-
 
 - name: test-value 21 - Create starting ini file
   copy:

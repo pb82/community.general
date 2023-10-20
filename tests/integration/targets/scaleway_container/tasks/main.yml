@@ -11,24 +11,24 @@
 - name: Create container_namespace
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ container_namespace_name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
+    name: "{{ container_namespace_name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
   register: integration_container_namespace
 
 - name: Create a container (Check)
   check_mode: true
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_creation_check_task
 
 - ansible.builtin.debug:
@@ -43,14 +43,14 @@
 - name: Create container
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_creation_task
 
 - ansible.builtin.debug:
@@ -66,14 +66,14 @@
 - name: Create container (Confirmation)
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_creation_confirmation_task
 
 - ansible.builtin.debug:
@@ -90,14 +90,14 @@
   check_mode: true
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_update_check_task
 
 - ansible.builtin.debug:
@@ -112,14 +112,14 @@
 - name: Update container
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_update_task
 
 - ansible.builtin.debug:
@@ -135,14 +135,14 @@
 - name: Update container (Confirmation)
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_update_confirmation_task
 
 - ansible.builtin.debug:
@@ -159,14 +159,14 @@
   check_mode: true
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_update_secret_check_task
 
 - ansible.builtin.debug:
@@ -181,14 +181,14 @@
 - name: Update container secret variables
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_update_secret_task
 
 - ansible.builtin.debug:
@@ -205,14 +205,14 @@
 - name: Update container secret variables (Confirmation)
   community.general.scaleway_container:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
-    port: '{{ port }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
+    port: "{{ port }}"
   register: cn_update_secret_confirmation_task
 
 - ansible.builtin.debug:
@@ -230,11 +230,11 @@
   check_mode: true
   community.general.scaleway_container:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
   register: cn_deletion_check_task
 
 - ansible.builtin.debug:
@@ -249,11 +249,11 @@
 - name: Delete container
   community.general.scaleway_container:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
   register: cn_deletion_task
 
 - name: Check module call result
@@ -265,11 +265,11 @@
 - name: Delete container (Confirmation)
   community.general.scaleway_container:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    namespace_id: '{{ integration_container_namespace.container_namespace.id }}'
-    registry_image: '{{ image }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    namespace_id: "{{ integration_container_namespace.container_namespace.id }}"
+    registry_image: "{{ image }}"
   register: cn_deletion_confirmation_task
 
 - ansible.builtin.debug:
@@ -284,7 +284,7 @@
 - name: Delete container namespace
   community.general.scaleway_container_namespace:
     state: absent
-    name: '{{ container_namespace_name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ container_namespace_name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"

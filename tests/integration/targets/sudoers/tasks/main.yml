@@ -27,7 +27,6 @@
     state: directory
     recurse: true
 
-
 # Run module and collect data
 
 - name: Create first rule
@@ -56,7 +55,6 @@
     commands: /usr/local/bin/command
   register: rule_1_again
 
-
 - name: Create second rule with two commands
   community.general.sudoers:
     name: my-sudo-rule-2
@@ -72,7 +70,6 @@
     src: "{{ sudoers_path }}/my-sudo-rule-2"
   register: rule_2_contents
 
-
 - name: Create rule requiring a password
   community.general.sudoers:
     name: my-sudo-rule-3
@@ -87,7 +84,6 @@
     src: "{{ sudoers_path }}/my-sudo-rule-3"
   register: rule_3_contents
 
-
 - name: Create rule using a group
   community.general.sudoers:
     name: my-sudo-rule-4
@@ -100,7 +96,6 @@
   ansible.builtin.slurp:
     src: "{{ sudoers_path }}/my-sudo-rule-4"
   register: rule_4_contents
-
 
 - name: Create rule in a alternative directory
   community.general.sudoers:
@@ -170,7 +165,6 @@
     path: "{{ sudoers_path }}/my-sudo-rule-1"
   register: revoke_rule_1_stat
 
-
 # Validation testing
 
 - name: Attempt command without full path to executable
@@ -181,7 +175,6 @@
     commands: systemctl
   ignore_errors: true
   register: edge_case_1
-
 
 - name: Attempt command without full path to executable, but disabling validation
   community.general.sudoers:
@@ -202,7 +195,7 @@
 - name: Prevent visudo being executed
   file:
     path: "{{ which_visudo.stdout }}"
-    mode: '-x'
+    mode: -x
   when: ansible_os_family != 'Darwin'
 
 - name: Attempt command without full path to executable, but enforcing validation with no visudo present
@@ -215,7 +208,7 @@
   ignore_errors: true
   when: ansible_os_family != 'Darwin'
   register: edge_case_3
-  
+
 - name: Revoke non-existing rule
   community.general.sudoers:
     name: non-existing-rule
@@ -226,7 +219,6 @@
   ansible.builtin.stat:
     path: "{{ sudoers_path }}/non-existing-rule"
   register: revoke_non_existing_rule_stat
-
 
 # Run assertions
 
@@ -263,7 +255,7 @@
     that:
       - not revoke_rule_1_stat.stat.exists
       - not revoke_non_existing_rule_stat.stat.exists
-      
+
 - name: Check edge case responses
   ansible.builtin.assert:
     that:

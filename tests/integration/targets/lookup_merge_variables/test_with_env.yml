@@ -20,7 +20,7 @@
         - name: Validate that the list is complete
           assert:
             that:
-              - "(merged_list | length) == 2"
+              - (merged_list | length) == 2
               - "'item1' in merged_list"
               - "'item3' in merged_list"
       vars:
@@ -36,7 +36,7 @@
         - name: Validate that the list is complete
           assert:
             that:
-              - "(merged_list | length) == 3"
+              - (merged_list | length) == 3
               - "'item1' in merged_list"
               - "'item2' in merged_list"
               - "'item3' in merged_list"

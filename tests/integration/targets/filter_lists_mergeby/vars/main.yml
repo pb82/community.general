@@ -156,7 +156,7 @@ list200:
   - name: myname01
     param01:
       x: default_value
-      y: default_value
+      true: default_value
       list:
         - default_value
   - name: myname02
@@ -165,12 +165,12 @@ list200:
 list201:
   - name: myname01
     param01:
-      y: patch_value
+      true: patch_value
       z: patch_value
       list:
         - patch_value
   - name: myname02
-    param01: [3, 4, 4, {key: value}]
+    param01: [3, 4, 4, key: value]
 
 result200:
   - name: myname01
@@ -179,7 +179,7 @@ result200:
         - default_value
         - patch_value
       x: default_value
-      y: patch_value
+      true: patch_value
       z: patch_value
   - name: myname02
     param01:
@@ -196,7 +196,7 @@ result201:
     param01:
       list:
         - patch_value
-      y: patch_value
+      true: patch_value
       z: patch_value
   - name: myname02
     param01:

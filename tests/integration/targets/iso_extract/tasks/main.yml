@@ -11,7 +11,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 - set_fact:
-    output_test_dir: '{{ remote_tmp_dir }}/test_iso_extract'
+    output_test_dir: "{{ remote_tmp_dir }}/test_iso_extract"
 
 - name: Install EPEL repository (RHEL only)
   include_role:

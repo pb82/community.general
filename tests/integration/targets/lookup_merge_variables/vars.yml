@@ -31,4 +31,4 @@ override_error_init:
 override__override_error:
   key_to_override: Override value
 
-logging_output_file: /tmp/ansible-test-merge-variables  # The Ansible log output is available in this file
+logging_output_file: /tmp/ansible-test-merge-variables # The Ansible log output is available in this file

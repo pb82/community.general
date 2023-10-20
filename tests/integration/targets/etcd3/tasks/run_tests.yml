@@ -10,62 +10,62 @@
 # Integration tests
 - name: Check mode, show need change
   etcd3:
-    key: "foo"
-    value: "bar"
-    state: "present"
+    key: foo
+    value: bar
+    state: present
   register: _etcd3_prst_chktst
   check_mode: true
 
 - name: Change to new value
   etcd3:
-    key: "foo"
-    value: "bar"
-    state: "present"
+    key: foo
+    value: bar
+    state: present
   register: _etcd3_prst_chgtst
 
 - name: Idempotency test, show unchanged.
   etcd3:
-    key: "foo"
-    value: "bar"
-    state: "present"
+    key: foo
+    value: bar
+    state: present
   register: _etcd3_prst_idmptnttst
 
 - name: Idempotency test in check mode, show unchanged
   etcd3:
-    key: "foo"
-    value: "bar"
-    state: "present"
+    key: foo
+    value: bar
+    state: present
   register: _etcd3_prst_idmptntchktst
   check_mode: true
 
 - name: Check mode, show need removal of key
   etcd3:
-    key: "foo"
-    value: "baz"
-    state: "absent"
+    key: foo
+    value: baz
+    state: absent
   register: _etcd3_absnt_chktst
   check_mode: true
 
 - name: Remove foo key
   etcd3:
-    key: "foo"
-    value: "baz"
-    state: "absent"
+    key: foo
+    value: baz
+    state: absent
   register: _etcd3_absnt_chgtst
 
 - name: Idempotency test in check mode, show unchanged
   etcd3:
-    key: "foo"
-    value: "baz"
-    state: "absent"
+    key: foo
+    value: baz
+    state: absent
   register: _etcd3_absnt_idmptnttst
   check_mode: true
 
 - name: Idempotency test, show unchanged
   etcd3:
-    key: "foo"
-    value: "baz"
-    state: "absent"
+    key: foo
+    value: baz
+    state: absent
   register: _etcd3_absnt_idmptntchktst
 
 - name: Checking the status are expected

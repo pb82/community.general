@@ -15,7 +15,7 @@
       include_tasks: prepare.yml
 
 - set_fact:
-    ssl_backends: ['openssl']
+    ssl_backends: [openssl]
 
 - set_fact:
     ssl_backends: "{{ ssl_backends + ['cryptography'] }}"

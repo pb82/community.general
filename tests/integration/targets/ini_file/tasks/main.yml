@@ -16,7 +16,6 @@
 
 - name: include tasks
   block:
-
     - name: include tasks to perform basic tests
       include_tasks: tests/00-basic.yml
 

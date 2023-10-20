@@ -11,23 +11,23 @@
 - name: Create function_namespace
   community.general.scaleway_function_namespace:
     state: present
-    name: '{{ function_namespace_name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
+    name: "{{ function_namespace_name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
   register: integration_function_namespace
 
 - name: Create a function (Check)
   check_mode: true
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: fn_creation_check_task
 
 - ansible.builtin.debug:
@@ -42,13 +42,13 @@
 - name: Create function
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: fn_creation_task
 
 - ansible.builtin.debug:
@@ -64,13 +64,13 @@
 - name: Create function (Confirmation)
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: fn_creation_confirmation_task
 
 - ansible.builtin.debug:
@@ -87,13 +87,13 @@
   check_mode: true
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: fn_update_check_task
 
 - ansible.builtin.debug:
@@ -108,13 +108,13 @@
 - name: Update function
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: fn_update_task
 
 - ansible.builtin.debug:
@@ -130,13 +130,13 @@
 - name: Update function (Confirmation)
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ secret_environment_variables }}"
   register: fn_update_confirmation_task
 
 - ansible.builtin.debug:
@@ -153,13 +153,13 @@
   check_mode: true
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
   register: fn_update_secret_check_task
 
 - ansible.builtin.debug:
@@ -174,13 +174,13 @@
 - name: Update function secret variables
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
   register: fn_update_secret_task
 
 - ansible.builtin.debug:
@@ -197,13 +197,13 @@
 - name: Update function secret variables (Confirmation)
   community.general.scaleway_function:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
-    description: '{{ updated_description }}'
-    environment_variables: '{{ environment_variables }}'
-    secret_environment_variables: '{{ updated_secret_environment_variables }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
+    description: "{{ updated_description }}"
+    environment_variables: "{{ environment_variables }}"
+    secret_environment_variables: "{{ updated_secret_environment_variables }}"
   register: fn_update_secret_confirmation_task
 
 - ansible.builtin.debug:
@@ -221,11 +221,11 @@
   check_mode: true
   community.general.scaleway_function:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
   register: fn_deletion_check_task
 
 - ansible.builtin.debug:
@@ -240,11 +240,11 @@
 - name: Delete function
   community.general.scaleway_function:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
   register: fn_deletion_task
 
 - ansible.builtin.debug:
@@ -259,11 +259,11 @@
 - name: Delete function (Confirmation)
   community.general.scaleway_function:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    namespace_id: '{{ integration_function_namespace.function_namespace.id }}'
-    runtime: '{{ runtime }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    namespace_id: "{{ integration_function_namespace.function_namespace.id }}"
+    runtime: "{{ runtime }}"
   register: fn_deletion_confirmation_task
 
 - ansible.builtin.debug:
@@ -278,7 +278,7 @@
 - name: Delete function namespace
   community.general.scaleway_function_namespace:
     state: absent
-    name: '{{ function_namespace_name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ function_namespace_name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"

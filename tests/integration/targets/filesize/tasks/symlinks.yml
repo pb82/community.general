@@ -13,25 +13,23 @@
 
 - name: Create a broken symlink in the same directory
   ansible.builtin.file:
-    src:  "{{ filesize_testfile | basename }}"
+    src: "{{ filesize_testfile | basename }}"
     dest: "{{ filesize_testlink }}"
     state: link
     force: true
     follow: false
 
-
-
 - name: Create a file with a size of 512 kB (512000 bytes) (check mode)
   community.general.filesize:
     path: "{{ filesize_testlink }}"
-    size: "512 kB"
+    size: 512 kB
   register: filesize_test_symlink_01
   check_mode: true
 
 - name: Create a file with a size of 512 kB (512000 bytes)
   community.general.filesize:
     path: "{{ filesize_testlink }}"
-    size: "512 kB"
+    size: 512 kB
   register: filesize_test_symlink_02
 
 - name: Stat the resulting file (not the symlink)
@@ -39,25 +37,23 @@
     path: "{{ filesize_test_symlink_02.path }}"
   register: filesize_stat_symlink_02
 
-
 - name: Create a file with a size of 500 KiB (512000 bytes) (check mode, idempotency)
   community.general.filesize:
     path: "{{ filesize_testlink }}"
-    size: "500 KiB"
+    size: 500 KiB
   register: filesize_test_symlink_03
   check_mode: true
 
 - name: Create a file with a size of 500 KiB (512000 bytes) (idempotency)
   community.general.filesize:
     path: "{{ filesize_testlink }}"
-    size: "500 KiB"
+    size: 500 KiB
   register: filesize_test_symlink_04
 
 - name: Stat the file again (should remain the same)
   ansible.builtin.stat:
     path: "{{ filesize_test_symlink_04.path }}"
   register: filesize_stat_symlink_04
-
 
 - name: Assert that results are as expected
   ansible.builtin.assert:
@@ -83,8 +79,6 @@
 
       - filesize_test_symlink_04.path == filesize_test_symlink_02.path
       - filesize_test_symlink_04.path != filesize_testlink
-
-
 
 - name: Remove test file
   ansible.builtin.file:

@@ -128,7 +128,6 @@
       - classic_remove_without_true_classic is changed
       - classic_remove_with_true_classic is not changed
 
-
 - name: Make sure package is not installed (uhttpd)
   community.general.snap:
     name: uhttpd
@@ -145,7 +144,7 @@
     name: uhttpd
     state: present
     options:
-      - "listening-port=8080"
+      - listening-port=8080
   register: install_with_option
 
 - name: Install package again with option (uhttpd)
@@ -153,7 +152,7 @@
     name: uhttpd
     state: present
     options:
-      - "listening-port=8080"
+      - listening-port=8080
   register: install_with_option_again
 
 - name: Install package again with different options (uhttpd)
@@ -161,8 +160,8 @@
     name: uhttpd
     state: present
     options:
-      - "listening-port=8088"
-      - "document-root-dir=/tmp"
+      - listening-port=8088
+      - document-root-dir=/tmp
   register: install_with_option_changed
 
 - name: Remove package (uhttpd)
@@ -176,7 +175,7 @@
     that:
       - install is changed
       - install_with_option is changed
-      - "install_with_option.options_changed[0] == 'uhttpd:listening-port=8080'"
+      - install_with_option.options_changed[0] == 'uhttpd:listening-port=8080'
       - install_with_option_again is not changed
       - install_with_option_changed is changed
       - "'uhttpd:listening-port=8088' in install_with_option_changed.options_changed"

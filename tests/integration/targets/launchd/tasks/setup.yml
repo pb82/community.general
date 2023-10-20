@@ -13,7 +13,7 @@
   copy:
     src: ansible_test_service.py
     dest: /usr/local/sbin/ansible_test_service
-    mode: '755'
+    mode: "755"
 
 - name: rewrite shebang in the test daemon script
   lineinfile:

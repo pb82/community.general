@@ -1,3 +1,4 @@
+---
 # Test code for ssh_config module
 # Copyright (c) 2021, Abhijeet Kasurde (@Akasurde) <akasurde@redhat.com>
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
@@ -6,16 +7,16 @@
 - name: Install required libs
   pip:
     name:
-      - 'paramiko<3.0.0'
+      - paramiko<3.0.0
     state: present
-    extra_args: "-c {{ remote_constraints }}"
+    extra_args: -c {{ remote_constraints }}
 
 - set_fact:
-    output_test_dir: '{{ remote_tmp_dir }}/test_ssh_config'
+    output_test_dir: "{{ remote_tmp_dir }}/test_ssh_config"
 
 - set_fact:
-    ssh_config_test: '{{ output_test_dir }}/ssh_config_test'
-    ssh_private_key: '{{ output_test_dir }}/fake_id_rsa'
+    ssh_config_test: "{{ output_test_dir }}/ssh_config_test"
+    ssh_private_key: "{{ output_test_dir }}/fake_id_rsa"
 
 - name: create a temporary directory
   file:
@@ -24,13 +25,13 @@
 
 - name: Copy sample config file
   copy:
-    src: 'files/ssh_config_test'
-    dest: '{{ ssh_config_test }}'
+    src: files/ssh_config_test
+    dest: "{{ ssh_config_test }}"
 
 - name: Copy sample private key file
   copy:
-    src: 'files/fake_id_rsa'
-    dest: '{{ ssh_private_key }}'
+    src: files/fake_id_rsa
+    dest: "{{ ssh_private_key }}"
 
 - name: Fail for required argument
   community.general.ssh_config:
@@ -46,10 +47,10 @@
 - name: Add a host in check mode
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "example.com"
+    host: example.com
     hostname: github.com
-    identity_file: '{{ ssh_private_key }}'
-    port: '2223'
+    identity_file: "{{ ssh_private_key }}"
+    port: "2223"
     state: present
   register: host_add
   check_mode: true
@@ -65,10 +66,10 @@
 - name: Add a host
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "example.com"
+    host: example.com
     hostname: github.com
-    identity_file: '{{ ssh_private_key }}'
-    port: '2223'
+    identity_file: "{{ ssh_private_key }}"
+    port: "2223"
     state: present
   register: host_add
 
@@ -83,10 +84,10 @@
 - name: Add same host again for idempotency
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "example.com"
+    host: example.com
     hostname: github.com
-    identity_file: '{{ ssh_private_key }}'
-    port: '2223'
+    identity_file: "{{ ssh_private_key }}"
+    port: "2223"
     state: present
   register: host_add_again
 
@@ -101,10 +102,10 @@
 - name: Update host
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "example.com"
+    host: example.com
     hostname: github.com
-    identity_file: '{{ ssh_private_key }}'
-    port: '2224'
+    identity_file: "{{ ssh_private_key }}"
+    port: "2224"
     state: present
   register: host_update
 
@@ -121,10 +122,10 @@
 - name: Update host again
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "example.com"
+    host: example.com
     hostname: github.com
-    identity_file: '{{ ssh_private_key }}'
-    port: '2224'
+    identity_file: "{{ ssh_private_key }}"
+    port: "2224"
     state: present
   register: host_update
 
@@ -140,7 +141,7 @@
 - name: Delete a host
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "example.com"
+    host: example.com
     state: absent
   register: host_delete
 
@@ -155,7 +156,7 @@
 - name: Delete same host again for idempotency
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "example.com"
+    host: example.com
     hostname: github.com
     state: absent
   register: host_delete_again
@@ -172,10 +173,10 @@
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
     user: root
-    host: "example.com"
+    host: example.com
     hostname: github.com
-    identity_file: '{{ ssh_private_key }}'
-    port: '2223'
+    identity_file: "{{ ssh_private_key }}"
+    port: "2223"
     state: present
   register: mut_ex
   ignore_errors: true
@@ -189,12 +190,12 @@
 - name: Check if proxycommand and proxyjump are mutually exclusive
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "example.com"
+    host: example.com
     hostname: github.com
-    proxycommand: "ssh jumphost.example.com -W %h:%p"
-    proxyjump: "jumphost.example.com"
-    identity_file: '{{ ssh_private_key }}'
-    port: '2224'
+    proxycommand: ssh jumphost.example.com -W %h:%p
+    proxyjump: jumphost.example.com
+    identity_file: "{{ ssh_private_key }}"
+    port: "2224"
     state: present
   register: proxy_mut_ex
   ignore_errors: true
@@ -208,10 +209,10 @@
 - name: Add a full name host
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "full_name"
+    host: full_name
     hostname: full_name.com
-    identity_file: '{{ ssh_private_key }}'
-    port: '2223'
+    identity_file: "{{ ssh_private_key }}"
+    port: "2223"
     state: present
   register: full_name
 
@@ -226,10 +227,10 @@
 - name: Add a host with name which is contained in full name host
   community.general.ssh_config:
     ssh_config_file: "{{ ssh_config_test }}"
-    host: "full"
+    host: full
     hostname: full.com
-    identity_file: '{{ ssh_private_key }}'
-    port: '2223'
+    identity_file: "{{ ssh_private_key }}"
+    port: "2223"
     state: present
   register: short_name
 
@@ -242,4 +243,4 @@
       - short_name.hosts_removed == []
 
 - name: Include integration tests for additional options (e.g. proxycommand, proxyjump)
-  include_tasks: 'options.yml'
+  include_tasks: options.yml

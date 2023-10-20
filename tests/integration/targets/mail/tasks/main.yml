@@ -20,17 +20,17 @@
 
 - name: Install test smtpserver
   copy:
-    src: '{{ item }}'
-    dest: '{{ remote_tmp_dir }}/{{ item }}'
+    src: "{{ item }}"
+    dest: "{{ remote_tmp_dir }}/{{ item }}"
   loop:
-  - smtpserver.py
-  - smtpserver.crt
-  - smtpserver.key
+    - smtpserver.py
+    - smtpserver.crt
+    - smtpserver.key
 
 # FIXME: Verify the mail after it was send would be nice
 #        This would require either dumping the content, or registering async task output
 - name: Start test smtpserver
-  shell: '{{ ansible_python.executable }} {{ remote_tmp_dir }}/smtpserver.py 10025:10465'
+  shell: "{{ ansible_python.executable }} {{ remote_tmp_dir }}/smtpserver.py 10025:10465"
   async: 45
   poll: 0
   register: smtpserver

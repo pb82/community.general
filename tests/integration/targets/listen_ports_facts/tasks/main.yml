@@ -1,3 +1,4 @@
+---
 ####################################################################
 # WARNING: These are designed specifically for Ansible tests       #
 # and should not be used as examples of how to write Ansible roles #
@@ -27,7 +28,7 @@
 
 - name: install netcat on rh >= 7
   ansible.builtin.package:
-    name: 'nmap-ncat'
+    name: nmap-ncat
     state: latest
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7
 
@@ -44,13 +45,13 @@
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7
 
 - name: start TCP server on port 5556
-  command: "nc -l -p 5556"
+  command: nc -l -p 5556
   async: 1000
   poll: 0
   when: (ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7) or ansible_os_family == "Debian"
 
 - name: start TCP server on port 5556
-  command: "nc -l 5556"
+  command: nc -l 5556
   async: 1000
   poll: 0
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7
@@ -68,14 +69,14 @@
 
 - name: Gather listening ports facts explicitly via netstat and include_non_listening
   listen_ports_facts:
-    command: 'netstat'
-    include_non_listening: 'yes'
+    command: netstat
+    include_non_listening: "yes"
   when: (ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7) or ansible_os_family == "Debian"
 
 - name: Gather listening ports facts explicitly via ss and include_non_listening
   listen_ports_facts:
-    command: 'ss'
-    include_non_listening: 'yes'
+    command: ss
+    include_non_listening: "yes"
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7
 
 - name: check for ansible_facts.udp_listen exists
@@ -106,7 +107,7 @@
   when: (ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7) or ansible_os_family == "Debian"
 
 - name: kill all async commands
-  command: "kill -9 {{ item.pid }}"
+  command: kill -9 {{ item.pid }}
   loop: "{{ [tcp_listen, udp_listen]|flatten }}"
   when: item.name == 'nc'
   ignore_errors: true

@@ -10,7 +10,7 @@
 - name: Create private keys
   community.crypto.openssl_privatekey:
     path: "{{ item }}"
-    mode: "u=rw,go="
+    mode: u=rw,go=
   loop:
     - "{{ test_key_path }}"
     - "{{ test_key2_path }}"
@@ -19,13 +19,13 @@
   community.crypto.openssl_csr:
     path: "{{ test_csr_path }}"
     privatekey_path: "{{ test_key_path }}"
-    commonName: "localhost"
+    commonName: localhost
 
 - name: Generate CSR for self-signed certificate used for testing
   community.crypto.openssl_csr:
     path: "{{ test_csr2_path }}"
     privatekey_path: "{{ test_key2_path }}"
-    commonName: "localhost"
+    commonName: localhost
 
 - name: Generate the self-signed cert used as a placeholder to create the java keystore
   community.crypto.x509_certificate:
@@ -43,13 +43,13 @@
 
 - name: Create the pkcs12 archive from the test x509 cert
   community.crypto.openssl_pkcs12:
-    name: "test_pkcs12_cert"
+    name: test_pkcs12_cert
     path: "{{ test_pkcs_path }}"
     passphrase: "{{ test_keystore2_password }}"
     certificate_path: "{{ test_cert_path }}"
     privatekey_path: "{{ test_key_path }}"
   when:
-    - "not (ansible_os_family == 'RedHat' and ansible_distribution_version is version('8.0', '<'))"
+    - not (ansible_os_family == 'RedHat' and ansible_distribution_version is version('8.0', '<'))
 
 - name: Create the pkcs12 archive from the test x509 cert (command)
   ansible.builtin.command:
@@ -62,18 +62,18 @@
       -passout stdin
     stdin: "{{ test_keystore2_password }}"
   when:
-    - "ansible_os_family == 'RedHat'"
-    - "ansible_distribution_version is version('8.0', '<')"
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_version is version('8.0', '<')
 
 - name: Create the pkcs12 archive from the certificate we will be trying to add to the keystore
   community.crypto.openssl_pkcs12:
-    name: "test_pkcs12_cert"
+    name: test_pkcs12_cert
     path: "{{ test_pkcs2_path }}"
     passphrase: "{{ test_keystore2_password }}"
     certificate_path: "{{ test_cert2_path }}"
     privatekey_path: "{{ test_key2_path }}"
   when:
-    - "not (ansible_os_family == 'RedHat' and ansible_distribution_version is version('8.0', '<'))"
+    - not (ansible_os_family == 'RedHat' and ansible_distribution_version is version('8.0', '<'))
 
 - name: Create the pkcs12 archive from the certificate we will be trying to add to the keystore (command)
   ansible.builtin.command:
@@ -86,8 +86,8 @@
       -passout stdin
     stdin: "{{ test_keystore2_password }}"
   when:
-    - "ansible_os_family == 'RedHat'"
-    - "ansible_distribution_version is version('8.0', '<')"
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_version is version('8.0', '<')
 
 #
 # Run tests
@@ -121,14 +121,14 @@
 
 - name: List newly created keystore content
   ansible.builtin.command:
-    cmd: "keytool -list -keystore {{ test_keystore2_path }}"
+    cmd: keytool -list -keystore {{ test_keystore2_path }}
     stdin: "{{ test_keystore2_password }}"
   register: keytool_list_keystore
 
 - name: Assert that the keystore has a private key entry
   ansible.builtin.assert:
     that:
-      - "keytool_list_keystore.stdout_lines[5] is match('test_pkcs12_cert,.*, PrivateKeyEntry, $')"
+      - keytool_list_keystore.stdout_lines[5] is match('test_pkcs12_cert,.*, PrivateKeyEntry, $')
 
 - name: try to import from pkcs12 a non existing alias
   community.general.java_cert:
@@ -147,7 +147,7 @@
     that:
       - result_x509_changed is failed
 
-- name:  import initial test certificate from file path
+- name: import initial test certificate from file path
   community.general.java_cert:
     cert_alias: test_cert
     cert_path: "{{ test_cert_path }}"
@@ -242,7 +242,7 @@
 
 - name: Copy the ssl server script
   copy:
-    src: "setupSSLServer.py"
+    src: setupSSLServer.py
     dest: "{{ remote_tmp_dir }}"
 
 - name: Create an SSL server that we will use for testing URL imports
@@ -250,7 +250,7 @@
   async: 10
   poll: 0
 
-- name: "Wait for one second to make sure that the serve script has actually been started"
+- name: Wait for one second to make sure that the serve script has actually been started
   pause:
     seconds: 1
 

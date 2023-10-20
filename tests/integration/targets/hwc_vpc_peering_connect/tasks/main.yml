@@ -11,20 +11,20 @@
 # Pre-test setup
 - name: create a vpc
   hwc_network_vpc:
-    cidr: "192.168.0.0/16"
-    name: "ansible_network_vpc_test_local"
+    cidr: 192.168.0.0/16
+    name: ansible_network_vpc_test_local
     state: present
   register: vpc1
 - name: create a vpc
   hwc_network_vpc:
-    cidr: "192.168.0.0/16"
-    name: "ansible_network_vpc_test_peering"
+    cidr: 192.168.0.0/16
+    name: ansible_network_vpc_test_peering
     state: present
   register: vpc2
 - name: delete a peering connect
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: absent
@@ -32,7 +32,7 @@
 - name: create a peering connect (check mode)
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: present
@@ -47,20 +47,19 @@
 - name: create a peering connect
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: present
   register: result
 - name: assert changed is true
   assert:
-    that:
-      result is changed
+    that: result is changed
 #----------------------------------------------------------
 - name: create a peering connect (idemponent)
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: present
@@ -74,7 +73,7 @@
 - name: create a peering connect that already exists
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: present
@@ -88,7 +87,7 @@
 - name: delete a peering connect (check mode)
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: absent
@@ -96,26 +95,24 @@
   register: result
 - name: assert changed is true
   assert:
-    that:
-      result is changed
+    that: result is changed
 #----------------------------------------------------------
 - name: delete a peering connect
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: absent
   register: result
 - name: assert changed is true
   assert:
-    that:
-      result is changed
+    that: result is changed
 #----------------------------------------------------------
 - name: delete a peering connect (idemponent)
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: absent
@@ -129,7 +126,7 @@
 - name: delete a peering connect that does not exist
   hwc_vpc_peering_connect:
     local_vpc_id: "{{ vpc1.id }}"
-    name: "ansible_network_peering_test"
+    name: ansible_network_peering_test
     peering_vpc:
       vpc_id: "{{ vpc2.id }}"
     state: absent
@@ -143,13 +140,13 @@
 # Post-test teardown
 - name: delete a vpc
   hwc_network_vpc:
-    cidr: "192.168.0.0/16"
-    name: "ansible_network_vpc_test_peering"
+    cidr: 192.168.0.0/16
+    name: ansible_network_vpc_test_peering
     state: absent
   register: vpc2
 - name: delete a vpc
   hwc_network_vpc:
-    cidr: "192.168.0.0/16"
-    name: "ansible_network_vpc_test_local"
+    cidr: 192.168.0.0/16
+    name: ansible_network_vpc_test_local
     state: absent
   register: vpc1

@@ -12,7 +12,7 @@
 - name: restore the mercurial python interpreter symlink (if needed)
   lineinfile:
     path: "{{ which_hg.stdout }}"
-    regexp: "^#!.*$"
+    regexp: ^#!.*$
     line: "#!{{ stat_hg_interpreter.stat.path }}"
   when: stat_hg_interpreter.stat.islnk
 

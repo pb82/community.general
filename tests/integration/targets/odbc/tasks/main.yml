@@ -9,10 +9,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 - when:
-    - ansible_os_family != 'Archlinux'  # TODO install driver from AUR: https://aur.archlinux.org/packages/psqlodbc
-    - ansible_os_family != 'RedHat' or ansible_distribution_major_version != '7'  # CentOS 7 stopped working
+    - ansible_os_family != 'Archlinux' # TODO install driver from AUR: https://aur.archlinux.org/packages/psqlodbc
+    - ansible_os_family != 'RedHat' or ansible_distribution_major_version != '7' # CentOS 7 stopped working
   block:
-
     #
     # Test for proper failures without pyodbc
     #
@@ -35,17 +34,17 @@
     #
     - name: Changing DSN for Suse
       set_fact:
-        dsn: "DRIVER={PSQL};Server=localhost;Port=5432;Database=postgres;Uid={{ my_user }};Pwd={{ my_pass_decrypted }};UseUnicode=True"
+        dsn: DRIVER={PSQL};Server=localhost;Port=5432;Database=postgres;Uid={{ my_user }};Pwd={{ my_pass_decrypted }};UseUnicode=True
       when: ansible_os_family == 'Suse' or ansible_os_family == 'Alpine'
 
     - name: Changing DSN for Alpine
       set_fact:
-        dsn: "DRIVER={/usr/lib/psqlodbcw.so};Server=localhost;Port=5432;Database=postgres;Uid={{ my_user }};Pwd={{ my_pass_decrypted }};UseUnicode=True"
+        dsn: DRIVER={/usr/lib/psqlodbcw.so};Server=localhost;Port=5432;Database=postgres;Uid={{ my_user }};Pwd={{ my_pass_decrypted }};UseUnicode=True
       when: ansible_os_family == 'Alpine'
 
     - name: Changing DSN for Debian
       set_fact:
-        dsn: "DRIVER={PostgreSQL Unicode};Server=localhost;Port=5432;Database=postgres;Uid={{ my_user }};Pwd={{ my_pass_decrypted }};UseUnicode=True"
+        dsn: DRIVER={PostgreSQL Unicode};Server=localhost;Port=5432;Database=postgres;Uid={{ my_user }};Pwd={{ my_pass_decrypted }};UseUnicode=True
       when: ansible_os_family == 'Debian'
 
     #
@@ -60,14 +59,14 @@
       odbc:
         dsn: "{{ dsn }}"
         query: |
-            CREATE TABLE films (
-                code        char(5) CONSTRAINT firstkey PRIMARY KEY,
-                title       varchar(40) NOT NULL,
-                did         integer NOT NULL,
-                date_prod   date,
-                kind        varchar(10),
-                len         interval hour to minute
-            );
+          CREATE TABLE films (
+              code        char(5) CONSTRAINT firstkey PRIMARY KEY,
+              title       varchar(40) NOT NULL,
+              did         integer NOT NULL,
+              date_prod   date,
+              kind        varchar(10),
+              len         interval hour to minute
+          );
       become_user: "{{ pg_user }}"
       become: true
       register: results
@@ -82,7 +81,7 @@
     - name: Insert a record without params
       odbc:
         dsn: "{{ dsn }}"
-        query: "INSERT INTO films (code, title, did, date_prod, kind, len) VALUES ('asdfg', 'My First Movie', 1, '2019-01-12', 'SyFi', '02:00')"
+        query: INSERT INTO films (code, title, did, date_prod, kind, len) VALUES ('asdfg', 'My First Movie', 1, '2019-01-12', 'SyFi', '02:00')
       become_user: "{{ pg_user }}"
       become: true
       register: results
@@ -94,14 +93,14 @@
     - name: Insert a record with params
       odbc:
         dsn: "{{ dsn }}"
-        query: "INSERT INTO films (code, title, did, date_prod, kind, len) VALUES (?, ?, ?, ?, ?, ?)"
+        query: INSERT INTO films (code, title, did, date_prod, kind, len) VALUES (?, ?, ?, ?, ?, ?)
         params:
-          - 'qwert'
-          - 'My Second Movie'
+          - qwert
+          - My Second Movie
           - 2
-          - '2019-01-12'
-          - 'Comedy'
-          - '01:30'
+          - "2019-01-12"
+          - Comedy
+          - "01:30"
       become_user: "{{ pg_user }}"
       become: true
       register: results
@@ -119,7 +118,7 @@
     - name: Perform select single row without params (do not coherse changed)
       odbc:
         dsn: "{{ dsn }}"
-        query: "SELECT * FROM films WHERE code='asdfg'"
+        query: SELECT * FROM films WHERE code='asdfg'
       register: results
 
     - assert:
@@ -131,10 +130,10 @@
     - name: Perform select multiple rows with params (coherse changed)
       odbc:
         dsn: "{{ dsn }}"
-        query: 'SELECT * FROM films WHERE code=? or code=?'
+        query: SELECT * FROM films WHERE code=? or code=?
         params:
-          - 'asdfg'
-          - 'qwert'
+          - asdfg
+          - qwert
       register: results
       changed_when: false
 
@@ -147,7 +146,7 @@
     - name: Drop the table
       odbc:
         dsn: "{{ dsn }}"
-        query: "DROP TABLE films"
+        query: DROP TABLE films
       register: results
 
     - assert:

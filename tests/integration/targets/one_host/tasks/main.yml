@@ -21,7 +21,6 @@
     - opennebula_test_fixture
     - opennebula_test_fixture_replay
 
-
 # SETUP INITIAL TESTING CONDITION
 
 - set_fact: test_number={{ test_number | int + 1 }}
@@ -38,7 +37,7 @@
     PYONE_TEST_FIXTURE: "{{ opennebula_test_fixture }}"
     PYONE_TEST_FIXTURE_FILE: /tmp/opennebula-fixtures.json.gz
     PYONE_TEST_FIXTURE_REPLAY: "{{ opennebula_test_fixture_replay }}"
-    PYONE_TEST_FIXTURE_UNIT: "test_{{test_number}}_{{ item }}"
+    PYONE_TEST_FIXTURE_UNIT: test_{{test_number}}_{{ item }}
   with_items: "{{opennebula_test.hosts}}"
   register: result
 
@@ -58,7 +57,7 @@
     PYONE_TEST_FIXTURE: "{{ opennebula_test_fixture }}"
     PYONE_TEST_FIXTURE_FILE: /tmp/opennebula-fixtures.json.gz
     PYONE_TEST_FIXTURE_REPLAY: "{{ opennebula_test_fixture_replay }}"
-    PYONE_TEST_FIXTURE_UNIT: "test_{{test_number}}_{{item}}"
+    PYONE_TEST_FIXTURE_UNIT: test_{{test_number}}_{{item}}
   ignore_errors: true
   register: result
   with_items:
@@ -66,11 +65,11 @@
     - disabled
     - offline
 
-- name: "assert test_{{test_number}} failed"
+- name: assert test_{{test_number}} failed
   assert:
     that:
-    - result is failed
-    - result.results[0].msg == 'invalid host state ERROR'
+      - result is failed
+      - result.results[0].msg == 'invalid host state ERROR'
 
 # ---
 
@@ -88,18 +87,17 @@
     PYONE_TEST_FIXTURE: "{{ opennebula_test_fixture }}"
     PYONE_TEST_FIXTURE_FILE: /tmp/opennebula-fixtures.json.gz
     PYONE_TEST_FIXTURE_REPLAY: "{{ opennebula_test_fixture_replay }}"
-    PYONE_TEST_FIXTURE_UNIT: "test_{{test_number}}"
+    PYONE_TEST_FIXTURE_UNIT: test_{{test_number}}
   register: result
 
-- name: "assert test_{{test_number}} worked"
+- name: assert test_{{test_number}} worked
   assert:
     that:
-    - result.changed
+      - result.changed
 
 # HOST ENABLEMENT
 
 - set_fact: test_number={{ test_number | int + 1 }}
-
 
 - name: "test_{{test_number}}: enable the test hosts"
   one_host:
@@ -113,14 +111,14 @@
     PYONE_TEST_FIXTURE: "{{ opennebula_test_fixture }}"
     PYONE_TEST_FIXTURE_FILE: /tmp/opennebula-fixtures.json.gz
     PYONE_TEST_FIXTURE_REPLAY: "{{ opennebula_test_fixture_replay }}"
-    PYONE_TEST_FIXTURE_UNIT: "test_{{test_number}}_{{ item }}"
+    PYONE_TEST_FIXTURE_UNIT: test_{{test_number}}_{{ item }}
   with_items: "{{opennebula_test.hosts}}"
   register: result
 
-- name: "assert test_{{test_number}} worked"
+- name: assert test_{{test_number}} worked
   assert:
     that:
-    - result.changed
+      - result.changed
 
 # TEMPLATE MANAGEMENT
 
@@ -143,14 +141,14 @@
     PYONE_TEST_FIXTURE: "{{ opennebula_test_fixture }}"
     PYONE_TEST_FIXTURE_FILE: /tmp/opennebula-fixtures.json.gz
     PYONE_TEST_FIXTURE_REPLAY: "{{ opennebula_test_fixture_replay }}"
-    PYONE_TEST_FIXTURE_UNIT: "test_{{test_number}}_{{ item }}"
+    PYONE_TEST_FIXTURE_UNIT: test_{{test_number}}_{{ item }}
   with_items: "{{opennebula_test.hosts}}"
   register: result
 
-- name: "assert test_{{test_number}} worked"
+- name: assert test_{{test_number}} worked
   assert:
     that:
-    - result.changed
+      - result.changed
 
 # ---
 
@@ -173,14 +171,14 @@
     PYONE_TEST_FIXTURE: "{{ opennebula_test_fixture }}"
     PYONE_TEST_FIXTURE_FILE: /tmp/opennebula-fixtures.json.gz
     PYONE_TEST_FIXTURE_REPLAY: "{{ opennebula_test_fixture_replay }}"
-    PYONE_TEST_FIXTURE_UNIT: "test_{{test_number}}_{{ item }}"
+    PYONE_TEST_FIXTURE_UNIT: test_{{test_number}}_{{ item }}
   with_items: "{{opennebula_test.hosts}}"
   register: result
 
-- name: "assert test_{{test_number}} worked"
+- name: assert test_{{test_number}} worked
   assert:
     that:
-    - result is not changed
+      - result is not changed
 
 # HOST DISABLEMENT
 
@@ -198,14 +196,14 @@
     PYONE_TEST_FIXTURE: "{{ opennebula_test_fixture }}"
     PYONE_TEST_FIXTURE_FILE: /tmp/opennebula-fixtures.json.gz
     PYONE_TEST_FIXTURE_REPLAY: "{{ opennebula_test_fixture_replay }}"
-    PYONE_TEST_FIXTURE_UNIT: "test_{{test_number}}_{{ item }}"
+    PYONE_TEST_FIXTURE_UNIT: test_{{test_number}}_{{ item }}
   with_items: "{{opennebula_test.hosts}}"
   register: result
 
-- name: "assert test_{{test_number}} worked"
+- name: assert test_{{test_number}} worked
   assert:
     that:
-    - result.changed
+      - result.changed
 
 # HOST OFFLINE
 
@@ -223,14 +221,14 @@
     PYONE_TEST_FIXTURE: "{{ opennebula_test_fixture }}"
     PYONE_TEST_FIXTURE_FILE: /tmp/opennebula-fixtures.json.gz
     PYONE_TEST_FIXTURE_REPLAY: "{{ opennebula_test_fixture_replay }}"
-    PYONE_TEST_FIXTURE_UNIT: "test_{{test_number}}_{{ item }}"
+    PYONE_TEST_FIXTURE_UNIT: test_{{test_number}}_{{ item }}
   with_items: "{{opennebula_test.hosts}}"
   register: result
 
-- name: "assert test_{{test_number}} worked"
+- name: assert test_{{test_number}} worked
   assert:
     that:
-    - result.changed
+      - result.changed
 
 # TEARDOWN
 

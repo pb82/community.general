@@ -13,7 +13,7 @@
   when: ansible_distribution not in ['CentOS', 'Fedora', 'Debian', 'Ubuntu']
 
 - name: Include OS-specific variables
-  include_vars: '{{ ansible_os_family }}.yml'
+  include_vars: "{{ ansible_os_family }}.yml"
   when: ansible_os_family in ['Debian', 'RedHat']
 
 - name: Set Rundeck base dir
@@ -27,11 +27,11 @@
 
 - name: Install Rundeck
   shell: |
-      mkdir -p $RDECK_BASE;
-      curl -k -o $RDECK_BASE/rundeck.war -L '{{ rundeck_war_url }}';
-      curl -k -o $RDECK_BASE/rundeck-cli.jar -L '{{ rundeck_cli_url }}'
-      cd $RDECK_BASE;
-      java -Xmx4g -jar rundeck.war &
+    mkdir -p $RDECK_BASE;
+    curl -k -o $RDECK_BASE/rundeck.war -L '{{ rundeck_war_url }}';
+    curl -k -o $RDECK_BASE/rundeck-cli.jar -L '{{ rundeck_cli_url }}'
+    cd $RDECK_BASE;
+    java -Xmx4g -jar rundeck.war &
   environment:
     RDECK_BASE: "{{ rdeck_base }}"
 

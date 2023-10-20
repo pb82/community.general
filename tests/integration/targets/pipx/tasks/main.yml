@@ -293,7 +293,7 @@
   ansible.builtin.file:
     path: /opt/pipx
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: install tox site-wide
   community.general.pipx:

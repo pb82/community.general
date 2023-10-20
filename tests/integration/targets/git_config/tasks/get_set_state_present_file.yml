@@ -9,7 +9,7 @@
   git_config:
     name: "{{ option_name }}"
     value: "{{ option_value }}"
-    scope: "file"
+    scope: file
     file: "{{ remote_tmp_dir }}/gitconfig_file"
     state: present
   register: result
@@ -17,7 +17,7 @@
 - name: getting value with state=present
   git_config:
     name: "{{ option_name }}"
-    scope: "file"
+    scope: file
     file: "{{ remote_tmp_dir }}/gitconfig_file"
     state: present
   register: get_result

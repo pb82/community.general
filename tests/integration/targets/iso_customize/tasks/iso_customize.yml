@@ -1,3 +1,4 @@
+---
 # Copyright (c) 2022, Ansible Project
 # Copyright (c) 2022, VMware, Inc. All Rights Reserved.
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
@@ -6,20 +7,20 @@
 - name: Add a line to the file test02.cfg and make sure it succeed
   ansible.builtin.lineinfile:
     path: "{{ test_dir }}/test02.cfg"
-    regexp: "^test"
-    line: "test"
+    regexp: ^test
+    line: test
 
 - name: "Customize ISO file: add file, delete file and change file"
   community.general.iso_customize:
     src_iso: "{{ test_dir }}/test.iso"
     dest_iso: "{{ test_dir }}/{{ dest_iso_name }}"
     delete_files:
-      - "/test01.cfg"
+      - /test01.cfg
     add_files:
       - src_file: "{{ test_dir }}/test01.cfg"
-        dest_file: "/preseed/ubuntu.seed"
+        dest_file: /preseed/ubuntu.seed
       - src_file: "{{ test_dir }}/test02.cfg"
-        dest_file: "/test02.cfg"
+        dest_file: /test02.cfg
 
 - include_tasks: iso_mount.yml
   vars:
@@ -34,7 +35,7 @@
 
 - assert:
     that:
-    - check_file.stat.exists == False
+      - check_file.stat.exists == False
 
 - name: Check the file /preseed/ubuntu.seed is added
   stat:
@@ -43,11 +44,11 @@
 
 - assert:
     that:
-    - check_file.stat.exists == True
+      - check_file.stat.exists == True
 
 - block:
     - name: Get the content of file test02.cfg
-      command: "cat {{ mount_root_dir }}/test02.cfg"
+      command: cat {{ mount_root_dir }}/test02.cfg
       register: get_file_content
 
     - set_fact:
@@ -71,5 +72,5 @@
 - name: Delete line of file test02.cfg
   ansible.builtin.lineinfile:
     path: "{{ test_dir }}/test02.cfg"
-    regexp: "test" 
+    regexp: test
     state: absent

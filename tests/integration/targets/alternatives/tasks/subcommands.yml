@@ -6,18 +6,18 @@
 - name: Try with subcommands
   alternatives:
     name: dummymain
-    path: '/usr/bin/dummy1'
-    link: '/usr/bin/dummymain'
+    path: /usr/bin/dummy1
+    link: /usr/bin/dummymain
     subcommands:
       - name: dummysubcmd
-        path: '/usr/bin/dummy2'
-        link: '/usr/bin/dummysubcmd'
+        path: /usr/bin/dummy2
+        link: /usr/bin/dummysubcmd
   register: alternative
 
 - name: Check expected command was executed
   assert:
     that:
-      - 'alternative is changed'
+      - alternative is changed
 
 - name: Execute the current dummymain command
   command: dummymain
@@ -39,7 +39,7 @@
 
 - name: Get dummymain alternatives output
   command:
-    cmd: '{{ alternatives_command }} --display dummymain'
+    cmd: "{{ alternatives_command }} --display dummymain"
   register: result
 
 - name: Print result
@@ -49,14 +49,14 @@
 - name: Subcommands are not removed if not specified
   alternatives:
     name: dummymain
-    path: '/usr/bin/dummy1'
-    link: '/usr/bin/dummymain'
+    path: /usr/bin/dummy1
+    link: /usr/bin/dummymain
   register: alternative
 
 - name: Check expected command was executed
   assert:
     that:
-      - 'alternative is not changed'
+      - alternative is not changed
 
 - name: Execute the current dummysubcmd command
   command: dummysubcmd
@@ -70,15 +70,15 @@
 - name: Subcommands are removed if set to an empty list
   alternatives:
     name: dummymain
-    path: '/usr/bin/dummy1'
-    link: '/usr/bin/dummymain'
+    path: /usr/bin/dummy1
+    link: /usr/bin/dummymain
     subcommands: []
   register: alternative
 
 - name: Check expected command was executed
   assert:
     that:
-      - 'alternative is changed'
+      - alternative is changed
 
 - name: Execute the current dummysubcmd command
   command: dummysubcmd
@@ -93,7 +93,7 @@
 
 - name: Get dummymain alternatives output
   command:
-    cmd: '{{ alternatives_command }} --display dummymain'
+    cmd: "{{ alternatives_command }} --display dummymain"
   register: result
 
 - name: Print result
@@ -103,18 +103,18 @@
 - name: Install other alternative with subcommands
   alternatives:
     name: dummymain
-    path: '/usr/bin/dummy3'
-    link: '/usr/bin/dummymain'
+    path: /usr/bin/dummy3
+    link: /usr/bin/dummymain
     subcommands:
       - name: dummysubcmd
-        path: '/usr/bin/dummy4'
-        link: '/usr/bin/dummysubcmd'
+        path: /usr/bin/dummy4
+        link: /usr/bin/dummysubcmd
   register: alternative
 
 - name: Check expected command was executed
   assert:
     that:
-      - 'alternative is changed'
+      - alternative is changed
 
 - name: Execute the current dummymain command
   command: dummymain
@@ -136,7 +136,7 @@
 
 - name: Get dummymain alternatives output
   command:
-    cmd: '{{ alternatives_command }} --display dummymain'
+    cmd: "{{ alternatives_command }} --display dummymain"
   register: result
 
 - name: Print result
@@ -146,13 +146,13 @@
 - name: Switch to first alternative
   alternatives:
     name: dummymain
-    path: '/usr/bin/dummy1'
+    path: /usr/bin/dummy1
   register: alternative
 
 - name: Check expected command was executed
   assert:
     that:
-      - 'alternative is changed'
+      - alternative is changed
 
 - name: Execute the current dummymain command
   command: dummymain
@@ -176,7 +176,7 @@
 
 - name: Get dummymain alternatives output
   command:
-    cmd: '{{ alternatives_command }} --display dummymain'
+    cmd: "{{ alternatives_command }} --display dummymain"
   register: result
 
 - name: Print result
@@ -186,13 +186,13 @@
 - name: Switch to second alternative
   alternatives:
     name: dummymain
-    path: '/usr/bin/dummy3'
+    path: /usr/bin/dummy3
   register: alternative
 
 - name: Check expected command was executed
   assert:
     that:
-      - 'alternative is changed'
+      - alternative is changed
 
 - name: Execute the current dummymain command
   command: dummymain
@@ -214,7 +214,7 @@
 
 - name: Get dummymain alternatives output
   command:
-    cmd: '{{ alternatives_command }} --display dummymain'
+    cmd: "{{ alternatives_command }} --display dummymain"
   register: result
 
 - name: Print result

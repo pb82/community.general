@@ -5,8 +5,8 @@
 
 - name: Configuring a handler with missing set parameters should fail
   sensu_handler:
-    name: "set"
-    type: "set"
+    name: set
+    type: set
   register: failure
   ignore_errors: true
 
@@ -18,8 +18,8 @@
 
 - name: Configure a set handler
   sensu_handler:
-    name: "set"
-    type: "set"
+    name: set
+    type: set
     handlers:
       - anotherhandler
   register: handler
@@ -32,14 +32,14 @@
 - name: Validate set handler return data
   assert:
     that:
-      - "handler is successful"
-      - "handler is changed"
-      - "handler['name'] == 'set'"
-      - "handler['file'] == '/etc/sensu/conf.d/handlers/set.json'"
-      - "handler['config']['type'] == 'set'"
+      - handler is successful
+      - handler is changed
+      - handler['name'] == 'set'
+      - handler['file'] == '/etc/sensu/conf.d/handlers/set.json'
+      - handler['config']['type'] == 'set'
       - "'anotherhandler' in handler['config']['handlers']"
-      - "handler['config']['handle_flapping'] == false"
-      - "handler['config']['handle_silenced'] == false"
+      - handler['config']['handle_flapping'] == false
+      - handler['config']['handle_silenced'] == false
 
 - name: Assert that the handler configuration file is actually configured properly
   vars:
@@ -47,7 +47,7 @@
   assert:
     that:
       - "'set' in config['handlers']"
-      - "config['handlers']['set']['type'] == 'set'"
+      - config['handlers']['set']['type'] == 'set'
       - "'anotherhandler' in config['handlers']['set']['handlers']"
-      - "config['handlers']['set']['handle_flapping'] == false"
-      - "config['handlers']['set']['handle_silenced'] == false"
+      - config['handlers']['set']['handle_flapping'] == false
+      - config['handlers']['set']['handle_silenced'] == false

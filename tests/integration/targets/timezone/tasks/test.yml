@@ -140,9 +140,9 @@
 ##
 
 - block:
-  ##
-  ## test with empty config file
-  ##
+    ##
+    ## test with empty config file
+    ##
 
     - name: empty config file
       command: cp /dev/null {{ timezone_config_file }}
@@ -163,14 +163,13 @@
       command: cmp /etc/localtime /usr/share/zoneinfo/Europe/Belgrade
       changed_when: false
 
-
-  ##
-  ## test with deleted config file
-  ##
+    ##
+    ## test with deleted config file
+    ##
 
     - name: remove config file
       file:
-        path: '{{ timezone_config_file }}'
+        path: "{{ timezone_config_file }}"
         state: absent
 
     - name: set timezone to Europe/Belgrade (no config file)
@@ -189,10 +188,9 @@
       command: cmp /etc/localtime /usr/share/zoneinfo/Europe/Belgrade
       changed_when: false
 
-
-  ##
-  ## test with /etc/localtime as symbolic link to a zoneinfo file
-  ##
+    ##
+    ## test with /etc/localtime as symbolic link to a zoneinfo file
+    ##
 
     - name: create symlink /etc/locatime -> /usr/share/zoneinfo/Etc/UTC
       file:
@@ -217,10 +215,9 @@
       command: cmp /etc/localtime /usr/share/zoneinfo/Europe/Belgrade
       changed_when: false
 
-
-  ##
-  ## test with /etc/localtime as broken symbolic link
-  ##
+    ##
+    ## test with /etc/localtime as broken symbolic link
+    ##
 
     - name: set timezone to a broken symlink
       file:
@@ -245,10 +242,9 @@
       command: cmp /etc/localtime /usr/share/zoneinfo/Europe/Belgrade
       changed_when: false
 
-
-  ##
-  ## test with /etc/localtime set manually using copy
-  ##
+    ##
+    ## test with /etc/localtime set manually using copy
+    ##
 
     - name: set timezone manually by coping zone info file to /etc/localtime
       copy:
@@ -274,7 +270,6 @@
   when:
     - ansible_service_mgr != 'systemd'
     - timezone_config_file is defined
-
 
 ####
 #### hwclock tests
@@ -366,7 +361,6 @@
         that:
           - not hwclock_again_checkmode.changed
 
-
     ##
     ## no systemd tests for hwclock
     ##
@@ -378,11 +372,11 @@
 
         - name: remove /etc/adjtime and conf file
           file:
-            path: '{{ item }}'
+            path: "{{ item }}"
             state: absent
           with_items:
             - /etc/adjtime
-            - '{{ hwclock_config_file }}'
+            - "{{ hwclock_config_file }}"
 
         - name: set hwclock to UTC with deleted /etc/adjtime and conf file
           timezone:
@@ -396,14 +390,13 @@
               - hwclock_set_utc_deleted_adjtime_and_conf.diff.after.hwclock == 'UTC'
               - hwclock_set_utc_deleted_adjtime_and_conf.diff.before.hwclock == 'n/a'
 
-
         ##
         ## test set hwclock with /etc/adjtime deleted
         ##
 
         - name: remove /etc/adjtime
           file:
-            path: '{{ item }}'
+            path: "{{ item }}"
             state: absent
           with_items:
             - /etc/adjtime
@@ -431,7 +424,6 @@
               - hwclock_set_local_deleted_adjtime_local.changed
               - hwclock_set_local_deleted_adjtime_local.diff.after.hwclock == 'local'
               - hwclock_set_local_deleted_adjtime_local.diff.before.hwclock == 'UTC'
-     
 
         ##
         ## test set hwclock with conf file deleted
@@ -439,10 +431,10 @@
 
         - name: remove conf file
           file:
-            path: '{{ item }}'
+            path: "{{ item }}"
             state: absent
           with_items:
-            - '{{ hwclock_config_file }}'
+            - "{{ hwclock_config_file }}"
 
         - name: set hwclock to UTC with deleted conf
           timezone:
@@ -456,14 +448,13 @@
               - hwclock_set_utc_deleted_conf.diff.after.hwclock == 'UTC'
               - hwclock_set_utc_deleted_conf.diff.before.hwclock == 'n/a'
 
-
         ##
         ## test set hwclock with /etc/adjtime missing UTC/LOCAL strings
         ##
 
         - name: create /etc/adjtime without UTC/LOCAL
           copy:
-            content: '0.0 0 0\n0'
+            content: "0.0 0 0\\n0"
             dest: /etc/adjtime
 
         - name: set hwclock to UTC with broken /etc/adjtime

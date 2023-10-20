@@ -11,14 +11,14 @@
 # Pre-test setup
 - name: create a security group
   hwc_vpc_security_group:
-    name: "ansible_network_security_group_test"
+    name: ansible_network_security_group_test
     state: present
   register: sg
 - name: delete a security group rule
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -27,9 +27,9 @@
 #----------------------------------------------------------
 - name: create a security group rule (check mode)
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -45,9 +45,9 @@
 #----------------------------------------------------------
 - name: create a security group rule
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -61,9 +61,9 @@
 #----------------------------------------------------------
 - name: create a security group rule (idemponent)
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -77,9 +77,9 @@
 # ----------------------------------------------------------------------------
 - name: create a security group rule that already exists
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -94,9 +94,9 @@
 #----------------------------------------------------------
 - name: delete a security group rule (check mode)
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -111,9 +111,9 @@
 #----------------------------------------------------------
 - name: delete a security group rule
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -127,9 +127,9 @@
 #----------------------------------------------------------
 - name: delete a security group rule (idemponent)
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -143,9 +143,9 @@
 # ----------------------------------------------------------------------------
 - name: delete a security group rule that does not exist
   hwc_vpc_security_group_rule:
-    direction: "ingress"
-    protocol: "tcp"
-    ethertype: "IPv4"
+    direction: ingress
+    protocol: tcp
+    ethertype: IPv4
     port_range_max: 55
     security_group_id: "{{ sg.id }}"
     port_range_min: 22
@@ -161,6 +161,6 @@
 # Post-test teardown
 - name: delete a security group
   hwc_vpc_security_group:
-    name: "ansible_network_security_group_test"
+    name: ansible_network_security_group_test
     state: absent
   register: sg

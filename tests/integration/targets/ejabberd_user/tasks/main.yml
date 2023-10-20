@@ -12,7 +12,6 @@
   ansible.builtin.meta: end_play
   when: ansible_distribution in ('Alpine', 'openSUSE Leap', 'CentOS', 'Fedora')
 
-
 - name: Remove ejabberd
   ansible.builtin.package:
     name: ejabberd

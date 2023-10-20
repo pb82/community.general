@@ -50,7 +50,7 @@
   set_fact:
     test_session_found: true
   loop: "{{ result['sessions'] }}"
-  when: "item.get('ID') == session_id and item.get('Name') == 'testsession'"
+  when: item.get('ID') == session_id and item.get('Name') == 'testsession'
 
 - name: ensure session was created
   assert:
@@ -60,7 +60,7 @@
 - name: fetch info about a session
   consul_session:
     state: info
-    id: '{{ session_id }}'
+    id: "{{ session_id }}"
     token: "{{ consul_management_token }}"
   register: result
 
@@ -83,7 +83,7 @@
 - name: ensure unknown scheme fails
   consul_session:
     state: info
-    id: '{{ session_id }}'
+    id: "{{ session_id }}"
     scheme: non_existent
     token: "{{ consul_management_token }}"
   register: result
@@ -96,7 +96,7 @@
 - name: ensure SSL certificate is checked
   consul_session:
     state: info
-    id: '{{ session_id }}'
+    id: "{{ session_id }}"
     port: 8501
     scheme: https
     token: "{{ consul_management_token }}"
@@ -112,7 +112,7 @@
 - name: ensure SSL certificate isn't checked when validate_certs is disabled
   consul_session:
     state: info
-    id: '{{ session_id }}'
+    id: "{{ session_id }}"
     port: 8501
     scheme: https
     token: "{{ consul_management_token }}"
@@ -127,12 +127,12 @@
 - name: ensure a secure connection is possible
   consul_session:
     state: info
-    id: '{{ session_id }}'
+    id: "{{ session_id }}"
     port: 8501
     scheme: https
     token: "{{ consul_management_token }}"
   environment:
-    REQUESTS_CA_BUNDLE: '{{ remote_dir }}/cert.pem'
+    REQUESTS_CA_BUNDLE: "{{ remote_dir }}/cert.pem"
   register: result
 
 - assert:
@@ -142,7 +142,7 @@
 - name: delete a session
   consul_session:
     state: absent
-    id: '{{ session_id }}'
+    id: "{{ session_id }}"
     token: "{{ consul_management_token }}"
   register: result
 
@@ -166,20 +166,20 @@
 - name: search deleted session
   command: echo 'session found'
   loop: "{{ result['sessions'] }}"
-  when: "item.get('ID') == session_id and item.get('Name') == 'testsession'"
+  when: item.get('ID') == session_id and item.get('Name') == 'testsession'
   register: search_deleted
 
 - name: ensure session was deleted
   assert:
     that:
-      - search_deleted is skipped  # each iteration is skipped
-      - search_deleted is not changed  # and then unchanged
+      - search_deleted is skipped # each iteration is skipped
+      - search_deleted is not changed # and then unchanged
 
 - name: ensure session can be created with a ttl
   consul_session:
     state: present
     name: session-with-ttl
-    ttl: 180  # sec
+    ttl: 180 # sec
     token: "{{ consul_management_token }}"
   register: result
 

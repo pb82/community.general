@@ -22,12 +22,12 @@
 
 - name: set config file path on Debian
   set_fact:
-    timezone_config_file: '/etc/timezone'
+    timezone_config_file: /etc/timezone
   when: ansible_os_family == 'Debian'
 
 - name: set config file path on RedHat
   set_fact:
-    timezone_config_file: '/etc/sysconfig/clock'
+    timezone_config_file: /etc/sysconfig/clock
   when: ansible_os_family == 'RedHat'
 
 ##
@@ -36,12 +36,12 @@
 
 - name: set config file path on Debian
   set_fact:
-    hwclock_config_file: '/etc/default/rcS'
+    hwclock_config_file: /etc/default/rcS
   when: ansible_os_family == 'Debian'
 
 - name: set config file path on RedHat
   set_fact:
-    hwclock_config_file: '/etc/sysconfig/clock'
+    hwclock_config_file: /etc/sysconfig/clock
   when: ansible_os_family == 'RedHat'
 
 ####
@@ -69,14 +69,13 @@
     - ansible_distribution == 'Fedora'
     - ansible_facts.distribution_major_version is version('31', '<')
 
-
 - name: Run tests
   # Skip tests on Fedora 31 and 32 because dbus fails to start unless the container is run in privileged mode.
   # Even then, it starts unreliably. This may be due to the move to cgroup v2 in Fedora 31 and 32.
   # https://www.redhat.com/sysadmin/fedora-31-control-group-v2
   when:
     - ansible_facts.distribution ~ ansible_facts.distribution_major_version not in ['Fedora31', 'Fedora32']
-    - not (ansible_os_family == 'Alpine')  # TODO
+    - not (ansible_os_family == 'Alpine') # TODO
   block:
     - name: set timezone to Etc/UTC
       timezone:

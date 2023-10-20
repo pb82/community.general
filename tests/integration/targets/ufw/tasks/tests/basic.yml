@@ -27,51 +27,51 @@
   register: enable_idem_check
 - assert:
     that:
-    - enable_check is changed
-    - enable is changed
-    - enable_idem is not changed
-    - enable_idem_check is not changed
+      - enable_check is changed
+      - enable is changed
+      - enable_idem is not changed
+      - enable_idem_check is not changed
 
 # ############################################
 - name: ipv4 allow (check mode)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
   check_mode: true
   register: ipv4_allow_check
 - name: ipv4 allow
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
   register: ipv4_allow
 - name: ipv4 allow (idempotency)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
   register: ipv4_allow_idem
 - name: ipv4 allow (idempotency, check mode)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
   check_mode: true
   register: ipv4_allow_idem_check
 - assert:
     that:
-    - ipv4_allow_check is changed
-    - ipv4_allow is changed
-    - ipv4_allow_idem is not changed
-    - ipv4_allow_idem_check is not changed
+      - ipv4_allow_check is changed
+      - ipv4_allow is changed
+      - ipv4_allow_idem is not changed
+      - ipv4_allow_idem_check is not changed
 
 # ############################################
 - name: delete ipv4 allow (check mode)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
     delete: true
   check_mode: true
   register: delete_ipv4_allow_check
@@ -79,30 +79,30 @@
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
     delete: true
   register: delete_ipv4_allow
 - name: delete ipv4 allow (idempotency)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
     delete: true
   register: delete_ipv4_allow_idem
 - name: delete ipv4 allow (idempotency, check mode)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
     delete: true
   check_mode: true
   register: delete_ipv4_allow_idem_check
 - assert:
     that:
-    - delete_ipv4_allow_check is changed
-    - delete_ipv4_allow is changed
-    - delete_ipv4_allow_idem is not changed
-    - delete_ipv4_allow_idem_check is not changed
+      - delete_ipv4_allow_check is changed
+      - delete_ipv4_allow is changed
+      - delete_ipv4_allow_idem is not changed
+      - delete_ipv4_allow_idem_check is not changed
 
 # ############################################
 - name: ipv6 allow (check mode)
@@ -133,10 +133,10 @@
   register: ipv6_allow_idem_check
 - assert:
     that:
-    - ipv6_allow_check is changed
-    - ipv6_allow is changed
-    - ipv6_allow_idem is not changed
-    - ipv6_allow_idem_check is not changed
+      - ipv6_allow_check is changed
+      - ipv6_allow is changed
+      - ipv6_allow_idem is not changed
+      - ipv6_allow_idem_check is not changed
 
 # ############################################
 - name: delete ipv6 allow (check mode)
@@ -171,52 +171,51 @@
   register: delete_ipv6_allow_idem_check
 - assert:
     that:
-    - delete_ipv6_allow_check is changed
-    - delete_ipv6_allow is changed
-    - delete_ipv6_allow_idem is not changed
-    - delete_ipv6_allow_idem_check is not changed
-
+      - delete_ipv6_allow_check is changed
+      - delete_ipv6_allow is changed
+      - delete_ipv6_allow_idem is not changed
+      - delete_ipv6_allow_idem_check is not changed
 
 # ############################################
 - name: ipv4 allow (check mode)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
   check_mode: true
   register: ipv4_allow_check
 - name: ipv4 allow
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
   register: ipv4_allow
 - name: ipv4 allow (idempotency)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
   register: ipv4_allow_idem
 - name: ipv4 allow (idempotency, check mode)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
   check_mode: true
   register: ipv4_allow_idem_check
 - assert:
     that:
-    - ipv4_allow_check is changed
-    - ipv4_allow is changed
-    - ipv4_allow_idem is not changed
-    - ipv4_allow_idem_check is not changed
+      - ipv4_allow_check is changed
+      - ipv4_allow is changed
+      - ipv4_allow_idem is not changed
+      - ipv4_allow_idem_check is not changed
 
 # ############################################
 - name: delete ipv4 allow (check mode)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
     delete: true
   check_mode: true
   register: delete_ipv4_allow_check
@@ -224,30 +223,30 @@
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
     delete: true
   register: delete_ipv4_allow
 - name: delete ipv4 allow (idempotency)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
     delete: true
   register: delete_ipv4_allow_idem
 - name: delete ipv4 allow (idempotency, check mode)
   ufw:
     rule: allow
     port: 23
-    to_ip: 0.0.0.0
+    to_ip: "0.0.0.0"
     delete: true
   check_mode: true
   register: delete_ipv4_allow_idem_check
 - assert:
     that:
-    - delete_ipv4_allow_check is changed
-    - delete_ipv4_allow is changed
-    - delete_ipv4_allow_idem is not changed
-    - delete_ipv4_allow_idem_check is not changed
+      - delete_ipv4_allow_check is changed
+      - delete_ipv4_allow is changed
+      - delete_ipv4_allow_idem is not changed
+      - delete_ipv4_allow_idem_check is not changed
 
 # ############################################
 - name: ipv6 allow (check mode)
@@ -278,10 +277,10 @@
   register: ipv6_allow_idem_check
 - assert:
     that:
-    - ipv6_allow_check is changed
-    - ipv6_allow is changed
-    - ipv6_allow_idem is not changed
-    - ipv6_allow_idem_check is not changed
+      - ipv6_allow_check is changed
+      - ipv6_allow is changed
+      - ipv6_allow_idem is not changed
+      - ipv6_allow_idem_check is not changed
 
 # ############################################
 - name: delete ipv6 allow (check mode)
@@ -316,10 +315,10 @@
   register: delete_ipv6_allow_idem_check
 - assert:
     that:
-    - delete_ipv6_allow_check is changed
-    - delete_ipv6_allow is changed
-    - delete_ipv6_allow_idem is not changed
-    - delete_ipv6_allow_idem_check is not changed
+      - delete_ipv6_allow_check is changed
+      - delete_ipv6_allow is changed
+      - delete_ipv6_allow_idem is not changed
+      - delete_ipv6_allow_idem_check is not changed
 
 # ############################################
 - name: Reload ufw
@@ -333,8 +332,8 @@
   register: reload_check
 - assert:
     that:
-    - reload is changed
-    - reload_check is changed
+      - reload is changed
+      - reload_check is changed
 
 # ############################################
 - name: Disable (check mode)
@@ -357,10 +356,10 @@
   register: disable_idem_check
 - assert:
     that:
-    - disable_check is changed
-    - disable is changed
-    - disable_idem is not changed
-    - disable_idem_check is not changed
+      - disable_check is changed
+      - disable is changed
+      - disable_idem is not changed
+      - disable_idem_check is not changed
 
 # ############################################
 - name: Re-enable
@@ -400,7 +399,7 @@
   register: reset_idem_check
 - assert:
     that:
-    - reset_check is changed
-    - reset is changed
-    - reset_idem is changed
-    - reset_idem_check is changed
+      - reset_check is changed
+      - reset is changed
+      - reset_idem is changed
+      - reset_idem_check is changed

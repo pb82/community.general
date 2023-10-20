@@ -9,11 +9,11 @@
     - ansible_facts.distribution == 'FreeBSD'
   block:
     - name: Cache original contents of /etc/rc.conf
-      shell: "cat /etc/rc.conf"
+      shell: cat /etc/rc.conf
       register: cached_etc_rcconf_content
 
     - name: Cache original contents of /boot/loader.conf
-      shell: "cat /boot/loader.conf"
+      shell: cat /boot/loader.conf
       register: cached_boot_loaderconf_content
 
     ##
@@ -39,7 +39,7 @@
       register: sysrc_example1_idempotent
 
     - name: Get file content
-      shell: "cat /etc/rc.conf | egrep -v ^\\#"
+      shell: cat /etc/rc.conf | egrep -v ^\#
       register: sysrc_example1_content
 
     - name: Ensure sysrc updates rc.conf properly
@@ -80,7 +80,7 @@
       register: sysrc_example2_idempotent
 
     - name: Get file content
-      shell: "cat /boot/loader.conf | egrep -v ^\\#"
+      shell: cat /boot/loader.conf | egrep -v ^\#
       register: sysrc_example2_content
 
     - name: Ensure sysrc did not change the file, but marked as changed
@@ -98,20 +98,20 @@
     - name: Set cloned_interfaces
       sysrc:
         name: cloned_interfaces
-        value: "lo0"
+        value: lo0
 
     - name: Add gif0 interface
       sysrc:
         name: cloned_interfaces
         state: value_present
-        value: "gif0"
+        value: gif0
       register: sysrc_example3
 
     - name: Add gif1 interface (checkmode)
       sysrc:
         name: cloned_interfaces
         state: value_present
-        value: "gif1"
+        value: gif1
       check_mode: true
       register: sysrc_example3_checkmode
 
@@ -119,11 +119,11 @@
       sysrc:
         name: cloned_interfaces
         state: value_present
-        value: "gif0"
+        value: gif0
       register: sysrc_example3_idempotent
 
     - name: Get file content
-      shell: "cat /etc/rc.conf | egrep -v ^\\#"
+      shell: cat /etc/rc.conf | egrep -v ^\#
       register: sysrc_example3_content
 
     - name: Ensure sysrc did not change the file, but marked as changed
@@ -172,7 +172,7 @@
           register: sysrc_example4_idempotent
 
         - name: Get file content
-          shell: "cat /usr/jails/testjail/etc/rc.conf | grep nginx_enable"
+          shell: cat /usr/jails/testjail/etc/rc.conf | grep nginx_enable
           register: sysrc_example4_content
 
         - name: Ensure sysrc worked in testjail
@@ -186,7 +186,7 @@
         - name: Stop and remove testjail
           failed_when: false
           changed_when: false
-          command: "ezjail-admin delete -wf testjail"
+          command: ezjail-admin delete -wf testjail
 
     ##
     ## sysrc - Test Absent
@@ -216,7 +216,7 @@
       register: sysrc_absent_idempotent
 
     - name: Get file content
-      shell: "cat /etc/rc.conf | egrep -v ^\\#"
+      shell: cat /etc/rc.conf | egrep -v ^\#
       register: sysrc_absent_content
 
     - name: Ensure sysrc did as intended
@@ -233,7 +233,7 @@
     - name: Set sysrc_delim to known value
       sysrc:
         name: sysrc_delim
-        value: "t1,t2"
+        value: t1,t2
 
     - name: Add to value with delimiter (not-exists)
       sysrc:
@@ -269,7 +269,7 @@
       register: sysrc_delim_idempotent
 
     - name: Get file content
-      shell: "cat /etc/rc.conf | egrep -v ^\\#"
+      shell: cat /etc/rc.conf | egrep -v ^\#
       register: sysrc_delim_content
 
     - name: Ensure sysrc did as intended
@@ -319,7 +319,7 @@
       register: sysrc_value_absent_idempotent
 
     - name: Get file content
-      shell: "cat /etc/rc.conf | egrep -v ^\\#"
+      shell: cat /etc/rc.conf | egrep -v ^\#
       register: sysrc_delim_content
 
     - name: Ensure sysrc did as intended with value_absent

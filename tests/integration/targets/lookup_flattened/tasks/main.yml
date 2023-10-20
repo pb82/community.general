@@ -9,16 +9,16 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 - name: test with_flattened
-  set_fact: '{{ item }}=flattened'
+  set_fact: "{{ item }}=flattened"
   with_community.general.flattened:
-  - - a__
-  - - b__
-    - - c__
-      - d__
+    -   - a__
+    -   - b__
+        -   - c__
+            - d__
 - name: verify with_flattened results
   assert:
     that:
-    - a__ == 'flattened'
-    - b__ == 'flattened'
-    - c__ == 'flattened'
-    - d__ == 'flattened'
+      - a__ == 'flattened'
+      - b__ == 'flattened'
+      - c__ == 'flattened'
+      - d__ == 'flattened'

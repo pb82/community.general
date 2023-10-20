@@ -18,7 +18,7 @@
 
 - name: Create a Rundeck project
   community.general.rundeck_project:
-    name: "test_project"
+    name: test_project
     api_version: "{{ rundeck_api_version }}"
     url: "{{ rundeck_url }}"
     token: "{{ rundeck_api_token.stdout_lines[-1] }}"

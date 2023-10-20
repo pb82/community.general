@@ -11,16 +11,16 @@
 - name: Create container_namespace
   community.general.scaleway_container_namespace:
     state: present
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
-    description: '{{ description }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
+    description: "{{ description }}"
 
 - name: Get container namespace info
   community.general.scaleway_container_namespace_info:
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    project_id: "{{ scw_project }}"
   register: cn_info_task
 
 - ansible.builtin.debug:
@@ -35,7 +35,7 @@
 - name: Delete container namespace
   community.general.scaleway_container_namespace:
     state: absent
-    name: '{{ name }}'
-    region: '{{ scaleway_region }}'
-    description: '{{ description }}'
-    project_id: '{{ scw_project }}'
+    name: "{{ name }}"
+    region: "{{ scaleway_region }}"
+    description: "{{ description }}"
+    project_id: "{{ scw_project }}"

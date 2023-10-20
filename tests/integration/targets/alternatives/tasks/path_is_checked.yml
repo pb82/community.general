@@ -6,12 +6,12 @@
 - name: Try with nonexistent path
   alternatives:
     name: dummy
-    path: '/non/existent/path/there'
-    link: '/usr/bin/dummy'
+    path: /non/existent/path/there
+    link: /usr/bin/dummy
   ignore_errors: true
   register: alternative
 
 - name: Check previous task failed
   assert:
     that:
-      - 'alternative is failed'
+      - alternative is failed

@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- name: "create a blocking ruleset with a DROP policy"
+- name: create a blocking ruleset with a DROP policy
   copy:
     dest: "{{ iptables_tests }}"
     content: |
@@ -12,24 +12,21 @@
       COMMIT
 
 
-
-- name: "restore state from the test file (check_mode, must report a change)"
+- name: restore state from the test file (check_mode, must report a change)
   iptables_state:
     path: "{{ iptables_tests }}"
     state: restored
   register: iptables_state
   check_mode: true
 
-- name: "assert that results are as expected"
+- name: assert that results are as expected
   assert:
     that:
       - iptables_state is changed
 
-
-
-- name: "fail to restore state from the test file"
+- name: fail to restore state from the test file
   block:
-    - name: "restore state from the test file (bad policies, expected error -> rollback)"
+    - name: restore state from the test file (bad policies, expected error -> rollback)
       iptables_state:
         path: "{{ iptables_tests }}"
         state: restored
@@ -38,7 +35,7 @@
       poll: 0
 
   rescue:
-    - name: "explain expected failure"
+    - name: explain expected failure
       assert:
         that:
           - iptables_state is not changed
@@ -53,16 +50,14 @@
           The previous error has been triggered but its results are not as
           expected.
 
-- name: "check that the expected failure happened"
+- name: check that the expected failure happened
   assert:
     that:
       - iptables_state is failed
 
-
-
-- name: "fail to restore state from the test file (again)"
+- name: fail to restore state from the test file (again)
   block:
-    - name: "try again, with a higher timeout (bad policies, same expected error)"
+    - name: try again, with a higher timeout (bad policies, same expected error)
       iptables_state:
         path: "{{ iptables_tests }}"
         state: restored
@@ -73,7 +68,7 @@
         ansible_timeout: "{{ max_delay | d(300) }}"
 
   rescue:
-    - name: "explain expected failure"
+    - name: explain expected failure
       assert:
         that:
           - iptables_state is not changed
@@ -88,14 +83,12 @@
           The previous error has been triggered but its results are not as
           expected.
 
-- name: "check that the expected failure happened"
+- name: check that the expected failure happened
   assert:
     that:
       - iptables_state is failed
 
-
-
-- name: "restore state from backup (must NOT report a change)"
+- name: restore state from backup (must NOT report a change)
   iptables_state:
     path: "{{ iptables_saved }}"
     state: restored
@@ -103,14 +96,12 @@
   async: "{{ ansible_timeout }}"
   poll: 0
 
-- name: "assert that results are as expected"
+- name: assert that results are as expected
   assert:
     that:
       - iptables_state is not changed
 
-
-
-- name: "restore state from backup (mangle, must NOT report a change)"
+- name: restore state from backup (mangle, must NOT report a change)
   iptables_state:
     path: "{{ iptables_saved }}"
     table: mangle
@@ -119,14 +110,12 @@
   async: "{{ ansible_timeout }}"
   poll: 0
 
-- name: "assert that results are as expected"
+- name: assert that results are as expected
   assert:
     that:
       - iptables_state is not changed
 
-
-
-- name: "create a blocking ruleset with a REJECT rule"
+- name: create a blocking ruleset with a REJECT rule
   copy:
     dest: "{{ iptables_tests }}"
     content: |
@@ -135,10 +124,9 @@
       COMMIT
 
 
-
-- name: "fail to restore state from the test file (again)"
+- name: fail to restore state from the test file (again)
   block:
-    - name: "restore state from the test file (bad rules, expected error -> rollback)"
+    - name: restore state from the test file (bad rules, expected error -> rollback)
       iptables_state:
         path: "{{ iptables_tests }}"
         state: restored
@@ -147,7 +135,7 @@
       poll: 0
 
   rescue:
-    - name: "explain expected failure"
+    - name: explain expected failure
       assert:
         that:
           - iptables_state is not changed
@@ -162,16 +150,14 @@
           The previous error has been triggered but its results are not as
           expected.
 
-- name: "check that the expected failure happened"
+- name: check that the expected failure happened
   assert:
     that:
       - iptables_state is failed
 
-
-
-- name: "fail to restore state from the test file (again)"
+- name: fail to restore state from the test file (again)
   block:
-    - name: "try again, with a higher timeout (bad rules, same expected error)"
+    - name: try again, with a higher timeout (bad rules, same expected error)
       iptables_state:
         path: "{{ iptables_tests }}"
         state: restored
@@ -182,7 +168,7 @@
         ansible_timeout: "{{ max_delay | d(300) }}"
 
   rescue:
-    - name: "explain expected failure"
+    - name: explain expected failure
       assert:
         that:
           - iptables_state is not changed
@@ -197,7 +183,7 @@
           The previous error has been triggered but its results are not as
           expected.
 
-- name: "check that the expected failure happened"
+- name: check that the expected failure happened
   assert:
     that:
       - iptables_state is failed

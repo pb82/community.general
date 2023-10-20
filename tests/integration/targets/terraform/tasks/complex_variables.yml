@@ -7,11 +7,11 @@
   ansible.builtin.file:
     path: "{{ terraform_project_dir }}/complex_vars"
     state: directory
-    mode: 0755
+    mode: "0755"
 
 - name: copy terraform files to work space
   ansible.builtin.copy:
-    src: "complex_variables/{{ item }}"
+    src: complex_variables/{{ item }}
     dest: "{{ terraform_project_dir }}/complex_vars/{{ item }}"
   with_items:
     - main.tf
@@ -27,32 +27,32 @@
     complex_vars: true
     variables:
       dictionaries:
-        name: "kosala"
+        name: kosala
         age: 99
       list_of_strings:
-        - "kosala"
-        - 'cli specials"&$%@#*!(){}[]:"" \\'
-        - "xxx"
-        - "zzz"
+        - kosala
+        - cli specials"&$%@#*!(){}[]:"" \\
+        - xxx
+        - zzz
       list_of_objects:
-        - name: "kosala"
+        - name: kosala
           age: 99
-        - name: 'cli specials"&$%@#*!(){}[]:"" \\'
-          age: 0.1
-        - name: "zzz"
+        - name: cli specials"&$%@#*!(){}[]:"" \\
+          age: !!float "0.1"
+        - name: zzz
           age: 9.789
-        - name: "lll"
+        - name: lll
           age: 1000
       boolean: true
-      string_type: 'cli specials"&$%@#*!(){}[]:"" \\'
+      string_type: cli specials"&$%@#*!(){}[]:"" \\
       multiline_string: |
         one
         two
       list_of_lists:
-        - [ 1 ]
-        - [ 11, 12, 13 ]
-        - [ 2 ]
-        - [ 3 ]
+        - [1]
+        - [11, 12, 13]
+        - [2]
+        - [3]
     state: present
   register: terraform_init_result
 

@@ -38,7 +38,7 @@
       {{ query('community.general.dependent',
                dict([['a', [1, 2, 3]]]),
                dict([['b', '[1, 2, 3, 4] if item.a == 1 else [2, 3, 4] if item.a == 2 else [3, 4]']])) }}
-    # The last expression could have been `range(item.a, 5)`, but that's not supported by all Jinja2 versions used in CI
+# The last expression could have been `range(item.a, 5)`, but that's not supported by all Jinja2 versions used in CI
 
 - name: Check result of Test 2
   assert:
@@ -76,8 +76,8 @@
         b:
           - 3
           - 4
-    - var2: 'item.var1.value'
-    - var3: 'dependent_lookup_test[item.var1.key ~ "_" ~ item.var2]'
+    - var2: item.var1.value
+    - var3: dependent_lookup_test[item.var1.key ~ "_" ~ item.var2]
   loop_control:
     label: "{{ [item.var1.key, item.var2, item.var3] }}"
   register: dependent
